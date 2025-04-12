@@ -1,0 +1,101 @@
+<template>
+  <div class="changelog-page">
+    <div class="changelog-header">
+      <h1>更新日志</h1>
+      <p class="subtitle">ZError版本更新记录</p>
+    </div>
+    
+    <div class="changelog-container">
+      <div v-for="item in logs" :key="item.version" class="log-card">
+        <div class="version-badge">{{ item.version }}</div>
+        <div class="log-content">
+          <div class="log-date">{{ item.date }}</div>
+          <div class="log-description">{{ item.description }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      logs: [
+        { version: '1.0.0', date: '2024-03-20', description: '首次发布版本' },
+        { version: '1.0.1', date: '2024-03-25', description: '修复已知问题' }
+      ]
+    }
+  }
+}
+</script>
+
+<style scoped>
+.changelog-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.changelog-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.changelog-header h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #7f8c8d;
+}
+
+.changelog-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.log-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: flex-start;
+  transition: transform 0.3s ease;
+}
+
+.log-card:hover {
+  transform: translateY(-3px);
+}
+
+.version-badge {
+  background: #FCB334;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-right: 1.5rem;
+  flex-shrink: 0;
+}
+
+.log-content {
+  flex: 1;
+}
+
+.log-date {
+  font-size: 1rem;
+  color: #7f8c8d;
+  margin-bottom: 0.5rem;
+}
+
+.log-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #2c3e50;
+}
+</style>
