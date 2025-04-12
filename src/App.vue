@@ -9,12 +9,17 @@
         <router-link to="/">首页</router-link>
         <a href="#" @click.prevent="showDownloadModal = true">下载</a>
         <router-link to="/changelog">更新日志</router-link>
+        <a href="https://github.com/Miaozeqiu/ZError" target="_blank" class="github-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+        </a>
       </div>
     </nav>
     <main>
       <router-view />
     </main>
-    
+
     <!-- 添加下载弹窗 -->
     <transition name="modal-fade">
       <div class="modal" v-if="showDownloadModal">
@@ -41,11 +46,11 @@ import { provide, ref, watch } from 'vue'
 export default {
   setup() {
     const showDownloadModal = ref(false)
-    
+
     const openDownloadModal = () => {
       showDownloadModal.value = true
     }
-    
+
     watch(showDownloadModal, (newVal) => {
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
       const nav = document.querySelector('nav')
@@ -207,6 +212,7 @@ nav {
 }
 
 .nav-brand {
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 8px; /* 减少图标与品牌名称间距 */
@@ -233,12 +239,35 @@ nav {
 .nav-links {
   display: flex;
   gap: 2rem;
+  align-items: center; /* 新增：垂直居中 */
 }
 
+.github-icon {
+  display: flex;
+  align-items: center;
+  color: #2c3e50;
+  transition: all 0.3s ease;
+}
+
+.github-icon:hover {
+  color: #FCB334;
+  transform: scale(1.1);
+}
+
+.github-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+
+
 .nav-links a {
+
   padding: 0.5rem 0;
   position: relative;
   transition: all 0.3s ease;
+  flex-direction: row;
+  flex-shrink: 0; /* 防止被压缩 */
 }
 
 .nav-links a:hover {
