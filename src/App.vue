@@ -27,11 +27,11 @@
           <span class="close" @click="showDownloadModal = false">&times;</span>
           <a>下载 ZError</a>
           <div class="download-options">
-            <a href="#" class="download-btn direct-download">
+            <a href="https://dwpan.com/f/ONCm/ZError_Setup_1.0.0.exe" class="download-btn direct-download">
               <i class="icon-download"></i> Windows 直接下载
             </a>
-            <a href="#" class="download-btn cloud-download">
-              <i class="icon-cloud"></i> Windows 网盘下载
+            <a href="https://wwyl.lanzoum.com/b00ocrzzje" class="download-btn cloud-download">
+              <i class="icon-cloud"></i> Windows 网盘下载(密码:43so)
             </a>
           </div>
         </div>

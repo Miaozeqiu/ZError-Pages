@@ -1,5 +1,5 @@
 {
-    "version": "1.0.1",
-    "downloadUrl": "http://localhost:5173/innosetup-6.4.2.exe",
+    "version": "1.0.0",
+    "downloadUrl": "https://dwpan.com/f/ONCm/ZError_Setup_1.0.0.exe",
     "changelog": "1. 新增题库管理功能\n2. 优化性能"
 }

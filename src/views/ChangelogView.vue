@@ -4,7 +4,7 @@
       <h1>更新日志</h1>
       <p class="subtitle">ZError版本更新记录</p>
     </div>
-    
+
     <div class="changelog-container">
       <div v-for="item in logs" :key="item.version" class="log-card">
         <div class="version-badge">{{ item.version }}</div>
@@ -23,7 +23,7 @@ export default {
     return {
       logs: [
         { version: '1.0.0', date: '2024-03-20', description: '首次发布版本' },
-        { version: '1.0.1', date: '2024-03-25', description: '修复已知问题' }
+
       ]
     }
   }
