@@ -5,7 +5,12 @@
         <img src="@/assets/zerror.svg" alt="Logo" class="nav-logo">
         <span class="brand-name">ZError</span>
       </div>
-      <div class="nav-links">
+      <button class="hamburger" @click="toggleMenu">
+        <svg t="1744518248746" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4556" width="24" height="24">
+          <path d="M804.571429 256a36.571429 36.571429 0 0 1 0 73.142857H219.428571a36.571429 36.571429 0 1 1 0-73.142857h585.142858z m0 219.428571a36.571429 36.571429 0 0 1 0 73.142858H219.428571a36.571429 36.571429 0 0 1 0-73.142858h585.142858z m0 219.428572a36.571429 36.571429 0 0 1 0 73.142857H219.428571a36.571429 36.571429 0 0 1 0-73.142857h585.142858z" fill="#2c3e50" fill-opacity="0.65" p-id="4557"></path>
+        </svg>
+      </button>
+      <div class="nav-links" :class="{ 'active': isMenuOpen }">
         <router-link to="/">首页</router-link>
         <a href="#" @click.prevent="showDownloadModal = true">下载</a>
         <router-link to="/changelog">更新日志</router-link>
@@ -25,14 +30,21 @@
       <div class="modal" v-if="showDownloadModal">
         <div class="modal-content">
           <span class="close" @click="showDownloadModal = false">&times;</span>
-          <a>下载 ZError</a>
+          <a>下载 ZError for Windows</a>
           <div class="download-options">
             <a href="https://dwpan.com/f/ONCm/ZError_Setup_1.0.0.exe" class="download-btn direct-download">
-              <i class="icon-download"></i> Windows 直接下载
+              <i class="icon-download"></i> 直链下载
             </a>
             <a href="https://wwyl.lanzoum.com/b00ocrzzje" class="download-btn cloud-download">
-              <i class="icon-cloud"></i> Windows 网盘下载(密码:43so)
+              <i class="icon-cloud"></i> 蓝奏云下载(密码:43so)
             </a>
+            <a href="https://www.123865.com/s/RnebVv-gqb3v" class="download-btn cloud-download">
+              <i class="icon-cloud"></i> 123网盘下载
+            </a>
+            <a href="https://www.123684.com/s/RnebVv-gqb3v" class="download-btn cloud-download">
+              <i class="icon-cloud"></i> 123网盘下载（备用）
+            </a>
+
           </div>
         </div>
       </div>
@@ -46,6 +58,11 @@ import { provide, ref, watch } from 'vue'
 export default {
   setup() {
     const showDownloadModal = ref(false)
+    const isMenuOpen = ref(false)
+
+    const toggleMenu = () => {
+      isMenuOpen.value = !isMenuOpen.value
+    }
 
     const openDownloadModal = () => {
       showDownloadModal.value = true
@@ -71,7 +88,9 @@ export default {
     })
 
     return {
-      showDownloadModal
+      showDownloadModal,
+      isMenuOpen,
+      toggleMenu
     }
   }
 }
@@ -205,14 +224,12 @@ nav {
   background: transparent; /* 改为半透明背景 */
   backdrop-filter: blur(5px); /* 添加毛玻璃效果 */
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 .nav-brand {
-  width: 100%;
+  width: 800px;
   display: flex;
   align-items: center;
   gap: 8px; /* 减少图标与品牌名称间距 */
@@ -306,5 +323,67 @@ nav a.router-link-exact-active {
 
 body {
   margin: 0px;
+}
+
+
+
+/* 默认隐藏汉堡按钮 */
+.hamburger {
+  display: none;
+}
+
+/* 默认显示导航链接 */
+.nav-links {
+  display: flex;
+}
+
+@media (max-width: 1200px) {
+  .nav-brand {
+    width: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  nav{
+    background-color: #fff;
+  }
+  /* 小屏幕下显示汉堡按钮 */
+  .hamburger {
+    display: flex;
+    position: absolute;
+    right: 1.5rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1000;
+
+  }
+
+  /* 小屏幕下默认隐藏导航菜单 */
+  .nav-links {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: #fff;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    z-index: 999;
+    box-shadow: 1px 10px 10px rgba(0, 0, 0, 0.02);
+    /* 添加过渡效果 */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+  }
+
+  .nav-links.active {
+    max-height: 500px; /* 足够容纳所有菜单项的高度 */
+    opacity: 1;
+    display: flex;
+  }
 }
 </style>

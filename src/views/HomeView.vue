@@ -33,7 +33,7 @@
 
       </div>
     </div>
-    
+
     <!-- 移动社交媒体区域到平台区域之后 -->
     <div class="social-media-section">
       <div class="social-header">
@@ -88,7 +88,7 @@ export default {
   },
   setup() {
     const downloadModal = inject('downloadModal')
-    
+
     return {
       openDownloadModal: downloadModal.open
     }
@@ -185,7 +185,6 @@ export default {
   border-radius: 16px;
   margin: 3rem auto;
   /* box-shadow: 0 10px 20px rgba(0,0,0,0.05); */
-  width: 100%;
   max-width: 1600px;
 }
 
@@ -345,7 +344,75 @@ export default {
 
 .bank-button:hover{
   background-color: #fffbf4;
-  
+
+}
+
+/* 媒体查询适配 */
+@media (max-width: 1024px) {
+  .hero-section {
+    flex-direction: column;
+    height: auto;
+    padding: 2rem;
+  }
+
+  .hero-content {
+    padding-right: 0;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .hero-image {
+    width: 90%;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+  }
+
+  .platform-grid {
+    align-items: center;
+  }
+
+  .platform-item {
+    margin: 1rem 0;
+  }
+
+  .social-media-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .social-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .social-icons {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 640px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .bank-button {
+
+    margin-top: 1rem;
+  }
 }
 
 
