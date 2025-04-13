@@ -44,8 +44,11 @@
             <a href="https://www.123684.com/s/RnebVv-m6b3v" class="download-btn cloud-download">
               <i class="icon-cloud"></i> 123网盘下载（备用）
             </a>
-             <a href="https://pan.quark.cn/s/7142e7e19adb" class="download-btn cloud-download">
+            <a href="https://pan.quark.cn/s/b5302b71bb09" class="download-btn cloud-download">
               <i class="icon-cloud"></i> 夸克网盘
+            </a> 
+            <a href="https://pan.quark.cn/s/7142e7e19adb" class="download-btn cloud-download">
+              <i class="icon-cloud"></i> 夸克网盘（备用）
             </a>
 
           </div>
