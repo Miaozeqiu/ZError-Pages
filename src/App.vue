@@ -38,11 +38,14 @@
             <a href="https://wwyl.lanzoum.com/b00ocrzzje" class="download-btn cloud-download">
               <i class="icon-cloud"></i> 蓝奏云下载(密码:43so)
             </a>
-            <a href="https://www.123865.com/s/RnebVv-gqb3v" class="download-btn cloud-download">
+            <a href="https://www.123865.com/s/RnebVv-d6b3v" class="download-btn cloud-download">
               <i class="icon-cloud"></i> 123网盘下载
             </a>
-            <a href="https://www.123684.com/s/RnebVv-gqb3v" class="download-btn cloud-download">
+            <a href="https://www.123684.com/s/RnebVv-d6b3v" class="download-btn cloud-download">
               <i class="icon-cloud"></i> 123网盘下载（备用）
+            </a>
+             <a href="https://pan.quark.cn/s/ac2b1166aefa" class="download-btn cloud-download">
+              <i class="icon-cloud"></i> 夸克网盘
             </a>
 
           </div>
