@@ -6,7 +6,7 @@
         <p class="subtitle">支持OCS网课助手</p>
         <div class="button-group">
           <a href="#" @click.prevent="openDownloadModal" class="cta-button">立即下载</a>
-          <router-link to="/question-bank" class="cta-button bank-button">在线题库</router-link>
+          <a href="https://ze.zaizhexue.top" class="cta-button bank-button">在线题库</a>
         </div>
       </div>
       <img src="@/assets/ZError首页.png" alt="ZError首页" class="hero-image">
