@@ -32,7 +32,7 @@
           <span class="close" @click="showDownloadModal = false">&times;</span>
           <a>下载 ZError for Windows</a>
           <div class="download-options">
-            <a href="https://dwpan.com/f/ONCm/ZError_Setup_1.0.0.exe" class="download-btn direct-download">
+            <a href="https://dwpan.com/f/bYhj/ZError_Setup_1.0.0.exe" class="download-btn direct-download">
               <i class="icon-download"></i> 直链下载
             </a>
             <a href="https://wwyl.lanzoum.com/b00ocrzzje" class="download-btn cloud-download">
@@ -46,7 +46,7 @@
             </a>
             <a href="https://pan.quark.cn/s/b5302b71bb09" class="download-btn cloud-download">
               <i class="icon-cloud"></i> 夸克网盘
-            </a> 
+            </a>
             <a href="https://pan.quark.cn/s/7142e7e19adb" class="download-btn cloud-download">
               <i class="icon-cloud"></i> 夸克网盘（备用）
             </a>
