@@ -22,7 +22,8 @@ export default {
   data() {
     return {
       logs: [
-        { version: '1.0.1', date: '2024-03-21', description: '1. 批量导入问题\n2. 修复文件权限问题' },
+      { version: '1.1.1', date: '2024-03-21', description: '1. 修复密钥保存问题' },
+        { version: '1.1.0', date: '2024-03-21', description: '1. 批量导入问题\n2. 修复文件权限问题' },
         { version: '1.0.0', date: '2024-03-20', description: '首次发布版本' }
       ]
     }
