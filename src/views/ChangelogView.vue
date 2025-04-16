@@ -22,8 +22,8 @@ export default {
   data() {
     return {
       logs: [
-        { version: '1.0.0', date: '2024-03-20', description: '首次发布版本' },
-
+        { version: '1.0.1', date: '2024-03-21', description: '1. 批量导入问题\n2. 修复文件权限问题' },
+        { version: '1.0.0', date: '2024-03-20', description: '首次发布版本' }
       ]
     }
   }
@@ -63,7 +63,7 @@ export default {
   background: white;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   display: flex;
   align-items: flex-start;
   transition: transform 0.3s ease;
