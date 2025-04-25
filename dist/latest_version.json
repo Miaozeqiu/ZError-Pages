@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0",
-    "downloadUrl": "https://dwpan.com/f/ONCm/ZError_Setup_1.0.0.exe",
-    "changelog": "1. 新增题库管理功能\n2. 优化性能"
+    "version": "1.1.2",
+    "downloadUrl": "https://dwpan.com/f/X7iQ/ZError_Setup_1.1.2.exe",
+    "changelog": "1. 优化提示词\n2. 修复删除题目失败的问题"
 }
