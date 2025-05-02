@@ -1,5 +1,5 @@
 {
-    "version": "1.1.2",
-    "downloadUrl": "https://dwpan.com/f/X7iQ/ZError_Setup_1.1.2.exe",
-    "changelog": "1. 优化提示词\n2. 修复删除题目失败的问题"
+    "version": "1.2.0",
+    "downloadUrl": "https://dwpan.com/f/EmWsR/ZError_Setup_1.2.0.exe",
+    "changelog": "1. 添加截图搜题\n2. 修复题库无法修改的问题"
 }
