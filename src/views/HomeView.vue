@@ -70,11 +70,12 @@
       </div>
     </div>
   </div>
-  <footer class="page-footer" style="width:100%;display:flex;justify-content:center;align-items:center;padding:2rem 0 1rem 0;">
-    <a href="https://www.netlify.com/" target="_blank" rel="noopener">
-      <img src="@/assets/netlify.svg" alt="Netlify Logo" style="height:40px;">
+<div style="display: flex; align-items: center; width: 100%; justify-content: center;">
+    <a href="https://www.netlify.com/" target="_blank" rel="noopener" style="display: block; height: 100%; line-height: 0;">
+      <img src="@/assets/netlify.svg" alt="Netlify Logo" style="height:40px; cursor:pointer; display: block;">
     </a>
-  </footer>
+  </div>
+
 </template>
 
 <script>
