@@ -70,6 +70,11 @@
       </div>
     </div>
   </div>
+  <footer class="page-footer" style="width:100%;display:flex;justify-content:center;align-items:center;padding:2rem 0 1rem 0;">
+    <a href="https://www.netlify.com/" target="_blank" rel="noopener">
+      <img src="@/assets/netlify.svg" alt="Netlify Logo" style="height:40px;">
+    </a>
+  </footer>
 </template>
 
 <script>
