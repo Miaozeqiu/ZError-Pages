@@ -22,7 +22,8 @@ export default {
   data() {
     return {
       logs: [
-      { version: '1.2.0', date: '2024-05-2', description: '1. 添加截图搜题\n2. 修复题库无法修改的问题'  },
+        { version: '1.3.0', date: '2024-05-21', description: '1.添加题库分类功能\n 2.添加图片url显示功能\n 3. 题库的精确匹配改为模糊匹配\n 4.可以设置服务端口，并且对局域网开放\n 5.美化界面' },
+      { version: '1.2.0', date: '2024-05-2', description: '1. 添加截图搜题\n2. 修复题库无法修改的问题' },
       { version: '1.1.2', date: '2024-04-21', description: '1. 优化提示词\n2. 修复删除题目失败的问题' },
       { version: '1.1.1', date: '2024-03-21', description: '1. 修复密钥保存问题' },
         { version: '1.1.0', date: '2024-03-21', description: '1. 批量导入问题\n2. 修复文件权限问题' },

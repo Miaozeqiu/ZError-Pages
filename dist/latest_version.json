@@ -1,5 +1,5 @@
 {
-    "version": "1.1.2",
-    "downloadUrl": "https://dwpan.com/f/X7iQ/ZError_Setup_1.1.2.exe",
-    "changelog": "1. 优化提示词\n2. 修复删除题目失败的问题"
+    "version": "1.3.0",
+    "downloadUrl": "https://dwpan.com/f/paYFY/ZError_Setup_1.3.0.exe",
+    "changelog": "1.添加题库分类功能\n 2.添加图片url显示功能\n 3. 题库的精确匹配改为模糊匹配\n 4.可以设置服务端口，并且对局域网开放\n 5.美化界面"
 }
