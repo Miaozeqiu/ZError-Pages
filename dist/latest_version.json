@@ -1,5 +1,5 @@
 {
-    "version": "1.3.0",
-    "downloadUrl": "https://dwpan.com/f/paYFY/ZError_Setup_1.3.0.exe",
-    "changelog": "1.添加题库分类功能\n 2.添加图片url显示功能\n 3. 题库的精确匹配改为模糊匹配\n 4.可以设置服务端口，并且对局域网开放\n 5.美化界面"
+    "version": "1.4.0",
+    "downloadUrl": "https://dwpan.com/f/Jd9cO/ZError_Setup_1.4.0.exe",
+    "changelog": "1.截图搜题支持markdown以及latex语法显示\n2.添加火山引擎以及FreeQwQ\n3.优化软件启动与关闭"
 }

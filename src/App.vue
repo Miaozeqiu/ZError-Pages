@@ -32,7 +32,7 @@
           <span class="close" @click="showDownloadModal = false">&times;</span>
           <a>下载 ZError for Windows</a>
           <div class="download-options">
-            <a href="https://dwpan.com/f/6WNtM/ZError_Setup_1.3.1.exe" class="download-btn direct-download">
+            <a href="https://dwpan.com/f/DAyCe/ZError_Setup_1.4.0_.net8.exe" class="download-btn direct-download">
               <i class="icon-download"></i> 直链下载
             </a>
             <a href="https://wwyl.lanzoum.com/b00ocrzzje" class="download-btn cloud-download">
