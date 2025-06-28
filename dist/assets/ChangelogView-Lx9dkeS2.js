@@ -1,4 +1,4 @@
-import{_ as a,c as n,a as e,F as d,r as c,o,t}from"./index-CMtHZyo1.js";const l={data(){return{logs:[{version:"1.4.0",date:"2024-06-25",description:`1. 截图搜题支持markdown以及latex语法显示
+import{_ as a,c as n,a as e,F as d,r as c,o,t}from"./index-UebEzmTq.js";const l={data(){return{logs:[{version:"1.4.0",date:"2024-06-25",description:`1. 截图搜题支持markdown以及latex语法显示
 2. 添加火山引擎以及FreeQwQ
 3. 优化软件启动与关闭`},{version:"1.3.1",date:"2024-06-19",description:`1.修复局域网开放功能
 2.修复再添加ai回答到数据库后，文件夹树题目统计不刷新的问题
