@@ -13,6 +13,7 @@
       <div class="nav-links" :class="{ 'active': isMenuOpen }">
         <router-link to="/">首页</router-link>
         <a href="#" @click.prevent="showDownloadModal = true">下载</a>
+        <router-link to="https://docs.zerror.cc">文档</router-link>
         <router-link to="/changelog">更新日志</router-link>
         <a href="https://github.com/Miaozeqiu/ZError" target="_blank" class="github-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
