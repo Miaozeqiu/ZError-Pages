@@ -1,4 +1,4 @@
-import{_ as a,c as n,a as e,F as d,r as c,o,t}from"./index-Bzu0F--X.js";const l={data(){return{logs:[{version:"2.0.0",date:"2025-06-25",description:`1. 改为Tauri架构，更好的界面
+import{_ as a,c as n,a as e,F as d,r as c,o,t}from"./index-CVStIQrS.js";const l={data(){return{logs:[{version:"2.0.0",date:"2025-06-25",description:`1. 改为Tauri架构，更好的界面
 2. 支持自定义平台与AI模型
 3. 支持文本推理模型
 4. 修复服务器无法开启的bug`},{version:"1.4.0",date:"2025-06-25",description:`1. 截图搜题支持markdown以及latex语法显示
