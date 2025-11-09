@@ -1,39 +1,57 @@
-# .
+# ZError
 
-This template should help get you started developing with Vue 3 in Vite.
+<div align="center">
+  <img src="https://free.picui.cn/free/2025/04/14/67fd2249779d0.png" alt="ZError Logo" width="128">
+  <br>
+  <h3>OCS AI题库软件</h3>
+</div>
 
-## Recommended IDE Setup
+## 项目简介
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+ZError是一个功能强大的AI题库软件，支持多种AI平台接口，提供本地缓存和管理功能。
 
-## Type Support for `.vue` Imports in TS
+![软件首页](https://free.picui.cn/free/2025/11/09/691031b4dd824.png)
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+## 主要功能
 
-## Customize configuration
+- OCS题库配置
+- 支持多种API提供商（DeepSeek官方、阿里云百炼、硅基流动）
+- 本地题库管理与缓存
 
-See [Vite Configuration Reference](https://vite.dev/config/).
 
-## Project Setup
+## 题库管理
 
-```sh
-npm install
-```
+软件内置题库管理功能，支持导入、导出和编辑题目。
 
-### Compile and Hot-Reload for Development
+![题库页面](https://free.picui.cn/free/2025/11/09/691031f9db6f9.png)
 
-```sh
-npm run dev
-```
+## 使用教程
 
-### Type-Check, Compile and Minify for Production
+https://www.bilibili.com/video/BV1TPoFY8E4V
 
-```sh
-npm run build
-```
+## 系统要求
 
-### Lint with [ESLint](https://eslint.org/)
+- Windows 10/11
 
-```sh
-npm run lint
-```
+## 安装方法
+
+1. 从[官网](https://app.zerror.cc/)下载最新版本
+2. 运行安装程序
+3. 运行软件
+
+## 配置说明
+
+首次运行时，请在设置页面配置相应的API密钥：
+
+1. DeepSeek API密钥
+2. 阿里云百炼API密钥
+3. 硅基流动API密钥
+
+
+## 官方网站
+
+[app.zerror.cc](https://app.zerror.cc)
+
+## 许可证
+
+本项目采用MIT许可证
