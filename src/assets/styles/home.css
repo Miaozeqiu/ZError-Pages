@@ -19,35 +19,44 @@
   height: 80px;
 }
 .home-page {
+  max-width: 1200px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .platform-section {
+  box-sizing: border-box;
+  max-width: 1200px;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
-  padding-bottom: 50px;
+  padding: 50px;
   background-color: #fff8ea;
   width: 100%;
-  margin: 2rem auto;
 }
 
-.platform-title {
-  text-align: center;
-  font-size: 1.8rem;
-  color: #2c3e50;
-  margin-bottom: 2rem;
+/* 让整块平台区域也平滑淡入 */
+.platform-section.animate-element {
+  will-change: opacity, transform;
 }
+
+.platform-section.animate-element.visible {
+  transition-delay: 0s;
+}
+
 
 .platform-grid {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  align-items: center;
   gap: 1.5rem;
 }
 
 .platform-item {
+  margin: 1rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -67,24 +76,21 @@
 }
 
 
-.home-page {
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  min-width: 100%;
-}
+
 
 .hero-section {
-  height: 70vh;
+  box-sizing: border-box;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 4rem;
   /* background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%); */
   border-radius: 16px;
-  margin: 3rem auto;
-  /* box-shadow: 0 10px 20px rgba(0,0,0,0.05); */
-  max-width: 1600px;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  margin-top: 100px;
+  margin-bottom: 200px;
 }
 
 .hero-content {
@@ -119,6 +125,9 @@
 }
 
 /* 为不同元素设置不同的延迟 */
+
+
+
 .title.animate-element.visible {
   transition-delay: 0s;
 }
@@ -126,6 +135,8 @@
 .subtitle.animate-element.visible {
   transition-delay: 0.2s;
 }
+
+
 
 .button-group.animate-element.visible {
   transition-delay: 0.4s;
@@ -153,12 +164,12 @@
 
 /* 移除原有的动画属性 */
 .title {
+  margin-top: 0px;
   font-size: 50px;
   color: #2c3e50;
   margin-bottom: 1.5rem;
   font-weight: 400;
   line-height: 1.2;
-  /* 移除 animation: fadeInUp 0.8s ease forwards; */
 }
 
 .subtitle {
@@ -167,19 +178,35 @@
   margin-bottom: 2.5rem;
   line-height: 1.6;
   font-weight: 150;
-  /* 移除 animation 和 opacity 属性 */
 }
 
-.button-group {
-  /* 移除 animation 和 opacity 属性 */
-}
 
 .platform-title {
   text-align: center;
   font-size: 1.8rem;
   color: #2c3e50;
-  margin-bottom: 2rem;
+  font-weight: 500;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
   /* 移除 animation 属性 */
+}
+
+.platform-subtitle {
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+/* 新增：AI模型标题样式 */
+.ai-model-heading {
+  text-align: center;
+  color: #ff7a00; /* 橙色 */
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  margin: 1rem 0 0.5rem;
 }
 
 .social-title {
@@ -239,11 +266,18 @@
   height: auto;
   border-radius: 12px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
+  will-change: opacity, transform;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* 统一 hero-image 的动画延时，避免可见状态延迟导致的闪烁 */
+.hero-image.animate-element.visible {
+  transition-delay: 0s;
 }
 
 /* 修改社交媒体区域样式 */
 .social-media-section {
+  margin-top: 40px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -347,11 +381,15 @@
 }
 
 /* 媒体查询适配 */
-@media (max-width: 1024px) {
+@media (max-width: 1800px) {
   .hero-section {
     flex-direction: column;
     height: auto;
-    padding: 2rem;
+    padding: 0rem;
+    margin-top: 100px;;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 100px;
   }
 
   .hero-content {
@@ -361,7 +399,8 @@
   }
 
   .hero-image {
-    width: 90%;
+    border-radius: 4px;
+    width: 100%;
   }
 
   .title {
@@ -380,6 +419,10 @@
     margin: 1rem 0;
   }
 
+
+}
+
+@media (max-width: 800px) {
   .social-media-section {
     flex-direction: column;
     text-align: center;
@@ -393,7 +436,34 @@
   .social-icons {
     flex-direction: column;
   }
+
+  .ai-model-heading {
+    margin-top: 40px;
+  }
+
+  .platform-subtitle {
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 0.9rem;
+  }
+
+  .platform-grid {
+    gap: 1.5rem;
+  }
+
+  .platform-section {
+    padding: 0px;
+  }
+
+    .platform-item {
+      width: 100px;
+    margin: 1rem 0;
+  }
+
+
 }
+
+
 
 @media (max-width: 640px) {
   .title {
@@ -417,7 +487,6 @@
 /* 底部banner样式 */
 .footer-banner {
   width: 100%;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   border-top: 1px solid #dee2e6;
   padding: 2rem 0;
   margin-top: 3rem;
@@ -434,6 +503,7 @@
 }
 
 .banner-text {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -551,6 +621,10 @@
   .netlify-section {
     align-items: center;
   }
+
+  .sponsor-gif {
+    width: 200px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -563,12 +637,10 @@
   }
 
   .sponsor-gif {
-    width: 120px;
     height: auto;
     max-height: 90px;
     object-fit: contain;
     padding: 8px;
-    border-width: 3px;
   }
 
   .sponsor-info {

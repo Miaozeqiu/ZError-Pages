@@ -1,0 +1,54 @@
+:root {
+  --bg: #0f1115;
+  --panel: #151821;
+  --text: #e7e9ee;
+  --muted: #a8b0c2;
+  --primary: #3b82f6;
+  --primary-700: #1d4ed8;
+  --border: #2a3040;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Microsoft YaHei", "PingFang SC", sans-serif; color: var(--text); background: var(--bg); }
+
+.topbar { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid var(--border); background: #0e121a; position: sticky; top: 0; z-index: 10; }
+.topbar h1 { margin: 0; font-size: 18px; font-weight: 600; }
+.actions { display: flex; gap: 8px; }
+button { appearance: none; border: 1px solid var(--border); background: #0d1320; color: var(--text); padding: 8px 12px; border-radius: 8px; cursor: pointer; transition: .2s ease; }
+button:hover { border-color: #3b465f; background: #12192a; }
+button.primary { background: var(--primary); border-color: var(--primary-700); color: white; }
+button.primary:hover { background: var(--primary-700); }
+
+.layout { display: grid; grid-template-columns: 320px 1fr; min-height: calc(100vh - 56px); }
+.sidebar { border-right: 1px solid var(--border); padding: 16px; background: #0d1118; }
+.panel { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 12px; }
+.panel h2 { margin: 0 0 8px; font-size: 15px; }
+.row { display: flex; gap: 8px; align-items: center; margin: 8px 0; }
+.hint { color: var(--muted); font-size: 12px; }
+.info #statusBox { background: #0c1322; border: 1px dashed var(--border); padding: 8px; border-radius: 8px; color: var(--muted); }
+
+.editor-section { padding: 16px; }
+/* 列表与表单样式 */
+.list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.list .item { padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; background: #0d1320; cursor: pointer; transition: .15s ease; }
+.list .item:hover { border-color: #3b465f; background: #12192a; }
+.list .item.selected { border-color: var(--primary); background: #0f1a32; }
+
+.form-grid { display: grid; ; gap: 10px 12px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label { font-size: 12px; color: var(--muted); }
+.field input, .field select, .field textarea { background: #0b0f16; border: 1px solid var(--border); border-radius: 8px; color: var(--text); padding: 8px 10px; }
+.field input[type="checkbox"] { width: 18px; height: 18px; }
+.field textarea { min-height: 140px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+
+/* 适配 JSONEditor 默认样式 */
+.jsoneditor { background: #0b0f16; color: var(--text); }
+.jsoneditor-menu { background: #0f1627; border-bottom: 1px solid var(--border); }
+.jsoneditor-navigation-bar { background: #0f1627; }
+.jsoneditor-contextmenu { background: #11182b; border-color: var(--border); }
+.jsoneditor-treepath, .jsoneditor-search input { background: #0b0f16; color: var(--text); border-color: var(--border); }
+
+@media (max-width: 980px) {
+  .layout { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+}

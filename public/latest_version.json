@@ -1,5 +1,5 @@
 {
-    "version": "1.4.0",
-    "downloadUrl": "https://dwpan.com/f/Jd9cO/ZError_Setup_1.4.0.exe",
-    "changelog": "1.截图搜题支持markdown以及latex语法显示\n2.添加火山引擎以及FreeQwQ\n3.优化软件启动与关闭"
+    "version": "2.0.0",
+    "downloadUrl": "https://dwpan.com/f/Jd9cO/ZError_Setup_2.0.0.exe",
+    "changelog": "1.改为Tauri架构，更好的界面\n2.支持自定义平台与AI模型\n3.支持文本推理模型\n4.修复服务器无法开启的bug"
 }

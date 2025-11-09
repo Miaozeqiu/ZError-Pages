@@ -33,7 +33,7 @@
           <span class="close" @click="showDownloadModal = false">&times;</span>
           <a>下载 ZError for Windows</a>
           <div class="download-options">
-            <a href="https://cdn.zerror.cc/ZError_Setup_1.4.0_.net8.exe" class="download-btn direct-download">
+            <a href="https://cdn.zerror.cc/ZError_Setup_2.0.0.exe" class="download-btn direct-download">
               <i class="icon-download"></i> 直链下载
             </a>
             <a href="https://wwyl.lanzoum.com/b00ocrzzje" class="download-btn cloud-download">
@@ -105,6 +105,21 @@ export default {
 
 <style>
 /* 新增body样式防止偏移 */
+
+main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#app {
+  width: 100%;
+  display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
 body {
   margin: 0;
   overflow-y: scroll;
@@ -218,6 +233,7 @@ body {
 
 
 .app-container {
+  width: 100%;
   min-height: 100vh;
 }
 
@@ -227,7 +243,7 @@ nav {
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 1rem 1.5rem;
+  padding: 0.5rem 1rem;
   background: transparent; /* 改为半透明背景 */
   backdrop-filter: blur(5px); /* 添加毛玻璃效果 */
   display: flex;
@@ -329,6 +345,7 @@ nav a.router-link-exact-active {
 }
 
 body {
+  padding: 0 60px;
   margin: 0px;
 }
 
@@ -351,6 +368,9 @@ body {
 }
 
 @media (max-width: 768px) {
+  body {
+  padding: 0 30px;
+  }
 
   nav{
     background-color: #fff;

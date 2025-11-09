@@ -90,23 +90,6 @@
         },
         "temperature": 0.7,
         "topP": 0.9
-      },
-      {
-        "id": "siliconflow-deepseek-r1",
-        "name": "deepseek-ai/DeepSeek-R1",
-        "displayName": "DeepSeek-R1",
-        "platformId": "siliconflow",
-        "maxTokens": 4096,
-        "temperature": 0.7,
-        "topP": 0.9,
-        "enabled": true,
-        "category": "text",
-        "description": "DeepSeek-R1思考模型",
-        "pricing": {
-          "inputTokens": 0,
-          "outputTokens": 0
-        },
-        "jsCode": "async function processModel(input, config) {\n  // 构建请求数据\n  const requestData = {\n    messages: input.messages,\n    model: 'deepseek-ai/DeepSeek-R1',\n    stream: true,\n    max_tokens: 4096,\n    temperature: 0.7,\n    top_p: 0.9\n  };\n\n  console.log('SiliconFlow 请求:', requestData);\n\n  try {\n    // 发送请求到 SiliconFlow API\n    const response = await fetch(`${config.baseUrl}`, {\n      method: 'POST',\n      headers: {\n        'Authorization': `Bearer ${config.apiKey}`,\n        'Content-Type': 'application/json'\n      },\n      body: JSON.stringify(requestData)\n    });\n\n    if (!response.ok) {\n      const errorText = await response.text();\n      throw new Error(`SiliconFlow API 错误 ${response.status}: ${errorText}`);\n    }\n\n    // 处理流式响应\n    const reader = response.body.getReader();\n    const decoder = new TextDecoder();\n\n    // 返回异步生成器处理流式数据\n    return (async function* () {\n      let buffer = '';\n\n      try {\n        while (true) {\n          const { done, value } = await reader.read();\n\n          if (done) {\n            break;\n          }\n\n          // 解码数据块\n          buffer += decoder.decode(value, { stream: true });\n          const lines = buffer.split('\\n');\n          buffer = lines.pop() || '';\n\n          for (const line of lines) {\n            const trimmedLine = line.trim();\n\n            // === 调试：打印原始 SSE 行 ===\n            if (trimmedLine.startsWith('data: ')) {\n              console.log('Raw SSE chunk:', trimmedLine);\n            } else if (trimmedLine !== '') {\n              console.log('Raw non-data line:', trimmedLine);\n            }\n            // ========================================\n\n            if (trimmedLine === '' || trimmedLine === 'data: [DONE]') {\n              continue;\n            }\n\n            if (trimmedLine.startsWith('data: ')) {\n              try {\n                const jsonStr = trimmedLine.slice(6);\n                const data = JSON.parse(jsonStr);\n\n                if (data.choices && data.choices[0] && data.choices[0].delta) {\n                  const delta = data.choices[0].delta;\n\n                  // 同时获取 content 与 reasoning_content\n                  const content = delta.content ?? '';\n                  const reasoning_content = delta.reasoning_content ?? '';\n\n                  const finished = data.choices[0].finish_reason === 'stop';\n\n                  // 只要有任意内容或结束标记就 yield\n                  if (content || reasoning_content || finished) {\n                    yield {\n                      content,\n                      reasoning_content,        // ← 新增字段\n                      finished\n                    };\n                  }\n                }\n              } catch (parseError) {\n                console.warn('解析 SSE 数据失败:', parseError, trimmedLine);\n              }\n            }\n          }\n        }\n      } finally {\n        reader.releaseLock();\n      }\n    })();\n  } catch (error) {\n    console.error('SiliconFlow API 调用失败:', error);\n    throw error;\n  }\n}\n"
       }
     ],
     "name": "siliconflow"
@@ -165,6 +148,23 @@
         "pricing": {
           "inputTokens": 0.006,
           "outputTokens": 0.018
+        },
+        "temperature": 0.7,
+        "topP": 0.9
+      },
+      {
+        "category": "text",
+        "description": "",
+        "displayName": "deepseek-v3",
+        "enabled": true,
+        "id": "deepseek-v3",
+        "jsCode": "async function processModel(input, config, abortSignal) {\n  // TODO: 实现模型的 API 请求逻辑\n  return '未实现';\n}",
+        "maxTokens": 4096,
+        "name": "deepseek-v3",
+        "platformId": "aliyun-bailian",
+        "pricing": {
+          "inputTokens": 0,
+          "outputTokens": 0
         },
         "temperature": 0.7,
         "topP": 0.9
