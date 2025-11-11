@@ -6,7 +6,7 @@
         <p class="subtitle animate-element">支持OCS网课助手</p>
         <div class="button-group animate-element">
           <a href="#" @click.prevent="openDownloadModal" class="cta-button">立即下载</a>
-          <a href="https://ze.zaizhexue.top" class="cta-button bank-button">在线题库</a>
+          <a href="https://app.zerror.cc" class="cta-button bank-button">在线题库</a>
         </div>
       </div>
       <img src="@/assets/ZError2.0.0.png" alt="ZError首页" class="hero-image animate-element">
