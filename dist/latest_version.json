@@ -1,5 +1,5 @@
 {
-    "version": "2.0.1",
-    "downloadUrl": "https://dwpan.com/f/Jd9cO/ZError_Setup_2.0.0.exe",
-    "changelog": "1. 修复升级后的500错误"
+    "version": "2.0.2",
+    "downloadUrl": "https://cdn.zerror.cc/ZError_Setup_2.0.2.exe",
+    "changelog": "1. 修复某些情况下需要管理员身份运行的问题\n2.修复一些默认模型的无法使用的问题\n3.优化题库页对图片的显示\n4.更好的AI请求错误处理"
 }
