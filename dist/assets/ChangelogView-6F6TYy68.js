@@ -1,4 +1,7 @@
-import{_ as a,c as n,a as e,F as d,r as c,o,t}from"./index-DKVxYjJF.js";const l={data(){return{logs:[{version:"2.0.2",date:"2025-11-18",description:`1. 修复某些情况下需要管理员身份运行的问题
+import{_ as a,c as s,a as e,F as d,r as c,o,t}from"./index-BaUOryIF.js";const l={data(){return{logs:[{version:"2.1.0",date:"2025-11-30",description:`1. 修复软件默认数据存储路径问题
+2. 添加导入与导出功能
+3. 修复文件夹无法拖动的问题
+4. 添加对题目选项的支持`},{version:"2.0.2",date:"2025-11-18",description:`1. 修复某些情况下需要管理员身份运行的问题
 2.修复一些默认模型的无法使用的问题
 3.优化题库页对图片的显示
 4.更好的AI请求错误处理`},{version:"2.0.1",date:"2025-11-8",description:"1. 修复更新后请求500错误的问题"},{version:"2.0.0",date:"2025-11-8",description:`1. 改为Tauri架构，更好的界面
@@ -16,4 +19,4 @@ import{_ as a,c as n,a as e,F as d,r as c,o,t}from"./index-DKVxYjJF.js";const l=
  5.美化界面`},{version:"1.2.0",date:"2025-05-2",description:`1. 添加截图搜题
 2. 修复题库无法修改的问题`},{version:"1.1.2",date:"2025-04-21",description:`1. 优化提示词
 2. 修复删除题目失败的问题`},{version:"1.1.1",date:"2025-03-21",description:"1. 修复密钥保存问题"},{version:"1.1.0",date:"2025-03-21",description:`1. 批量导入问题
-2. 修复文件权限问题`},{version:"1.0.0",date:"2025-03-20",description:"首次发布版本"}]}}},p={class:"changelog-page"},v={class:"changelog-container"},_={class:"version-badge"},g={class:"log-content"},u={class:"log-date"},h={class:"log-description"};function f(k,i,x,I,r,b){return o(),n("div",p,[i[0]||(i[0]=e("div",{class:"changelog-header"},[e("h1",null,"更新日志"),e("p",{class:"subtitle"},"ZError版本更新记录")],-1)),e("div",v,[(o(!0),n(d,null,c(r.logs,s=>(o(),n("div",{key:s.version,class:"log-card"},[e("div",_,t(s.version),1),e("div",g,[e("div",u,t(s.date),1),e("div",h,t(s.description),1)])]))),128))])])}const w=a(l,[["render",f],["__scopeId","data-v-38101e73"]]);export{w as default};
+2. 修复文件权限问题`},{version:"1.0.0",date:"2025-03-20",description:"首次发布版本"}]}}},p={class:"changelog-page"},v={class:"changelog-container"},_={class:"version-badge"},g={class:"log-content"},u={class:"log-date"},h={class:"log-description"};function f(k,i,x,I,r,b){return o(),s("div",p,[i[0]||(i[0]=e("div",{class:"changelog-header"},[e("h1",null,"更新日志"),e("p",{class:"subtitle"},"ZError版本更新记录")],-1)),e("div",v,[(o(!0),s(d,null,c(r.logs,n=>(o(),s("div",{key:n.version,class:"log-card"},[e("div",_,t(n.version),1),e("div",g,[e("div",u,t(n.date),1),e("div",h,t(n.description),1)])]))),128))])])}const w=a(l,[["render",f],["__scopeId","data-v-45509d64"]]);export{w as default};

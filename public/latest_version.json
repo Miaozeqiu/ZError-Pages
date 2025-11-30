@@ -1,5 +1,5 @@
 {
-    "version": "2.0.2",
-    "downloadUrl": "https://cdn.zerror.cc/ZError_Setup_2.0.2.exe",
-    "changelog": "1. 修复某些情况下需要管理员身份运行的问题\n2.修复一些默认模型的无法使用的问题\n3.优化题库页对图片的显示\n4.更好的AI请求错误处理"
+    "version": "2.1.0",
+    "downloadUrl": "https://cdn.zerror.cc/ZError_Setup_2.1.0.exe",
+    "changelog": "1. 修复软件默认数据存储路径问题\n2. 添加导入与导出功能\n3. 修复文件夹无法拖动的问题\n4. 添加对题目选项的支持"
 }

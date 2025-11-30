@@ -569,7 +569,7 @@
 }
 
 .sponsor-desc {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: #5a6c7d;
   margin: 0;
   font-weight: 500;
@@ -655,4 +655,137 @@
   .sponsor-desc {
     font-size: 0.8rem;
   }
+}
+
+/* Communication Section */
+.communication-section {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.comm-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.comm-title {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.comm-subtitle {
+  font-size: 1rem;
+  color: #666;
+}
+
+.comm-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.comm-item {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  padding: 15px 25px;
+  width: 260px;
+  transition: all 0.3s ease;
+  border: 1px solid #eee;
+}
+
+.comm-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.comm-link-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.comm-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: #f0f7ff;
+  border-radius: 10px;
+}
+
+.comm-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.comm-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 4px 0;
+}
+
+.comm-link {
+  font-size: 0.9rem;
+  color: #3498db;
+  text-decoration: none;
+}
+.comm-link:hover {
+  text-decoration: underline;
+}
+
+/* QR Code Hover Effect */
+.comm-qr {
+  position: absolute;
+  bottom: 100%; /* Show above */
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 10;
+  width: 240px;
+  pointer-events: none; /* Prevent interfering with hover */
+}
+
+.comm-qr img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+.comm-item:hover .comm-qr {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-10px);
+}
+
+/* Arrow for tooltip */
+.comm-qr::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -8px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
 }

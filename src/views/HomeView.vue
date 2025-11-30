@@ -43,6 +43,49 @@
       </div>
     </div>
 
+    <!-- 交流分享区域 -->
+    <div class="communication-section">
+      <div class="comm-header">
+        <h3 class="comm-title animate-element">交流分享</h3>
+        <p class="comm-subtitle animate-element">加入社区，获取最新资讯</p>
+      </div>
+      <div class="comm-items">
+
+        <!-- QQ Group -->
+        <div class="comm-item animate-element">
+          <div class="comm-link-wrapper">
+            <div class="comm-icon-wrapper">
+              <svg t="1764490701048" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5616" width="40" height="40"><path d="M824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3C766.5 262.2 689.3 112 511.5 112 331.7 112 256.2 265.2 261 447.9c-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z" p-id="5617" fill="#12B7F5"></path></svg>
+            </div>
+            <div class="comm-text">
+              <p class="comm-name">QQ群聊</p>
+              <a href="https://qm.qq.com/q/yfMO6AqVyM" target="_blank" class="comm-link">点击加入</a>
+            </div>
+          </div>
+          <div class="comm-qr">
+             <img :src="qqGroupQr" alt="QQ Group QR">
+          </div>
+        </div>
+
+        <!-- Channel -->
+        <div class="comm-item animate-element">
+          <div class="comm-link-wrapper">
+            <div class="comm-icon-wrapper">
+               <svg t="1764490832120" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6604" width="40" height="40"><path d="M630.125714 1001.033143l-78.774857-153.088H262.144l-24.868571 158.866286-155.794286-22.966858 21.284571-135.899428H0V694.857143h126.683429l59.830857-382.756572H0V159.012571h210.432L235.300571 0l155.794286 22.966857-21.284571 135.972572h389.705143L783.945143 0l155.794286 22.966857-20.918858 136.045714H1024v153.088h-128.731429L836.461714 694.857143H1024v153.088h-211.017143L785.92 1024l-155.794286-22.966857z m105.837715-689.005714H345.965714L285.988571 694.857143h265.289143l104.96 135.899428 79.725715-518.656z" fill="#28C9DA" p-id="6605"></path></svg>
+            </div>
+            <div class="comm-text">
+              <p class="comm-name">ZE题库交流</p>
+              <a href="https://pd.qq.com/s/51jqhjhn9" target="_blank" class="comm-link">点击加入频道</a>
+            </div>
+          </div>
+          <div class="comm-qr">
+             <img :src="channelQr" alt="Channel QR">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <!-- 移动社交媒体区域到平台区域之后 -->
     <div class="social-media-section">
       <div class="social-header">
@@ -103,6 +146,8 @@
 import siliconSvg from '@/assets/硅基.svg?raw'
 import bailianSvg from '@/assets/百炼.svg?raw'
 import deepseekSvg from '@/assets/deepseek.svg?raw'  // 新增导入
+import qqGroupQr from '@/assets/qrcode_1764491285880.jpg'
+import channelQr from '@/assets/qrcode_1764491300797.jpg'
 import { inject, onMounted } from 'vue'
 import '@/assets/styles/home.css'  // 导入样式文件
 
@@ -111,7 +156,9 @@ export default {
     return {
       siliconSvg,
       bailianSvg,
-      deepseekSvg  // 新增数据项
+      deepseekSvg,  // 新增数据项
+      qqGroupQr,
+      channelQr
     }
   },
   setup() {
