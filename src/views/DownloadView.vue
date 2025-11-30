@@ -1,8 +1,8 @@
 <template>
   <div class="page">
     <h1 class="title">下载 ZError</h1>
-    <p class="subtitle">开源免费的大学生AI题库</p>
-    
+    <p class="subtitle">开源的大学生AI题库</p>
+
     <div class="download-section">
       <div class="download-card">
         <h3>Windows 版本</h3>

@@ -3,7 +3,7 @@
     <div class="hero-section">
       <div class="hero-content">
         <p class="title animate-element">开源免费的大学生的AI题库</p>
-        <p class="subtitle animate-element">支持OCS网课助手</p>
+        <p class="subtitle animate-element">支持<a href="https://docs.ocsjs.com/" target="_blank" style="color: #FCB334; text-decoration: none;">OCS网课助手</a></p>
         <div class="button-group animate-element">
           <a href="#" @click.prevent="openDownloadModal" class="cta-button">立即下载</a>
           <a href="https://tiku.zerror.cc" class="cta-button bank-button">在线题库</a>
