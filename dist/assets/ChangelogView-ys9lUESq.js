@@ -1,4 +1,4 @@
-import{_ as a,c as s,a as e,F as d,r as c,o,t}from"./index-CNtzTZ0Y.js";const l={data(){return{logs:[{version:"2.1.0",date:"2025-11-30",description:`1. 修复软件默认数据存储路径问题
+import{_ as a,c as s,a as e,F as d,r as c,o,t}from"./index-B5LTtpmx.js";const l={data(){return{logs:[{version:"2.1.0",date:"2025-11-30",description:`1. 修复软件默认数据存储路径问题
 2. 添加导入与导出功能
 3. 修复文件夹无法拖动的问题
 4. 添加对题目选项的支持`},{version:"2.0.2",date:"2025-11-18",description:`1. 修复某些情况下需要管理员身份运行的问题
