@@ -260,14 +260,14 @@
       {
         "id": "freeqwq-qwen3-30b-a3b",
         "name": "freeqwq-qwen3-30b-a3b",
-        "displayName": "Qwen3-30B-A3B",
+        "displayName": "free:Qwen3-30B-A3B",
         "platformId": "freeqwq",
         "maxTokens": 4096,
         "temperature": 0.7,
         "topP": 0.9,
         "enabled": true,
         "category": "text",
-        "description": "无需登录的Qwen3-30B-A3B模型，FreeQwQ网站复制api_key即可",
+        "description": "无需登录的Qwen3-30B-A3B模型，FreeQwQ网站复制token即可",
         "pricing": {
           "inputTokens": 0,
           "outputTokens": 0
@@ -284,7 +284,7 @@
         "topP": 0.9,
         "enabled": true,
         "category": "text",
-        "description": "智谱GLM-4.5，该模型需要注册FreeQwQ，使用注册后的api_key，配置来自群友@mi",
+        "description": "智谱GLM-4.5，该模型需要注册FreeQwQ，使用注册后的api_key",
         "pricing": {
           "inputTokens": 0,
           "outputTokens": 0
