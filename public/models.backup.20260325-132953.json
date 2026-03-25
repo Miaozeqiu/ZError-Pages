@@ -5,7 +5,6 @@
     "displayName": "硅基流动",
     "icon": "silicon.png",
     "id": "siliconflow",
-    "inviteUrl": "https://university.aliyun.com/course/promotion22-activity?clubTaskBiz=subTask..12444057..10264..&userCode=snge9dyx",
     "models": [
       {
         "category": "text",
@@ -111,8 +110,8 @@
       }
     ],
     "name": "siliconflow",
-    "url": "https://bailian.console.aliyun.com/",
-    "inviteText": "学生认证免费获取300余额！"
+    "inviteUrl": "https://university.aliyun.com/course/promotion22-activity?clubTaskBiz=subTask..12444057..10264..&userCode=snge9dyx",
+    "url": "https://bailian.console.aliyun.com/"
   },
   {
     "baseUrl": "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
