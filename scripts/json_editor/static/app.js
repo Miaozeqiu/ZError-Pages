@@ -18,6 +18,8 @@ const platform_id = document.getElementById('platform_id');
 const platform_name = document.getElementById('platform_name');
 const platform_displayName = document.getElementById('platform_displayName');
 const platform_baseUrl = document.getElementById('platform_baseUrl');
+const platform_url = document.getElementById('platform_url');
+const platform_inviteUrl = document.getElementById('platform_inviteUrl');
 const platform_icon = document.getElementById('platform_icon');
 const platform_description = document.getElementById('platform_description');
 
@@ -52,6 +54,8 @@ function platformTemplate() {
     name: 'new-platform',
     displayName: '新平台',
     baseUrl: '',
+    url: '',
+    inviteUrl: '',
     icon: '',
     models: [],
     description: ''
@@ -170,10 +174,10 @@ function renderPlatformList() {
 function renderPlatformForm() {
   const p = state[selectedPlatformIndex];
   const disabled = !p;
-  [platform_id, platform_name, platform_displayName, platform_baseUrl, platform_icon, platform_description]
+  [platform_id, platform_name, platform_displayName, platform_baseUrl, platform_url, platform_inviteUrl, platform_icon, platform_description]
     .forEach(el => { el.disabled = disabled; });
   if (!p) {
-    platform_id.value = platform_name.value = platform_displayName.value = platform_baseUrl.value = platform_icon.value = '';
+    platform_id.value = platform_name.value = platform_displayName.value = platform_baseUrl.value = platform_url.value = platform_inviteUrl.value = platform_icon.value = '';
     platform_description.value = '';
     return;
   }
@@ -181,6 +185,8 @@ function renderPlatformForm() {
   platform_name.value = p.name || '';
   platform_displayName.value = p.displayName || '';
   platform_baseUrl.value = p.baseUrl || '';
+  platform_url.value = p.url || '';
+  platform_inviteUrl.value = p.inviteUrl || '';
   platform_icon.value = p.icon || '';
   platform_description.value = p.description || '';
 
@@ -188,6 +194,8 @@ function renderPlatformForm() {
   platform_name.oninput = () => { p.name = platform_name.value; renderPlatformList(); };
   platform_displayName.oninput = () => { p.displayName = platform_displayName.value; renderPlatformList(); };
   platform_baseUrl.oninput = () => { p.baseUrl = platform_baseUrl.value; };
+  platform_url.oninput = () => { p.url = platform_url.value; };
+  platform_inviteUrl.oninput = () => { p.inviteUrl = platform_inviteUrl.value; };
   platform_icon.oninput = () => { p.icon = platform_icon.value; };
   platform_description.oninput = () => { p.description = platform_description.value; };
 }
