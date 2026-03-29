@@ -7,149 +7,182 @@
     <link rel="stylesheet" href="/static/style.css" />
   </head>
   <body>
-    <header class="topbar">
-      <h1>models.json 可视化编辑器</h1>
-      <div class="actions">
-        <button id="reloadBtn">重新加载</button>
-        <button id="saveBtn" class="primary">保存更改</button>
-        <button id="validateBtn">校验结构</button>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-block">
+          <span class="eyebrow">JSON Editor</span>
+          <div class="brand-copy">
+            <h1>models.json 可视化编辑器</h1>
+            <p>快速维护供应商与模型配置，支持位置排序、结构校验与实时编辑。</p>
+          </div>
+        </div>
+        <div class="topbar-side">
+          <div class="actions">
+            <button id="reloadBtn" type="button">重新加载</button>
+            <button id="validateBtn" type="button">校验结构</button>
+            <button id="saveBtn" class="primary" type="button">保存更改</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="layout">
+        <aside class="sidebar">
+          <div class="panel panel-accent">
+            <div class="panel-head">
+              <div>
+                <h2>供应商列表</h2>
+                <p>选择供应商，并用排序按钮调整显示位置。</p>
+              </div>
+              <span id="sidebarPlatformCount" class="panel-count">0 个</span>
+            </div>
+            <div class="toolbar">
+              <button id="addPlatformBtn" type="button">新增供应商</button>
+              <button id="deletePlatformBtn" type="button">删除所选</button>
+              <button id="movePlatformUpBtn" type="button">上移</button>
+              <button id="movePlatformDownBtn" type="button">下移</button>
+            </div>
+            <ul id="platformList" class="list"></ul>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>模型图标映射</h2>
+                <p>按条目维护图标与模型关键字关系，关键字支持逗号或换行分隔。</p>
+              </div>
+              <span id="modelIconMappingsCount" class="panel-count">0 项</span>
+            </div>
+            <div class="mapping-toolbar">
+              <button id="addModelIconMappingBtn" type="button">新增映射</button>
+            </div>
+            <div id="modelIconMappingsList" class="mapping-list"></div>
+            <div id="modelIconMappingsError" class="mapping-error" hidden></div>
+            <details id="modelIconMappingsJsonPanel" class="mapping-json-panel">
+              <summary>高级 JSON 编辑</summary>
+              <div class="field full-width code-field compact-code-field">
+                <label for="model_icon_mappings_json">model_icon_mappings</label>
+                <textarea id="model_icon_mappings_json" spellcheck="false"></textarea>
+                <div class="field-tip">示例：`{"deepseek.png": ["DEEPSEEK", "DEEPSEEK-R1"]}`</div>
+              </div>
+            </details>
+          </div>
+
+          <div class="panel info">
+            <div class="panel-head simple">
+              <div>
+                <h2>状态</h2>
+                <p>操作结果与保存提醒会显示在这里。</p>
+              </div>
+            </div>
+            <div id="statusBox" data-type="info">就绪</div>
+          </div>
+        </aside>
+
+        <section class="editor-section">
+          <div class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>模型列表（所选供应商）</h2>
+                <p>可增删模型，并调整模型在当前供应商下的排列位置。</p>
+              </div>
+              <span id="currentModelCount" class="panel-count">0 个</span>
+            </div>
+            <div class="toolbar">
+              <button id="addModelBtn" type="button">新增模型</button>
+              <button id="deleteModelBtn" type="button">删除所选</button>
+              <button id="moveModelUpBtn" type="button">上移</button>
+              <button id="moveModelDownBtn" type="button">下移</button>
+            </div>
+            <ul id="modelList" class="list"></ul>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head simple">
+              <div>
+                <h2>模型详情</h2>
+                <p>编辑模型基础信息与脚本内容。</p>
+              </div>
+            </div>
+            <form id="modelForm" class="form-grid" onsubmit="return false;">
+              <div class="field">
+                <label for="model_id">模型 ID</label>
+                <input id="model_id" />
+              </div>
+              <div class="field">
+                <label for="model_displayName">显示名称</label>
+                <input id="model_displayName" />
+              </div>
+              <div class="field">
+                <label for="model_platformId">供应商 ID</label>
+                <input id="model_platformId" disabled />
+              </div>
+              <div class="field">
+                <label for="model_category">类别</label>
+                <select id="model_category">
+                  <option value="text">text</option>
+                  <option value="vision">vision</option>
+                  <option value="audio">audio</option>
+                  <option value="other">other</option>
+                </select>
+              </div>
+              <div class="field full-width code-field">
+                <label for="model_jsCode">jsCode</label>
+                <textarea id="model_jsCode"></textarea>
+              </div>
+            </form>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="platformEditorModal" class="modal-shell" hidden>
+      <div class="modal-backdrop" data-close-platform-editor="true"></div>
+      <div class="panel modal-dialog">
+        <div class="panel-head simple">
+          <div>
+            <h2>供应商详情</h2>
+            <p>维护供应商基础信息，修改 ID 时会同步该供应商下的模型平台 ID。</p>
+          </div>
+          <button id="closePlatformEditorBtn" type="button">关闭</button>
+        </div>
+        <form id="platformForm" class="form-grid" onsubmit="return false;">
+          <div class="field">
+            <label for="platform_id">供应商 ID</label>
+            <input id="platform_id" />
+          </div>
+          <div class="field">
+            <label for="platform_displayName">显示名称</label>
+            <input id="platform_displayName" />
+          </div>
+          <div class="field">
+            <label for="platform_baseUrl">Base URL</label>
+            <input id="platform_baseUrl" />
+          </div>
+          <div class="field">
+            <label for="platform_url">URL</label>
+            <input id="platform_url" />
+          </div>
+          <div class="field">
+            <label for="platform_inviteUrl">邀请 URL</label>
+            <input id="platform_inviteUrl" />
+          </div>
+          <div class="field">
+            <label for="platform_inviteText">邀请语句</label>
+            <input id="platform_inviteText" />
+          </div>
+          <div class="field">
+            <label for="platform_inviteCode">邀请码</label>
+            <input id="platform_inviteCode" />
+          </div>
+          <div class="field">
+            <label for="platform_icon">图标文件名</label>
+            <input id="platform_icon" />
+            <div id="platformIconPreview" class="asset-preview"></div>
+          </div>
+        </form>
       </div>
-    </header>
+    </div>
 
-    <main class="layout">
-      <aside class="sidebar">
-        <div class="panel">
-          <h2>平台列表</h2>
-          <div class="row">
-            <button id="addPlatformBtn">新增平台</button>
-            <button id="deletePlatformBtn">删除所选平台</button>
-          </div>
-          <ul id="platformList" class="list"></ul>
-        </div>
-
-        <div class="panel">
-          <h2>平台详情</h2>
-          <form id="platformForm" class="form-grid" onsubmit="return false;">
-            <div class="field">
-              <label for="platform_id">平台ID</label>
-              <input id="platform_id" />
-            </div>
-            <div class="field">
-              <label for="platform_name">内部名称</label>
-              <input id="platform_name" />
-            </div>
-            <div class="field">
-              <label for="platform_displayName">显示名称</label>
-              <input id="platform_displayName" />
-            </div>
-            <div class="field">
-              <label for="platform_baseUrl">Base URL</label>
-              <input id="platform_baseUrl" />
-            </div>
-            <div class="field">
-              <label for="platform_url">URL</label>
-              <input id="platform_url" />
-            </div>
-            <div class="field">
-              <label for="platform_inviteUrl">邀请URL</label>
-              <input id="platform_inviteUrl" />
-            </div>
-            <div class="field">
-              <label for="platform_inviteText">邀请语句</label>
-              <input id="platform_inviteText" />
-            </div>
-            <div class="field">
-              <label for="platform_icon">图标文件名</label>
-              <input id="platform_icon" />
-            </div>
-            <div class="field" style="grid-column: 1 / -1">
-              <label for="platform_description">平台描述</label>
-              <textarea id="platform_description"></textarea>
-            </div>
-          </form>
-        </div>
-
-        <div class="panel info">
-          <h2>状态</h2>
-          <div id="statusBox">就绪</div>
-        </div>
-      </aside>
-
-      <section class="editor-section">
-        <div class="panel">
-          <h2>模型列表（所选平台）</h2>
-          <div class="row">
-            <button id="addModelBtn">新增模型</button>
-            <button id="deleteModelBtn">删除所选模型</button>
-          </div>
-          <ul id="modelList" class="list"></ul>
-        </div>
-
-        <div class="panel">
-          <h2>模型详情</h2>
-          <form id="modelForm" class="form-grid" onsubmit="return false;">
-            <div class="field">
-              <label for="model_id">模型ID</label>
-              <input id="model_id" />
-            </div>
-            <div class="field">
-              <label for="model_name">内部名称</label>
-              <input id="model_name" />
-            </div>
-            <div class="field">
-              <label for="model_displayName">显示名称</label>
-              <input id="model_displayName" />
-            </div>
-            <div class="field">
-              <label for="model_platformId">平台ID</label>
-              <input id="model_platformId" disabled />
-            </div>
-            <div class="field">
-              <label for="model_maxTokens">maxTokens</label>
-              <input id="model_maxTokens" type="number" />
-            </div>
-            <div class="field">
-              <label for="model_temperature">temperature</label>
-              <input id="model_temperature" type="number" step="0.1" />
-            </div>
-            <div class="field">
-              <label for="model_topP">topP</label>
-              <input id="model_topP" type="number" step="0.1" />
-            </div>
-            <div class="field">
-              <label for="model_enabled">启用</label>
-              <input id="model_enabled" type="checkbox" />
-            </div>
-            <div class="field">
-              <label for="model_category">类别</label>
-              <select id="model_category">
-                <option value="text">text</option>
-                <option value="vision">vision</option>
-                <option value="audio">audio</option>
-                <option value="other">other</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="model_inputTokens">定价-输入</label>
-              <input id="model_inputTokens" type="number" step="0.0001" />
-            </div>
-            <div class="field">
-              <label for="model_outputTokens">定价-输出</label>
-              <input id="model_outputTokens" type="number" step="0.0001" />
-            </div>
-            <div class="field" style="grid-column: 1 / -1">
-              <label for="model_description">模型描述</label>
-              <textarea id="model_description"></textarea>
-            </div>
-            <div class="field" style="grid-column: 1 / -1">
-              <label for="model_jsCode">jsCode</label>
-              <textarea id="model_jsCode" style="min-height: 260px"></textarea>
-            </div>
-          </form>
-        </div>
-      </section>
-    </main>
-
-    <script src="/static/app.js"></script>
+    <script type="module" src="/static/app.js"></script>
   </body>
 </html>
