@@ -1,5 +1,5 @@
 {
-    "version": "2.1.1",
+    "version": "2.1.0",
     "downloadUrl": "https://cdn.zerror.cc/ZError_Setup_2.1.0.exe",
     "changelog": "1. 修复软件默认数据存储路径问题\n2. 添加导入与导出功能\n3. 修复文件夹无法拖动的问题\n4. 添加对题目选项的支持"
 }
