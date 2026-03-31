@@ -1,5 +1,5 @@
 {
   "version": "2.2.1",
-  "downloadUrl": "https://app.zerror.cc/apps/ZError_Setup_2.2.0.exe",
+  "downloadUrl": "https://app.zerror.cc/apps/ZError_Setup_2.2.1.exe",
   "changelog": "1. 优化图片链接识别算法，如再遇到图片链接识别问题，可以联系作者\n2.优化请求数量的日志记录"
 }
