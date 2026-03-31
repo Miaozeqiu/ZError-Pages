@@ -9,12 +9,14 @@
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "api": "python scripts/json_editor/app.py",
+    "test": "node --test scripts/json_editor/tests/questionImageAlgorithm.test.js && python -m unittest discover -s scripts/json_editor/tests -p \"test_*.py\""
   },
   "dependencies": {
-    "pinia": "^3.0.1",
+    "pinia": "^3.0.4",
     "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
+    "vue-router": "^4.6.4"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.1",
@@ -29,6 +31,6 @@
     "typescript": "~5.8.0",
     "vite": "^6.2.4",
     "vite-plugin-vue-devtools": "^7.7.2",
-    "vue-tsc": "^2.2.8"
+    "vue-tsc": "^2.2.12"
   }
 }

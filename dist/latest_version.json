@@ -1,5 +1,5 @@
 {
-    "version": "2.1.0",
-    "downloadUrl": "https://cdn.zerror.cc/ZError_Setup_2.1.0.exe",
-    "changelog": "1. 修复软件默认数据存储路径问题\n2. 添加导入与导出功能\n3. 修复文件夹无法拖动的问题\n4. 添加对题目选项的支持"
+    "version": "2.2.0",
+    "downloadUrl": "https://app.zerror.cc/apps/ZError_Setup_2.2.0.exe",
+    "changelog": "1. 添加图片题目的答案直接返回支持\n2.添加多模型并发，并最终由总结模型总结答案\n3. 优化平台与模型添加\n4. 优化界面\n5.添加题目反馈功能\n6. 添加请求记录\n7. 防止空答案存入\n8.优化包含'以下'，'下列'等关键字的题目的查询\n9.优化软件内查询，改为全文匹配"
 }

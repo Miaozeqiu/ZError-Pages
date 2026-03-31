@@ -1,226 +1,161 @@
-import os
+from __future__ import annotations
+
 import json
-import datetime
-from flask import Flask, jsonify, request, render_template, send_from_directory
-from flask_cors import CORS
+import threading
+from datetime import datetime
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+from typing import Any
+from urllib.parse import parse_qs, urlparse
+
+HOST = '127.0.0.1'
+PORT = 5050
+BASE_DIR = Path(__file__).resolve().parents[2]
+PUBLIC_MODELS_PATH = BASE_DIR / 'public' / 'models.json'
+DIST_MODELS_PATH = BASE_DIR / 'dist' / 'models.json'
+WRITE_TARGETS = [PUBLIC_MODELS_PATH, DIST_MODELS_PATH]
+SAVE_LOCK = threading.Lock()
 
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-JSON_PATH = os.path.join(BASE_DIR, "public", "models.json")
-BACKUP_DIR = os.path.join(BASE_DIR, "public")
-PROVIDERS_DIR = os.path.join(BASE_DIR, "public", "providers")
-DEFAULT_MODEL_ICON_MAPPINGS = {
-    "deepseek.png": ["DEEPSEEK"],
-}
+def _json_bytes(payload: Any) -> bytes:
+    return json.dumps(payload, ensure_ascii=False, indent=2).encode('utf-8') + b'\n'
 
 
-def list_provider_files():
-    if not os.path.isdir(PROVIDERS_DIR):
-        return []
-    return sorted(
-        [
-            name
-            for name in os.listdir(PROVIDERS_DIR)
-            if os.path.isfile(os.path.join(PROVIDERS_DIR, name))
-        ],
-        key=lambda name: name.lower(),
-    )
+def _read_models_payload() -> Any:
+    target = PUBLIC_MODELS_PATH if PUBLIC_MODELS_PATH.exists() else DIST_MODELS_PATH
+    if not target.exists():
+        raise FileNotFoundError('未找到 public/models.json 或 dist/models.json')
+
+    with target.open('r', encoding='utf-8') as file:
+        return json.load(file)
 
 
-def normalize_models_payload(data):
-    providers_list = list_provider_files()
+def _should_create_backup(handler: BaseHTTPRequestHandler) -> bool:
+    parsed = urlparse(handler.path)
+    query = parse_qs(parsed.query)
+    backup_query = query.get('backup', ['1'])[-1].strip().lower()
+    backup_header = handler.headers.get('X-Create-Backup', 'true').strip().lower()
+    false_values = {'0', 'false', 'no', 'off'}
+    return backup_query not in false_values and backup_header not in false_values
 
-    def normalize_platforms(platforms):
-        if not isinstance(platforms, list):
-            return []
-        normalized = []
-        for platform in platforms:
-            if isinstance(platform, dict):
-                item = dict(platform)
-                item.pop("providers_list", None)
-                item.pop("model_icon_mappings", None)
-                normalized.append(item)
+
+def _backup_path(path: Path) -> Path:
+    timestamp = datetime.now().strftime('%Y%m%d-%H%M%S')
+    return path.with_name(f'{path.stem}.backup.{timestamp}{path.suffix}')
+
+
+def _write_models_payload(payload: Any, *, create_backup: bool) -> None:
+    content = _json_bytes(payload)
+
+    with SAVE_LOCK:
+        for target in WRITE_TARGETS:
+            if not target.parent.exists():
+                target.parent.mkdir(parents=True, exist_ok=True)
+
+            if create_backup and target.exists():
+                target.replace(_backup_path(target))
+                target.write_bytes(content)
             else:
-                normalized.append(platform)
-        return normalized
-
-    def normalize_model_icon_mappings(mappings):
-        source = mappings if isinstance(mappings, dict) else DEFAULT_MODEL_ICON_MAPPINGS
-        normalized = {}
-        for icon_name, keywords in source.items():
-            if not isinstance(icon_name, str) or not icon_name.strip():
-                continue
-            if isinstance(keywords, str):
-                keyword_list = [keywords]
-            elif isinstance(keywords, list):
-                keyword_list = keywords
-            else:
-                continue
-
-            cleaned_keywords = [
-                keyword.strip()
-                for keyword in keyword_list
-                if isinstance(keyword, str) and keyword.strip()
-            ]
-            if cleaned_keywords:
-                normalized[icon_name] = cleaned_keywords
-        return normalized
-
-    if isinstance(data, list):
-        return {
-            "providers_list": providers_list,
-            "model_icon_mappings": normalize_model_icon_mappings(None),
-            "platforms": normalize_platforms(data),
-        }
-
-    if isinstance(data, dict):
-        payload = dict(data)
-        payload["providers_list"] = providers_list
-        payload["model_icon_mappings"] = normalize_model_icon_mappings(payload.get("model_icon_mappings"))
-        payload["platforms"] = normalize_platforms(payload.get("platforms", []))
-        return payload
-
-    return {
-        "providers_list": providers_list,
-        "model_icon_mappings": normalize_model_icon_mappings(None),
-        "platforms": [],
-    }
+                target.write_bytes(content)
 
 
-def load_models():
-    if not os.path.exists(JSON_PATH):
-        return normalize_models_payload([])
-    with open(JSON_PATH, "r", encoding="utf-8") as f:
-        return normalize_models_payload(json.load(f))
+def _error_payload(message: str, *, errors: list[str] | None = None) -> dict[str, Any]:
+    payload: dict[str, Any] = {'ok': False, 'error': message}
+    if errors:
+        payload['errors'] = errors
+    return payload
 
 
-def save_models(data):
-    payload = normalize_models_payload(data)
+class ModelsRequestHandler(BaseHTTPRequestHandler):
+    server_version = 'ModelsJsonEditor/1.0'
 
-    # 先备份
-    ts = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-    backup_path = os.path.join(BACKUP_DIR, f"models.backup.{ts}.json")
+    def do_OPTIONS(self) -> None:
+        self.send_response(204)
+        self._send_common_headers('application/json; charset=utf-8')
+        self.end_headers()
+
+    def do_GET(self) -> None:
+        parsed = urlparse(self.path)
+        if parsed.path == '/api/models':
+            try:
+                payload = _read_models_payload()
+                self._send_json(200, payload)
+            except FileNotFoundError as error:
+                self._send_json(404, _error_payload(str(error)))
+            except json.JSONDecodeError as error:
+                self._send_json(500, _error_payload(f'models.json 解析失败：{error}'))
+            except Exception as error:
+                self._send_json(500, _error_payload(f'读取失败：{error}'))
+            return
+
+        self._send_json(404, _error_payload('接口不存在'))
+
+    def do_POST(self) -> None:
+        parsed = urlparse(self.path)
+        if parsed.path != '/api/models':
+            self._send_json(404, _error_payload('接口不存在'))
+            return
+
+        try:
+            content_length = int(self.headers.get('Content-Length', '0'))
+        except ValueError:
+            self._send_json(400, _error_payload('无效的 Content-Length'))
+            return
+
+        raw_body = self.rfile.read(content_length) if content_length > 0 else b''
+        if not raw_body:
+            self._send_json(400, _error_payload('请求体不能为空'))
+            return
+
+        try:
+            payload = json.loads(raw_body.decode('utf-8'))
+        except json.JSONDecodeError as error:
+            self._send_json(400, _error_payload(f'JSON 格式错误：{error}'))
+            return
+
+        if not isinstance(payload, dict):
+            self._send_json(400, _error_payload('根结构必须是 JSON 对象'))
+            return
+
+        try:
+            _write_models_payload(payload, create_backup=_should_create_backup(self))
+        except Exception as error:
+            self._send_json(500, _error_payload(f'保存失败：{error}'))
+            return
+
+        self._send_json(200, {'ok': True, 'message': '保存成功'})
+
+    def log_message(self, format: str, *args: Any) -> None:
+        print(f'[{self.log_date_time_string()}] {self.address_string()} - {format % args}')
+
+    def _send_common_headers(self, content_type: str) -> None:
+        self.send_header('Content-Type', content_type)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type,X-Create-Backup')
+        self.send_header('Cache-Control', 'no-store')
+
+    def _send_json(self, status_code: int, payload: Any) -> None:
+        body = _json_bytes(payload)
+        self.send_response(status_code)
+        self._send_common_headers('application/json; charset=utf-8')
+        self.send_header('Content-Length', str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+
+def main() -> None:
+    server = ThreadingHTTPServer((HOST, PORT), ModelsRequestHandler)
+    print(f'Python models 后端已启动：http://{HOST}:{PORT}')
+    print(f'读取文件：{PUBLIC_MODELS_PATH}')
+    print('按 Ctrl+C 停止服务')
     try:
-        with open(backup_path, "w", encoding="utf-8") as bf:
-            json.dump(load_models(), bf, ensure_ascii=False, indent=2)
-    except Exception:
-        # 备份失败不阻塞保存
-        pass
-
-    # 保存新内容
-    with open(JSON_PATH, "w", encoding="utf-8") as f:
-        json.dump(payload, f, ensure_ascii=False, indent=2)
+        server.serve_forever()
+    except KeyboardInterrupt:
+        print('\n服务已停止')
+    finally:
+        server.server_close()
 
 
-def validate_models(data):
-    errors = []
-
-    if isinstance(data, dict):
-        providers_list = data.get("providers_list")
-        if providers_list is not None and not isinstance(providers_list, list):
-            errors.append("providers_list 必须是数组")
-
-        model_icon_mappings = data.get("model_icon_mappings")
-        if model_icon_mappings is not None:
-            if not isinstance(model_icon_mappings, dict):
-                errors.append("model_icon_mappings 必须是对象")
-            else:
-                for icon_name, keywords in model_icon_mappings.items():
-                    if not isinstance(icon_name, str) or not icon_name.strip():
-                        errors.append("model_icon_mappings 的键必须是非空字符串")
-                        continue
-                    if not isinstance(keywords, list):
-                        errors.append(f"model_icon_mappings[{icon_name}] 必须是数组")
-                        continue
-                    for keyword in keywords:
-                        if not isinstance(keyword, str) or not keyword.strip():
-                            errors.append(f"model_icon_mappings[{icon_name}] 的关键字必须是非空字符串")
-
-        platforms = data.get("platforms")
-        if not isinstance(platforms, list):
-            errors.append("platforms 必须是数组")
-            return errors
-    elif isinstance(data, list):
-        platforms = data
-    else:
-        errors.append("根结构必须是对象或数组")
-        return errors
-
-    for idx, platform in enumerate(platforms):
-        for key in ["id", "name", "displayName", "models"]:
-            if key not in platform:
-                errors.append(f"平台[{idx}]缺少字段: {key}")
-        if "models" in platform and not isinstance(platform["models"], list):
-            errors.append(f"平台[{idx}].models 必须是数组")
-        if isinstance(platform.get("models", []), list):
-            for midx, model in enumerate(platform["models"]):
-                for mkey in ["id", "displayName", "platformId"]:
-                    if mkey not in model:
-                        errors.append(f"平台[{idx}].models[{midx}] 缺少字段: {mkey}")
-    return errors
-
-
-def create_app():
-    app = Flask(
-        __name__,
-        template_folder=os.path.join(os.path.dirname(__file__), "templates"),
-        static_folder=os.path.join(os.path.dirname(__file__), "static"),
-    )
-    CORS(app)
-
-    @app.route("/")
-    def index():
-        return render_template("index.html")
-
-    @app.route("/api/health")
-    def health():
-        return jsonify({"status": "ok"})
-
-    @app.route("/api/models", methods=["GET"])
-    def get_models():
-        try:
-            return jsonify(load_models())
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    @app.route("/api/models", methods=["POST", "PUT"])
-    def put_models():
-        try:
-            data = request.get_json(force=True)
-            errors = validate_models(data)
-            if errors:
-                return jsonify({"ok": False, "errors": errors}), 400
-            save_models(data)
-            return jsonify({"ok": True})
-        except Exception as e:
-            return jsonify({"ok": False, "error": str(e)}), 500
-
-    @app.route("/api/platforms", methods=["GET"])
-    def get_platforms():
-        try:
-            payload = load_models()
-            items = [
-                {
-                    "id": p.get("id"),
-                    "name": p.get("id"),
-                    "displayName": p.get("displayName"),
-                    "modelsCount": len(p.get("models", [])),
-                }
-                for p in payload.get("platforms", [])
-            ]
-            return jsonify(items)
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    # 静态资源（可选：如需单独提供）
-    @app.route("/static/<path:filename>")
-    def static_files(filename):
-        return send_from_directory(app.static_folder, filename)
-
-    return app
-
-
-if __name__ == "__main__":
-    app = create_app()
-    # 避免与 Vite 端口冲突，使用 5050
-    app.run(host="127.0.0.1", port=5050, debug=True)
+if __name__ == '__main__':
+    main()
