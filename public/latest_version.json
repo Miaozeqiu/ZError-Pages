@@ -1,5 +1,5 @@
 {
-  "version": "2.2.3",
-  "downloadUrl": "https://app.zerror.cc/apps/ZError_Setup_2.2.1.exe",
-  "changelog": "1. 修复模型供应商列列表无法滑动的问题\n2. 停止服务与关闭测试时，会停止请求\n3. 优化图片颜色反转逻辑"
+  "version": "2.2.4",
+  "downloadUrl": "https://app.zerror.cc/apps/ZError_Setup_2.2.4.exe",
+  "changelog": "1. 修复模型无法打开修改窗外问题 \n 2. 优化模型输出显示\n 3. 添加操作引导"
 }
