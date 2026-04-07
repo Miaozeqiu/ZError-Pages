@@ -440,10 +440,11 @@
   }
 
   .hero-image {
-    width: min(92vw, 760px);
-    max-width: 760px;
+    width: 100%;
+    max-width: min(760px, 100%);
     border-radius: 4px;
     margin: 0 auto;
+    display: block;
   }
 
   .search-feature-section {
@@ -500,6 +501,7 @@
     flex-direction: column;
     gap: 2rem;
     margin-bottom: 80px;
+    align-items: center; /* 强制交叉轴居中 */
   }
 
   .search-feature-section.reverse {
@@ -512,9 +514,18 @@
   }
 
   .feature-visual-stack {
-    flex: auto; /* 竖排时恢复自由缩放 */
+    flex: 0 1 auto; /* 允许缩小，不允许放大，基于内容大小 */
     width: 100%;
     max-width: 620px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .feature-canvas {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
   }
 }
 
@@ -704,6 +715,24 @@
 .netlify-logo {
   height: 40px;
   width: auto;
+}
+
+@media (max-width: 1024px) {
+  .banner-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .banner-text {
+    align-items: center;
+  }
+
+  .sponsor-info {
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+  }
 }
 
 /* 响应式设计 */
