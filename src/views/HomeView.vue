@@ -19,6 +19,30 @@
       <img src="@/assets/ZError2.0.0.png" alt="ZError首页" class="hero-image animate-element" />
     </div>
 
+    <div class="search-feature-section">
+      <div class="search-feature-content">
+        <h3 class="search-feature-title animate-element">多模型并发请求。</h3>
+        <p class="search-feature-desc animate-element">
+          支持多个模型并发请求，并由总结模型最终给出答案，提高回答准确性。
+        </p>
+      </div>
+      <div class="feature-visual-stack animate-element">
+        <canvas ref="featureCanvas" class="feature-canvas" width="800" height="600" alt="功能展示"></canvas>
+      </div>
+    </div>
+
+    <div class="search-feature-section reverse">
+      <div class="search-feature-content">
+        <h3 class="search-feature-title animate-element">完美支持图片题目。</h3>
+        <p class="search-feature-desc animate-element">
+          完美兼容 OCS 网课助手。借助强大的视觉大模型，能够轻松识别并解析复杂的公式，实现图片题目的自动回答。
+        </p>
+      </div>
+      <div class="feature-visual-stack animate-element">
+        <canvas ref="ocsCanvas" class="feature-canvas" width="800" height="600" alt="OCS与视觉模型展示"></canvas>
+      </div>
+    </div>
+
     <div class="platform-section animate-element">
       <div class="ai-model-heading animate-element">AI模型</div>
       <h3 class="platform-title animate-element">完全自定义</h3>
@@ -249,7 +273,11 @@ import bailianSvg from "@/assets/百炼.svg?raw";
 import deepseekSvg from "@/assets/deepseek.svg?raw"; // 新增导入
 import qqGroupQr from "@/assets/qrcode_1764491285880.jpg";
 import channelQr from "@/assets/qrcode_1764491300797.jpg";
-import { inject, onMounted } from "vue";
+import multiModelImage from "@/assets/multi-model.png";
+import questionImage from "@/assets/question.png";
+import ocsImage from "@/assets/ocs.png";
+import visionImage from "@/assets/vision.png";
+import { inject, onMounted, ref } from "vue";
 import "@/assets/styles/home.css"; // 导入样式文件
 
 export default {
@@ -264,8 +292,209 @@ export default {
   },
   setup() {
     const downloadModal = inject("downloadModal");
+    const featureCanvas = ref(null);
+    const ocsCanvas = ref(null);
+
+    // Helper for rounded rect clipping
+    const roundRect = (ctx, x, y, width, height, radius) => {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+    };
+
+    const drawOcsCanvas = () => {
+      const canvas = ocsCanvas.value;
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      const imgBase = new Image();
+      const imgOverlay = new Image();
+      imgBase.src = visionImage;
+      imgOverlay.src = ocsImage;
+
+      let baseLoaded = false;
+      let overlayLoaded = false;
+
+      const drawImages = () => {
+        if (!baseLoaded || !overlayLoaded) return;
+
+        // vision.png ratio
+        const baseRatio = imgBase.height / imgBase.width;
+        // ocs.png ratio
+        const overlayRatio = imgOverlay.height / imgOverlay.width;
+
+        // Define sizes.
+        // We want base (vision) to be shifted right, overlay (ocs) to be on the left
+        const baseWidth = 540;
+        const baseHeight = baseWidth * baseRatio;
+
+        const overlayWidth = baseWidth * 0.75;
+        const overlayHeight = overlayWidth * overlayRatio;
+
+        // Offset logic: OCS is on the left (x=0), vision is shifted right
+        const overlayX = 0;
+        const overlayY = baseHeight * 0.12;
+
+        const baseX = overlayWidth * 0.45;
+        const baseY = 0;
+
+        // Padding for shadows
+        const padding = 60;
+        const totalWidth = Math.max(baseX + baseWidth, overlayX + overlayWidth) + padding * 2;
+        const totalHeight = Math.max(baseY + baseHeight, overlayY + overlayHeight) + padding * 2;
+
+        const dpr = Math.max(window.devicePixelRatio || 1, 3);
+        canvas.width = totalWidth * dpr;
+        canvas.height = totalHeight * dpr;
+
+        ctx.scale(dpr, dpr);
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+
+        ctx.translate(padding, padding);
+
+        // Draw base (vision)
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.15)';
+        ctx.shadowBlur = 30;
+        ctx.shadowOffsetY = 15;
+        ctx.shadowOffsetX = 0;
+
+        ctx.save();
+        roundRect(ctx, baseX, baseY, baseWidth, baseHeight, 16);
+        ctx.fillStyle = 'white';
+        ctx.fill();
+        ctx.clip();
+        ctx.drawImage(imgBase, baseX, baseY, baseWidth, baseHeight);
+        ctx.restore();
+
+        // Draw overlay (ocs) in front
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.25)';
+        ctx.shadowBlur = 40;
+        ctx.shadowOffsetY = 20;
+
+        ctx.save();
+        roundRect(ctx, overlayX, overlayY, overlayWidth, overlayHeight, 16);
+        ctx.fillStyle = 'white';
+        ctx.fill();
+        ctx.clip();
+        ctx.drawImage(imgOverlay, overlayX, overlayY, overlayWidth, overlayHeight);
+        ctx.restore();
+      };
+
+      imgBase.onload = () => {
+        baseLoaded = true;
+        drawImages();
+      };
+
+      imgOverlay.onload = () => {
+        overlayLoaded = true;
+        drawImages();
+      };
+    };
+
+    const drawFeatureCanvas = () => {
+      const canvas = featureCanvas.value;
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      const imgBase = new Image();
+      const imgOverlay = new Image();
+      imgBase.src = multiModelImage;
+      imgOverlay.src = questionImage;
+
+      let baseLoaded = false;
+      let overlayLoaded = false;
+
+      const drawImages = () => {
+        if (!baseLoaded || !overlayLoaded) return;
+
+        // Get natural aspect ratios
+        const baseRatio = imgBase.height / imgBase.width;
+        const overlayRatio = imgOverlay.height / imgOverlay.width;
+
+        // Define base image size relative to canvas
+        const baseWidth = 800; // Base rendering width
+        const baseHeight = baseWidth * baseRatio;
+
+        // Define overlay image size and position (1.2x width of base, offset right/down)
+        const overlayWidth = baseWidth * 1.2;
+        const overlayHeight = overlayWidth * overlayRatio;
+        const overlayX = baseWidth * 0.4; // 100% - ~32% visual overlap = ~0.6 -> shift right
+        const overlayY = baseHeight * 0.3; // 30% down
+
+        // Calculate total needed canvas size (including shadows)
+        const padding = 60; // Extra space for shadows
+        const totalWidth = Math.max(baseWidth, overlayX + overlayWidth) + padding * 2;
+        const totalHeight = Math.max(baseHeight, overlayY + overlayHeight) + padding * 2;
+
+        // Set actual canvas resolution (High DPI)
+        // Use a higher multiplier (e.g. 3 or 4) to ensure crisp rendering when scaled down by CSS
+        const dpr = Math.max(window.devicePixelRatio || 1, 3);
+        canvas.width = totalWidth * dpr;
+        canvas.height = totalHeight * dpr;
+
+        // Scale context to match DPR
+        ctx.scale(dpr, dpr);
+
+        // Enable high-quality image smoothing
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+
+        // Center the drawing in the padded area
+        ctx.translate(padding, padding);
+
+        // Draw base image with shadow
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+        ctx.shadowBlur = 30;
+        ctx.shadowOffsetY = 15;
+        ctx.shadowOffsetX = 0;
+
+        ctx.save();
+        roundRect(ctx, 0, 0, baseWidth, baseHeight, 16);
+        ctx.fillStyle = 'white';
+        ctx.fill(); // Fill to ensure shadow shows under transparent areas
+        ctx.clip();
+        ctx.drawImage(imgBase, 0, 0, baseWidth, baseHeight);
+        ctx.restore();
+
+        // Draw overlay with stronger shadow
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.25)';
+        ctx.shadowBlur = 40;
+        ctx.shadowOffsetY = 20;
+
+        ctx.save();
+        roundRect(ctx, overlayX, overlayY, overlayWidth, overlayHeight, 16);
+        ctx.fillStyle = 'white';
+        ctx.fill();
+        ctx.clip();
+        ctx.drawImage(imgOverlay, overlayX, overlayY, overlayWidth, overlayHeight);
+        ctx.restore();
+      };
+
+      imgBase.onload = () => {
+        baseLoaded = true;
+        drawImages();
+      };
+
+      imgOverlay.onload = () => {
+        overlayLoaded = true;
+        drawImages();
+      };
+    };
 
     onMounted(() => {
+      // 绘制 canvas
+      drawFeatureCanvas();
+      drawOcsCanvas();
+
       // 创建Intersection Observer实例
       const observer = new IntersectionObserver(
         (entries) => {
@@ -290,6 +519,8 @@ export default {
     });
 
     return {
+      featureCanvas,
+      ocsCanvas,
       openDownloadModal: downloadModal.open,
     };
   },

@@ -195,7 +195,7 @@
 .ai-model-heading {
   text-align: center;
   color: #ff7a00; /* 橙色 */
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.05em;
   margin: 1rem 0 0.5rem;
@@ -251,10 +251,8 @@
 }
 
 .hero-image {
-  width: 60%;
-  /* 减小图片宽度比例 */
-  max-width: 800px;
-  /* 减小最大宽度 */
+  width: 55%;
+  max-width: 700px;
   height: auto;
   border-radius: 12px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
@@ -264,8 +262,61 @@
     transform 0.6s ease;
 }
 
-/* 统一 hero-image 的动画延时，避免可见状态延迟导致的闪烁 */
 .hero-image.animate-element.visible {
+  transition-delay: 0s;
+}
+
+.search-feature-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  margin-bottom: 120px;
+}
+
+.search-feature-section.reverse {
+  flex-direction: row-reverse;
+}
+
+.search-feature-content {
+  flex: 1;
+  min-width: 280px; /* 允许文字区缩小，但给个保底宽度防止太小 */
+  max-width: 420px;
+}
+
+.search-feature-title {
+  margin: 0 0 1rem;
+  font-size: 3rem;
+  line-height: 1.15;
+  color: #101828;
+  font-weight: 700;
+}
+
+.search-feature-desc {
+  margin: 0;
+  color: #667085;
+  font-size: 1.25rem;
+  line-height: 1.7;
+}
+
+.feature-visual-stack {
+  position: relative;
+  flex: 0 0 580px; /* 固定图片宽度 580px，放大显示 */
+  max-width: 580px;
+  will-change: opacity, transform;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.feature-canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.feature-visual-stack.animate-element.visible {
   transition-delay: 0s;
 }
 
@@ -389,8 +440,42 @@
   }
 
   .hero-image {
+    width: min(92vw, 760px);
+    max-width: 760px;
     border-radius: 4px;
-    width: 100%;
+    margin: 0 auto;
+  }
+
+  .search-feature-section {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 80px;
+  }
+
+  .search-feature-section.reverse {
+    flex-direction: row-reverse;
+  }
+
+  .search-feature-content {
+    flex: 1 1 auto;
+    max-width: 420px;
+    text-align: left;
+  }
+
+  .search-feature-title {
+    font-size: 2.4rem;
+  }
+
+  .search-feature-desc {
+    font-size: 1.05rem;
+  }
+
+  .feature-visual-stack {
+    flex: 0 0 620px; /* 在这个断点下也稍微调大点适应屏幕，放大显示 */
+    width: 620px;
+    max-width: 100%;
   }
 
   .title {
@@ -410,10 +495,37 @@
   }
 }
 
+@media (max-width: 900px) {
+  .search-feature-section {
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 80px;
+  }
+
+  .search-feature-section.reverse {
+    flex-direction: column;
+  }
+
+  .search-feature-content {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .feature-visual-stack {
+    flex: auto; /* 竖排时恢复自由缩放 */
+    width: 100%;
+    max-width: 620px;
+  }
+}
+
 @media (max-width: 800px) {
   .social-media-section {
     flex-direction: column;
     text-align: center;
+  }
+
+  .search-feature-title {
+    font-size: 2rem;
   }
 
   .social-header {
