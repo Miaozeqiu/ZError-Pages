@@ -255,6 +255,9 @@
           <a href="#" target="_blank" rel="noopener" class="sponsor-link">
             <img src="@/assets/pangu.png" alt="Pangu" class="sponsor-gif pangu-logo" />
           </a>
+          <a href="#" target="_blank" rel="noopener" class="sponsor-link">
+            <img src="@/assets/微信图片_20260409211529.png" alt="Sponsor" class="sponsor-gif" />
+          </a>
         </div>
       </div>
       <div class="netlify-section">

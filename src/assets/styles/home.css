@@ -521,7 +521,7 @@
     display: flex;
     justify-content: center;
   }
-  
+
   .feature-canvas {
     width: 100%;
     max-width: 100%;
@@ -599,11 +599,12 @@
 }
 
 .banner-content {
+  height: 100%;
   max-width: 800px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 0 2rem;
   gap: 2rem;
 }
@@ -688,6 +689,7 @@
 }
 
 .netlify-section {
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -721,11 +723,16 @@
   .banner-content {
     flex-direction: column;
     text-align: center;
+    align-items: center;
     gap: 1.5rem;
   }
 
   .banner-text {
     align-items: center;
+  }
+
+  .banner-text > div {
+    justify-content: center !important;
   }
 
   .sponsor-info {
