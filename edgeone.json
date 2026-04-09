@@ -14,8 +14,38 @@
         {
           "key": "Access-Control-Allow-Headers",
           "value": "Content-Type, Authorization"
+        },
+        {
+          "key": "Access-Control-Max-Age",
+          "value": "86400"
         }
       ]
     }
-  ]
+  ],
+  "rewrites": [
+    {
+      "source": "/*",
+      "has": [
+        {
+          "type": "method",
+          "key": "OPTIONS"
+        }
+      ],
+      "destination": "/_edge/options"
+    }
+  ],
+  "functions": {
+    "options": {
+      "path": "/_edge/options",
+      "response": {
+        "status": 204,
+        "headers": {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization",
+          "Access-Control-Max-Age": "86400"
+        }
+      }
+    }
+  }
 }
