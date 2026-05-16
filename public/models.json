@@ -75,11 +75,31 @@
   ],
   "question_image_algorithm": "function createQuestionImageAlgorithm(runtime) {\n  /**\n   * 1. 核心正则改进：\n   * 使用 (?!https?:\\/\\/) 负向前瞻。\n   * 含义：匹配 URL 字符，但每匹配一个字符前，先检查后面是不是跟着新的 \"http\"，如果是则停止。\n   * 同时移除了逗号 [,]，防止多个链接被逗号粘连。\n   */\n  const urlRegex = /https?:\\/\\/(?:(?!https?:\\/\\/)[A-Za-z0-9\\-._~:/?#[\\]@!$&()*+;=%])+/g;\n\n  const countChar = (text, ch) => (text.match(new RegExp('\\\\\\\\' + ch, 'g')) || []).length;\n\n  const normalizeUrl = (rawUrl) => {\n    let url = String(rawUrl || '').trim();\n\n    // --- 规则 A：图片后缀截断 ---\n    // 只要匹配到图片后缀就截断，不考虑后面是什么（单位、下划线等由 trailingText 处理）\n    const imageExtensions = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'svg'];\n    const extPattern = new RegExp(`\\\\.(${imageExtensions.join('|')})`, 'i');\n    const extMatch = url.match(extPattern);\n    \n    if (extMatch) {\n      return url.substring(0, extMatch.index + extMatch[0].length);\n    }\n\n    // --- 规则 B：基础清洗逻辑 ---\n    // 移除末尾可能的中文或英文标点\n    url = url.replace(/[，。；！？,;!?]+$/g, '');\n    \n    // 剥离右侧引号和括号\n    while (/[\"'`》）】』」}>]$/.test(url)) { url = url.slice(0, -1); }\n\n    // 智能处理成对括号（防止 URL 内部带参数的括号被误删）\n    while (url.endsWith(')') && countChar(url, ')') > countChar(url, '(')) { url = url.slice(0, -1); }\n    while (url.endsWith(']') && countChar(url, ']') > countChar(url, '[')) { url = url.slice(0, -1); }\n    while (url.endsWith('}') && countChar(url, '}') > countChar(url, '{')) { url = url.slice(0, -1); }\n\n    return url;\n  };\n\n  const findMatches = (text) => {\n    const sourceText = String(text || '');\n    // 运行时工具根据 regex 找到所有匹配，并调用 normalizeUrl 得到归一化结果\n    const matches = runtime.createMatchesFromRegex(sourceText, {\n      regex: urlRegex,\n      normalizeUrl,\n    });\n\n    if (!matches) return [];\n\n    const processedMatches = [];\n\n    for (const match of matches) {\n      let url = match.normalizedUrl;\n      if (!url) continue;\n\n      /**\n       * 关键点：处理粘连字符\n       * 如果正则捕获的原始文本比 normalize 后的长，\n       * 说明后面跟着 ____ 或 V 这种字符，将其存入 trailingText 供 split 还原。\n       */\n      if (match.text && match.text.length > url.length) {\n        const extra = match.text.substring(url.length);\n        match.trailingText = extra + (match.trailingText || '');\n      }\n\n      // --- 规则 C：超星 LaTeX 链接深度解析 ---\n      const cxPattern = /^(https?:\\/\\/mooc[a-z0-9-]*\\.chaoxing\\.com\\/ananas\\/latex\\/p\\/)(\\d+)(.*)$/i;\n      const cxMatch = url.match(cxPattern);\n\n      if (cxMatch) {\n        const [, prefix, id, extra] = cxMatch;\n        match.normalizedUrl = prefix + id;\n        if (extra) {\n          match.trailingText = extra + (match.trailingText || '');\n        }\n      }\n\n      // --- 规则 D：基础过滤 ---\n      // 必须是有效的路径链接而非纯域名\n      const urlWithoutProtocol = match.normalizedUrl.replace(/^https?:\\/\\//i, '');\n      if (urlWithoutProtocol.includes('/')) {\n        processedMatches.push(match);\n      }\n    }\n\n    return processedMatches;\n  };\n\n  return {\n    findQuestionImageMatches: (text) => findMatches(text),\n\n    extractQuestionImageUrls: (text) => {\n      const matches = findMatches(text);\n      return [...new Set(matches.map((item) => item.normalizedUrl))];\n    },\n\n    splitQuestionImageParts: (text) => {\n      const sourceText = String(text || '');\n      const matches = findMatches(sourceText);\n      const parts = [];\n      let lastIndex = 0;\n\n      for (const match of matches) {\n        // 1. 压入图片前的文本节点\n        if (match.start > lastIndex) {\n          parts.push({\n            type: 'text',\n            text: sourceText.slice(lastIndex, match.start),\n          });\n        }\n        \n        // 2. 压入图片节点\n        parts.push({ \n          type: 'image', \n          url: match.normalizedUrl \n        });\n        \n        // 3. 压入由于归一化被剥离的“粘连文本”（如 ____ 或单位）\n        if (match.trailingText) {\n          parts.push({ \n            type: 'text', \n            text: match.trailingText \n          });\n        }\n        \n        lastIndex = match.end;\n      }\n\n      // 4. 压入末尾剩余文本\n      if (lastIndex < sourceText.length) {\n        parts.push({ \n          type: 'text', \n          text: sourceText.slice(lastIndex) \n        });\n      }\n\n      return parts.length ? parts : [{ type: 'text', text: sourceText }];\n    },\n  };\n}",
   "model_icon_mappings": {
-    "deepseek.png": ["DEEPSEEK"],
-    "doubao.png": ["豆包", "doubao"],
-    "kimi.webp": ["kimi"],
-    "qwen.png": ["qwen", "QWQ", "千问"],
-    "nvidia.png": ["nvidia"]
+    "deepseek.png": [
+      "DEEPSEEK"
+    ],
+    "doubao.png": [
+      "豆包",
+      "doubao"
+    ],
+    "kimi.webp": [
+      "kimi"
+    ],
+    "qwen.png": [
+      "qwen",
+      "QWQ",
+      "千问"
+    ],
+    "nvidia.png": [
+      "nvidia"
+    ],
+    "zhipu.png": [
+      "zhipu",
+      "glm",
+      "GLM",
+      "chatglm",
+      "智谱"
+    ]
   },
   "platforms": [
     {
@@ -505,6 +525,122 @@
           "jsCode": "async function processModel(input, config) {\n  const requestData = {\n    messages: input.messages,\n    model: 'LongCat-Flash-Lite',\n    stream: true,\n    max_tokens: 4096,\n    temperature: 0.7,\n    top_p: 0.9\n  };\n\n  console.log('LongCat 请求:', requestData);\n\n  try {\n    const response = await fetch(config.baseUrl, {\n      method: 'POST',\n      headers: {\n        'Authorization': `Bearer ${config.apiKey}`,\n        'Content-Type': 'application/json'\n      },\n      body: JSON.stringify(requestData)\n    });\n\n    console.log('LongCat 响应状态:', response.status);\n\n    if (!response.ok) {\n      const errorText = await response.text();\n      throw new Error(`LongCat API 错误 ${response.status}: ${errorText}`);\n    }\n\n    const reader = response.body.getReader();\n    const decoder = new TextDecoder();\n\n    return (async function* () {\n      let buffer = '';\n\n      try {\n        while (true) {\n          const { done, value } = await reader.read();\n          if (done) break;\n\n          const chunk = decoder.decode(value, { stream: true });\n          console.log('【原始chunk】', chunk);\n\n          buffer += chunk;\n          const lines = buffer.split('\\n');\n          buffer = lines.pop() || '';\n\n          for (const line of lines) {\n            const trimmedLine = line.trim();\n            if (trimmedLine === '' || trimmedLine === 'data: [DONE]') continue;\n\n            let jsonStr = null;\n            if (trimmedLine.startsWith('data: ')) {\n              jsonStr = trimmedLine.slice(6);\n            } else if (trimmedLine.startsWith('data:')) {\n              jsonStr = trimmedLine.slice(5);\n            }\n\n            if (jsonStr) {\n              try {\n                const data = JSON.parse(jsonStr);\n                console.log('【解析后data】', data);\n\n                if (data.choices && data.choices[0]) {\n                  const delta = data.choices[0].delta || {};\n                  const content = delta.content || '';\n                  const reasoning = delta.reasoning_content || '';\n                  const finished = data.choices[0].finish_reason === 'stop';\n                  const output = reasoning || content;\n\n                  if (output) {\n                    console.log('【输出】', output);\n                    yield {\n                      content: output,\n                      finished: false\n                    };\n                  }\n\n                  if (finished) {\n                    console.log('【完成】');\n                    yield {\n                      content: '',\n                      finished: true\n                    };\n                  }\n                }\n              } catch (parseError) {\n                console.warn('解析SSE数据失败:', parseError, trimmedLine);\n              }\n            }\n          }\n        }\n      } finally {\n        reader.releaseLock();\n      }\n    })();\n\n  } catch (error) {\n    console.error('LongCat API 调用失败:', error);\n    throw error;\n  }\n}"
         }
       ]
+    },
+    {
+      "baseUrl": "https://open.bigmodel.cn/api/paas/v4",
+      "description": "智谱 BigModel 开放平台",
+      "displayName": "智谱 BigModel",
+      "icon": "zhipu.png",
+      "id": "zhipu",
+      "inviteCode": "pacKM5HtRm9YUSoi+vDwGuZLO2QH3C0EBTSr+ArzMw4=",
+      "inviteText": "新用户注册得 2000万 Tokens，新模型免费玩到爽！",
+      "inviteUrl": "https://www.bigmodel.cn/invite?icode=pacKM5HtRm9YUSoi%2BvDwGuZLO2QH3C0EBTSr%2BArzMw4%3D",
+      "models": [
+        {
+          "id": "zhipu-glm-4.6v",
+          "name": "zhipu-glm-4.6v",
+          "displayName": "GLM-4.6V（文本）",
+          "platformId": "zhipu",
+          "maxTokens": 4096,
+          "temperature": 0.7,
+          "topP": 0.9,
+          "enabled": true,
+          "category": "text",
+          "description": "",
+          "pricing": {
+            "inputTokens": 0,
+            "outputTokens": 0
+          },
+          "jsCode": "async function processModel(input, config) {\n  const requestData = {\n    messages: input.messages,\n    model: 'glm-4.6v',\n    stream: true,\n    enable_thinking: false\n  };\n\n  console.log('智谱 BigModel 请求:', requestData);\n\n  const response = await fetch(`${config.baseUrl}/chat/completions`, {\n    method: 'POST',\n    headers: {\n      'Authorization': `Bearer ${config.apiKey}`,\n      'Content-Type': 'application/json'\n    },\n    body: JSON.stringify(requestData)\n  });\n\n  if (!response.ok) {\n    const errorText = await response.text();\n    throw new Error(`智谱 BigModel API 错误 ${response.status}: ${errorText}`);\n  }\n\n  const reader = response.body.getReader();\n  const decoder = new TextDecoder();\n\n  return (async function* () {\n    let buffer = '';\n\n    try {\n      while (true) {\n        const { done, value } = await reader.read();\n        if (done) break;\n\n        buffer += decoder.decode(value, { stream: true });\n        const lines = buffer.split('\\n');\n        buffer = lines.pop() || '';\n\n        for (const line of lines) {\n          const trimmedLine = line.trim();\n          if (trimmedLine === '' || trimmedLine === 'data: [DONE]') {\n            continue;\n          }\n\n          if (trimmedLine.startsWith('data: ')) {\n            try {\n              const data = JSON.parse(trimmedLine.slice(6));\n              const delta = data.choices?.[0]?.delta;\n              if (!delta) continue;\n\n              const content = delta.content ?? '';\n              const reasoning_content = delta.reasoning_content ?? '';\n              const finished = data.choices?.[0]?.finish_reason === 'stop';\n\n              if (content || reasoning_content || finished) {\n                yield {\n                  content,\n                  reasoning_content,\n                  finished\n                };\n              }\n            } catch (parseError) {\n              console.warn('解析 SSE 数据失败:', parseError, trimmedLine);\n            }\n          }\n        }\n      }\n    } finally {\n      reader.releaseLock();\n    }\n  })();\n}\n"
+        },
+        {
+          "id": "zhipu-glm-4.5-air",
+          "name": "zhipu-glm-4.5-air",
+          "displayName": "GLM-4.5-Air",
+          "platformId": "zhipu",
+          "maxTokens": 4096,
+          "temperature": 0.7,
+          "topP": 0.9,
+          "enabled": true,
+          "category": "text",
+          "description": "",
+          "pricing": {
+            "inputTokens": 0,
+            "outputTokens": 0
+          },
+          "jsCode": "async function processModel(input, config) {\n  const requestData = {\n    messages: input.messages,\n    model: 'glm-4.5-air',\n    stream: true,\n    enable_thinking: false\n  };\n\n  console.log('智谱 BigModel 请求:', requestData);\n\n  const response = await fetch(`${config.baseUrl}/chat/completions`, {\n    method: 'POST',\n    headers: {\n      'Authorization': `Bearer ${config.apiKey}`,\n      'Content-Type': 'application/json'\n    },\n    body: JSON.stringify(requestData)\n  });\n\n  if (!response.ok) {\n    const errorText = await response.text();\n    throw new Error(`智谱 BigModel API 错误 ${response.status}: ${errorText}`);\n  }\n\n  const reader = response.body.getReader();\n  const decoder = new TextDecoder();\n\n  return (async function* () {\n    let buffer = '';\n\n    try {\n      while (true) {\n        const { done, value } = await reader.read();\n        if (done) break;\n\n        buffer += decoder.decode(value, { stream: true });\n        const lines = buffer.split('\\n');\n        buffer = lines.pop() || '';\n\n        for (const line of lines) {\n          const trimmedLine = line.trim();\n          if (trimmedLine === '' || trimmedLine === 'data: [DONE]') {\n            continue;\n          }\n\n          if (trimmedLine.startsWith('data: ')) {\n            try {\n              const data = JSON.parse(trimmedLine.slice(6));\n              const delta = data.choices?.[0]?.delta;\n              if (!delta) continue;\n\n              const content = delta.content ?? '';\n              const reasoning_content = delta.reasoning_content ?? '';\n              const finished = data.choices?.[0]?.finish_reason === 'stop';\n\n              if (content || reasoning_content || finished) {\n                yield {\n                  content,\n                  reasoning_content,\n                  finished\n                };\n              }\n            } catch (parseError) {\n              console.warn('解析 SSE 数据失败:', parseError, trimmedLine);\n            }\n          }\n        }\n      }\n    } finally {\n      reader.releaseLock();\n    }\n  })();\n}\n"
+        },
+        {
+          "id": "zhipu-glm-4.7-flash",
+          "name": "zhipu-glm-4.7-flash",
+          "displayName": "GLM-4.7-Flash",
+          "platformId": "zhipu",
+          "maxTokens": 4096,
+          "temperature": 0.7,
+          "topP": 0.9,
+          "enabled": true,
+          "category": "text",
+          "description": "",
+          "pricing": {
+            "inputTokens": 0,
+            "outputTokens": 0
+          },
+          "jsCode": "async function processModel(input, config) {\n  const requestData = {\n    messages: input.messages,\n    model: 'glm-4.7-flash',\n    stream: true,\n    enable_thinking: false\n  };\n\n  console.log('智谱 BigModel 请求:', requestData);\n\n  const response = await fetch(`${config.baseUrl}/chat/completions`, {\n    method: 'POST',\n    headers: {\n      'Authorization': `Bearer ${config.apiKey}`,\n      'Content-Type': 'application/json'\n    },\n    body: JSON.stringify(requestData)\n  });\n\n  if (!response.ok) {\n    const errorText = await response.text();\n    throw new Error(`智谱 BigModel API 错误 ${response.status}: ${errorText}`);\n  }\n\n  const reader = response.body.getReader();\n  const decoder = new TextDecoder();\n\n  return (async function* () {\n    let buffer = '';\n\n    try {\n      while (true) {\n        const { done, value } = await reader.read();\n        if (done) break;\n\n        buffer += decoder.decode(value, { stream: true });\n        const lines = buffer.split('\\n');\n        buffer = lines.pop() || '';\n\n        for (const line of lines) {\n          const trimmedLine = line.trim();\n          if (trimmedLine === '' || trimmedLine === 'data: [DONE]') {\n            continue;\n          }\n\n          if (trimmedLine.startsWith('data: ')) {\n            try {\n              const data = JSON.parse(trimmedLine.slice(6));\n              const delta = data.choices?.[0]?.delta;\n              if (!delta) continue;\n\n              const content = delta.content ?? '';\n              const reasoning_content = delta.reasoning_content ?? '';\n              const finished = data.choices?.[0]?.finish_reason === 'stop';\n\n              if (content || reasoning_content || finished) {\n                yield {\n                  content,\n                  reasoning_content,\n                  finished\n                };\n              }\n            } catch (parseError) {\n              console.warn('解析 SSE 数据失败:', parseError, trimmedLine);\n            }\n          }\n        }\n      }\n    } finally {\n      reader.releaseLock();\n    }\n  })();\n}\n"
+        },
+        {
+          "id": "zhipu-glm-4.6v-flash-v",
+          "name": "zhipu-glm-4.6v-flash-v",
+          "displayName": "GLM-4.6V-Flash-视觉",
+          "platformId": "zhipu",
+          "maxTokens": 4096,
+          "temperature": 0.7,
+          "topP": 0.9,
+          "enabled": true,
+          "category": "vision",
+          "description": "",
+          "pricing": {
+            "inputTokens": 0,
+            "outputTokens": 0
+          },
+          "jsCode": "async function processModel(input, config, abortSignal) {\n  const requestData = {\n    messages: input.messages,\n    model: 'glm-4.6v-flash',\n    stream: true,\n    max_tokens: 4096,\n    temperature: 0.7,\n    top_p: 0.9,\n    enable_thinking: false\n  };\n\n  console.log('智谱 BigModel 请求:', requestData);\n\n  const response = await fetch(`${config.baseUrl}/chat/completions`, {\n    method: 'POST',\n    headers: {\n      'Authorization': `Bearer ${config.apiKey}`,\n      'Content-Type': 'application/json'\n    },\n    body: JSON.stringify(requestData),\n    signal: abortSignal\n  });\n\n  if (!response.ok) {\n    const errorText = await response.text();\n    throw new Error(`智谱 BigModel API 错误 ${response.status}: ${errorText}`);\n  }\n\n  const reader = response.body.getReader();\n  const decoder = new TextDecoder();\n\n  return (async function* () {\n    let buffer = '';\n\n    try {\n      while (true) {\n        const { done, value } = await reader.read();\n        if (done) break;\n\n        buffer += decoder.decode(value, { stream: true });\n        const lines = buffer.split('\\n');\n        buffer = lines.pop() || '';\n\n        for (const line of lines) {\n          const trimmedLine = line.trim();\n          if (trimmedLine === '' || trimmedLine === 'data: [DONE]') {\n            continue;\n          }\n\n          if (trimmedLine.startsWith('data: ')) {\n            try {\n              const data = JSON.parse(trimmedLine.slice(6));\n              const delta = data.choices?.[0]?.delta;\n              if (!delta) continue;\n\n              const content = delta.content ?? '';\n              const reasoning_content = delta.reasoning_content ?? '';\n              const finished = data.choices?.[0]?.finish_reason === 'stop';\n\n              if (content || reasoning_content || finished) {\n                yield {\n                  content,\n                  reasoning_content,\n                  finished\n                };\n              }\n            } catch (parseError) {\n              console.warn('解析 SSE 数据失败:', parseError, trimmedLine);\n            }\n          }\n        }\n      }\n    } finally {\n      reader.releaseLock();\n    }\n  })();\n}\n"
+        },
+        {
+          "id": "zhipu-glm-4.6v-flashx-v",
+          "name": "zhipu-glm-4.6v-flashx-v",
+          "displayName": "GLM-4.6V-FlashX-视觉",
+          "platformId": "zhipu",
+          "maxTokens": 4096,
+          "temperature": 0.7,
+          "topP": 0.9,
+          "enabled": true,
+          "category": "vision",
+          "description": "",
+          "pricing": {
+            "inputTokens": 0,
+            "outputTokens": 0
+          },
+          "jsCode": "async function processModel(input, config, abortSignal) {\n  const requestData = {\n    messages: input.messages,\n    model: 'glm-4.6v-flashx',\n    stream: true,\n    max_tokens: 4096,\n    temperature: 0.7,\n    top_p: 0.9,\n    enable_thinking: false\n  };\n\n  console.log('智谱 BigModel 请求:', requestData);\n\n  const response = await fetch(`${config.baseUrl}/chat/completions`, {\n    method: 'POST',\n    headers: {\n      'Authorization': `Bearer ${config.apiKey}`,\n      'Content-Type': 'application/json'\n    },\n    body: JSON.stringify(requestData),\n    signal: abortSignal\n  });\n\n  if (!response.ok) {\n    const errorText = await response.text();\n    throw new Error(`智谱 BigModel API 错误 ${response.status}: ${errorText}`);\n  }\n\n  const reader = response.body.getReader();\n  const decoder = new TextDecoder();\n\n  return (async function* () {\n    let buffer = '';\n\n    try {\n      while (true) {\n        const { done, value } = await reader.read();\n        if (done) break;\n\n        buffer += decoder.decode(value, { stream: true });\n        const lines = buffer.split('\\n');\n        buffer = lines.pop() || '';\n\n        for (const line of lines) {\n          const trimmedLine = line.trim();\n          if (trimmedLine === '' || trimmedLine === 'data: [DONE]') {\n            continue;\n          }\n\n          if (trimmedLine.startsWith('data: ')) {\n            try {\n              const data = JSON.parse(trimmedLine.slice(6));\n              const delta = data.choices?.[0]?.delta;\n              if (!delta) continue;\n\n              const content = delta.content ?? '';\n              const reasoning_content = delta.reasoning_content ?? '';\n              const finished = data.choices?.[0]?.finish_reason === 'stop';\n\n              if (content || reasoning_content || finished) {\n                yield {\n                  content,\n                  reasoning_content,\n                  finished\n                };\n              }\n            } catch (parseError) {\n              console.warn('解析 SSE 数据失败:', parseError, trimmedLine);\n            }\n          }\n        }\n      }\n    } finally {\n      reader.releaseLock();\n    }\n  })();\n}\n"
+        },
+        {
+          "id": "zhipu-glm-4.6v-v",
+          "name": "zhipu-glm-4.6v-v",
+          "displayName": "GLM-4.6V-视觉",
+          "platformId": "zhipu",
+          "maxTokens": 4096,
+          "temperature": 0.7,
+          "topP": 0.9,
+          "enabled": true,
+          "category": "vision",
+          "description": "",
+          "pricing": {
+            "inputTokens": 0,
+            "outputTokens": 0
+          },
+          "jsCode": "async function processModel(input, config, abortSignal) {\n  const requestData = {\n    messages: input.messages,\n    model: 'glm-4.6v',\n    stream: true,\n    max_tokens: 4096,\n    temperature: 0.7,\n    top_p: 0.9,\n    enable_thinking: false\n  };\n\n  console.log('智谱 BigModel 请求:', requestData);\n\n  const response = await fetch(`${config.baseUrl}/chat/completions`, {\n    method: 'POST',\n    headers: {\n      'Authorization': `Bearer ${config.apiKey}`,\n      'Content-Type': 'application/json'\n    },\n    body: JSON.stringify(requestData),\n    signal: abortSignal\n  });\n\n  if (!response.ok) {\n    const errorText = await response.text();\n    throw new Error(`智谱 BigModel API 错误 ${response.status}: ${errorText}`);\n  }\n\n  const reader = response.body.getReader();\n  const decoder = new TextDecoder();\n\n  return (async function* () {\n    let buffer = '';\n\n    try {\n      while (true) {\n        const { done, value } = await reader.read();\n        if (done) break;\n\n        buffer += decoder.decode(value, { stream: true });\n        const lines = buffer.split('\\n');\n        buffer = lines.pop() || '';\n\n        for (const line of lines) {\n          const trimmedLine = line.trim();\n          if (trimmedLine === '' || trimmedLine === 'data: [DONE]') {\n            continue;\n          }\n\n          if (trimmedLine.startsWith('data: ')) {\n            try {\n              const data = JSON.parse(trimmedLine.slice(6));\n              const delta = data.choices?.[0]?.delta;\n              if (!delta) continue;\n\n              const content = delta.content ?? '';\n              const reasoning_content = delta.reasoning_content ?? '';\n              const finished = data.choices?.[0]?.finish_reason === 'stop';\n\n              if (content || reasoning_content || finished) {\n                yield {\n                  content,\n                  reasoning_content,\n                  finished\n                };\n              }\n            } catch (parseError) {\n              console.warn('解析 SSE 数据失败:', parseError, trimmedLine);\n            }\n          }\n        }\n      }\n    } finally {\n      reader.releaseLock();\n    }\n  })();\n}\n"
+        }
+      ],
+      "name": "zhipu",
+      "url": "https://open.bigmodel.cn/"
     }
   ]
 }
