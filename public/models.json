@@ -102,18 +102,38 @@
     ],
     "longcat.png": [
       "longcat"
+    ],
+    "mimo.png": [
+      "mimo"
     ]
   },
   "platforms": [
     {
       "baseUrl": "https://dashscope.aliyuncs.com/compatible-mode",
       "description": "阿里云百炼AI平台服务",
-      "displayName": "阿里云百炼",
+      "displayName": "阿里云百炼（推荐）",
       "icon": "bailian.png",
       "id": "aliyun-bailian",
       "inviteText": "学生认证免费获取300余额！",
       "inviteUrl": "https://university.aliyun.com/course/promotion24-activity?clubTaskBiz=subTask..12597011..10271..&userCode=zjlwcw03",
       "models": [
+        {
+          "id": "bailian/qwen3.7-max",
+          "name": "bailian/qwen3.7-max",
+          "displayName": "Qwen3.7-Max",
+          "platformId": "aliyun-bailian",
+          "maxTokens": 4096,
+          "temperature": 0.7,
+          "topP": 0.9,
+          "enabled": true,
+          "category": "text",
+          "description": "",
+          "pricing": {
+            "inputTokens": 0,
+            "outputTokens": 0
+          },
+          "jsCode": "async function processModel(input, config) { \n   // 构建请求数据 \n   const requestData = { \n     messages: input.messages, \n     model: 'qwen3.7-max', \n     stream: true,\n     enable_thinking: false,\n   }; \n   \n   console.log('阿里云百炼 请求:', requestData); \n   \n   try { \n     // 发送请求到阿里云百炼 API \n     const response = await fetch(`${config.baseUrl}/v1/chat/completions`, { \n       method: 'POST', \n       headers: { \n         'Authorization': `Bearer ${config.apiKey}`, \n         'Content-Type': 'application/json' \n       }, \n       body: JSON.stringify(requestData) \n     }); \n     \n     if (!response.ok) { \n       const errorText = await response.text(); \n       throw new Error(`阿里云百炼 API 错误 ${response.status}: ${errorText}`); \n     } \n     \n     // 处理流式响应 \n     const reader = response.body.getReader(); \n     const decoder = new TextDecoder(); \n     \n    // 返回异步生成器处理流式数据\n    return (async function* () {\n      let buffer = '';\n\n      try {\n        while (true) {\n          const { done, value } = await reader.read();\n\n          if (done) {\n            break;\n          }\n\n          // 解码数据块\n          buffer += decoder.decode(value, { stream: true });\n          const lines = buffer.split('\\n');\n          buffer = lines.pop() || '';\n\n          for (const line of lines) {\n            const trimmedLine = line.trim();\n\n            // === 调试：打印原始 SSE 行 ===\n            if (trimmedLine.startsWith('data: ')) {\n              console.log('Raw SSE chunk:', trimmedLine);\n            } else if (trimmedLine !== '') {\n              console.log('Raw non-data line:', trimmedLine);\n            }\n            // ========================================\n\n            if (trimmedLine === '' || trimmedLine === 'data: [DONE]') {\n              continue;\n            }\n\n            if (trimmedLine.startsWith('data: ')) {\n              try {\n                const jsonStr = trimmedLine.slice(6);\n                const data = JSON.parse(jsonStr);\n\n                if (data.choices && data.choices[0] && data.choices[0].delta) {\n                  const delta = data.choices[0].delta;\n\n                  // 同时获取 content 与 reasoning_content\n                  const content = delta.content ?? '';\n                  const reasoning_content = delta.reasoning_content ?? '';\n\n                  const finished = data.choices[0].finish_reason === 'stop';\n\n                  // 只要有任意内容或结束标记就 yield\n                  if (content || reasoning_content || finished) {\n                    yield {\n                      content,\n                      reasoning_content,        \n                      finished\n                    };\n                  }\n                }\n              } catch (parseError) {\n                console.warn('解析 SSE 数据失败:', parseError, trimmedLine);\n              }\n            }\n          }\n        }\n      } finally {\n        reader.releaseLock();\n      }\n    })();\n  } catch (error) {\n    console.error('阿里云百炼 调用失败:', error);\n    throw error;\n  }\n}\n"
+        },
         {
           "id": "bailian/qwen3.6-plus",
           "name": "bailian/qwen3.6-plus",
@@ -149,21 +169,21 @@
           "topP": 0.9
         },
         {
-          "category": "text",
-          "description": "",
-          "displayName": "Qwen3.5-Flash",
-          "enabled": true,
-          "id": "bailian/qwen3.5-flash",
-          "jsCode": "async function processModel(input, config) { \n   // 构建请求数据 \n   const requestData = { \n     messages: input.messages, \n     model: 'qwen3.5-flash', \n     stream: true,\n     enable_thinking: false,\n   }; \n   \n   console.log('阿里云百炼 请求:', requestData); \n   \n   try { \n     // 发送请求到阿里云百炼 API \n     const response = await fetch(`${config.baseUrl}/v1/chat/completions`, { \n       method: 'POST', \n       headers: { \n         'Authorization': `Bearer ${config.apiKey}`, \n         'Content-Type': 'application/json' \n       }, \n       body: JSON.stringify(requestData) \n     }); \n     \n     if (!response.ok) { \n       const errorText = await response.text(); \n       throw new Error(`阿里云百炼 API 错误 ${response.status}: ${errorText}`); \n     } \n     \n     // 处理流式响应 \n     const reader = response.body.getReader(); \n     const decoder = new TextDecoder(); \n     \n    // 返回异步生成器处理流式数据\n    return (async function* () {\n      let buffer = '';\n\n      try {\n        while (true) {\n          const { done, value } = await reader.read();\n\n          if (done) {\n            break;\n          }\n\n          // 解码数据块\n          buffer += decoder.decode(value, { stream: true });\n          const lines = buffer.split('\\n');\n          buffer = lines.pop() || '';\n\n          for (const line of lines) {\n            const trimmedLine = line.trim();\n\n            // === 调试：打印原始 SSE 行 ===\n            if (trimmedLine.startsWith('data: ')) {\n              console.log('Raw SSE chunk:', trimmedLine);\n            } else if (trimmedLine !== '') {\n              console.log('Raw non-data line:', trimmedLine);\n            }\n            // ========================================\n\n            if (trimmedLine === '' || trimmedLine === 'data: [DONE]') {\n              continue;\n            }\n\n            if (trimmedLine.startsWith('data: ')) {\n              try {\n                const jsonStr = trimmedLine.slice(6);\n                const data = JSON.parse(jsonStr);\n\n                if (data.choices && data.choices[0] && data.choices[0].delta) {\n                  const delta = data.choices[0].delta;\n\n                  // 同时获取 content 与 reasoning_content\n                  const content = delta.content ?? '';\n                  const reasoning_content = delta.reasoning_content ?? '';\n\n                  const finished = data.choices[0].finish_reason === 'stop';\n\n                  // 只要有任意内容或结束标记就 yield\n                  if (content || reasoning_content || finished) {\n                    yield {\n                      content,\n                      reasoning_content,        \n                      finished\n                    };\n                  }\n                }\n              } catch (parseError) {\n                console.warn('解析 SSE 数据失败:', parseError, trimmedLine);\n              }\n            }\n          }\n        }\n      } finally {\n        reader.releaseLock();\n      }\n    })();\n  } catch (error) {\n    console.error('阿里云百炼 调用失败:', error);\n    throw error;\n  }\n}\n",
-          "maxTokens": 4096,
-          "name": "bailian/qwen3.5-flash",
+          "id": "qwen3.7-max-v",
+          "name": "qwen3.7-max-v",
+          "displayName": "Qwen3.7-Max-视觉",
           "platformId": "aliyun-bailian",
+          "maxTokens": 4096,
+          "temperature": 0.7,
+          "topP": 0.9,
+          "enabled": true,
+          "category": "vision",
+          "description": "",
           "pricing": {
             "inputTokens": 0,
             "outputTokens": 0
           },
-          "temperature": 0.7,
-          "topP": 0.9
+          "jsCode": "async function processModel(input, config, abortSignal) { \n    // 构建请求数据，支持视觉输入 \n    const requestData = { \n      messages: input.messages, \n      model: 'qwen3.5-plus', \n      stream: true, \n      max_tokens: 4096, \n      temperature: 0.7, \n      top_p: 0.9,\n      enable_thinking: false,\n    }; \n    \n    console.log('阿里云百炼 请求:', requestData); \n    \n   try { \n     // 发送请求到阿里云百炼 API \n     const response = await fetch(`${config.baseUrl}/v1/chat/completions`, { \n       method: 'POST', \n       headers: { \n         'Authorization': `Bearer ${config.apiKey}`, \n         'Content-Type': 'application/json' \n       }, \n       body: JSON.stringify(requestData) \n     }); \n     \n     if (!response.ok) { \n       const errorText = await response.text(); \n       throw new Error(`阿里云百炼 API 错误 ${response.status}: ${errorText}`); \n     } \n     \n     // 处理流式响应 \n     const reader = response.body.getReader(); \n     const decoder = new TextDecoder(); \n     \n    // 返回异步生成器处理流式数据\n    return (async function* () {\n      let buffer = '';\n\n      try {\n        while (true) {\n          const { done, value } = await reader.read();\n\n          if (done) {\n            break;\n          }\n\n          // 解码数据块\n          buffer += decoder.decode(value, { stream: true });\n          const lines = buffer.split('\\n');\n          buffer = lines.pop() || '';\n\n          for (const line of lines) {\n            const trimmedLine = line.trim();\n\n            // === 调试：打印原始 SSE 行 ===\n            if (trimmedLine.startsWith('data: ')) {\n              console.log('Raw SSE chunk:', trimmedLine);\n            } else if (trimmedLine !== '') {\n              console.log('Raw non-data line:', trimmedLine);\n            }\n            // ========================================\n\n            if (trimmedLine === '' || trimmedLine === 'data: [DONE]') {\n              continue;\n            }\n\n            if (trimmedLine.startsWith('data: ')) {\n              try {\n                const jsonStr = trimmedLine.slice(6);\n                const data = JSON.parse(jsonStr);\n\n                if (data.choices && data.choices[0] && data.choices[0].delta) {\n                  const delta = data.choices[0].delta;\n\n                  // 同时获取 content 与 reasoning_content\n                  const content = delta.content ?? '';\n                  const reasoning_content = delta.reasoning_content ?? '';\n\n                  const finished = data.choices[0].finish_reason === 'stop';\n\n                  // 只要有任意内容或结束标记就 yield\n                  if (content || reasoning_content || finished) {\n                    yield {\n                      content,\n                      reasoning_content,        \n                      finished\n                    };\n                  }\n                }\n              } catch (parseError) {\n                console.warn('解析 SSE 数据失败:', parseError, trimmedLine);\n              }\n            }\n          }\n        }\n      } finally {\n        reader.releaseLock();\n      }\n    })();\n  } catch (error) {\n    console.error('阿里云百炼 调用失败:', error);\n    throw error;\n  }\n}\n"
         },
         {
           "id": "bailian-qwen3.6-plus-v",
@@ -181,6 +201,23 @@
             "outputTokens": 0
           },
           "jsCode": "async function processModel(input, config, abortSignal) { \n    // 构建请求数据，支持视觉输入 \n    const requestData = { \n      messages: input.messages, \n      model: 'qwen3.5-plus', \n      stream: true, \n      max_tokens: 4096, \n      temperature: 0.7, \n      top_p: 0.9,\n      enable_thinking: false,\n    }; \n    \n    console.log('阿里云百炼 请求:', requestData); \n    \n   try { \n     // 发送请求到阿里云百炼 API \n     const response = await fetch(`${config.baseUrl}/v1/chat/completions`, { \n       method: 'POST', \n       headers: { \n         'Authorization': `Bearer ${config.apiKey}`, \n         'Content-Type': 'application/json' \n       }, \n       body: JSON.stringify(requestData) \n     }); \n     \n     if (!response.ok) { \n       const errorText = await response.text(); \n       throw new Error(`阿里云百炼 API 错误 ${response.status}: ${errorText}`); \n     } \n     \n     // 处理流式响应 \n     const reader = response.body.getReader(); \n     const decoder = new TextDecoder(); \n     \n    // 返回异步生成器处理流式数据\n    return (async function* () {\n      let buffer = '';\n\n      try {\n        while (true) {\n          const { done, value } = await reader.read();\n\n          if (done) {\n            break;\n          }\n\n          // 解码数据块\n          buffer += decoder.decode(value, { stream: true });\n          const lines = buffer.split('\\n');\n          buffer = lines.pop() || '';\n\n          for (const line of lines) {\n            const trimmedLine = line.trim();\n\n            // === 调试：打印原始 SSE 行 ===\n            if (trimmedLine.startsWith('data: ')) {\n              console.log('Raw SSE chunk:', trimmedLine);\n            } else if (trimmedLine !== '') {\n              console.log('Raw non-data line:', trimmedLine);\n            }\n            // ========================================\n\n            if (trimmedLine === '' || trimmedLine === 'data: [DONE]') {\n              continue;\n            }\n\n            if (trimmedLine.startsWith('data: ')) {\n              try {\n                const jsonStr = trimmedLine.slice(6);\n                const data = JSON.parse(jsonStr);\n\n                if (data.choices && data.choices[0] && data.choices[0].delta) {\n                  const delta = data.choices[0].delta;\n\n                  // 同时获取 content 与 reasoning_content\n                  const content = delta.content ?? '';\n                  const reasoning_content = delta.reasoning_content ?? '';\n\n                  const finished = data.choices[0].finish_reason === 'stop';\n\n                  // 只要有任意内容或结束标记就 yield\n                  if (content || reasoning_content || finished) {\n                    yield {\n                      content,\n                      reasoning_content,        \n                      finished\n                    };\n                  }\n                }\n              } catch (parseError) {\n                console.warn('解析 SSE 数据失败:', parseError, trimmedLine);\n              }\n            }\n          }\n        }\n      } finally {\n        reader.releaseLock();\n      }\n    })();\n  } catch (error) {\n    console.error('阿里云百炼 调用失败:', error);\n    throw error;\n  }\n}\n"
+        },
+        {
+          "category": "text",
+          "description": "",
+          "displayName": "Qwen3.5-Flash",
+          "enabled": true,
+          "id": "bailian/qwen3.5-flash",
+          "jsCode": "async function processModel(input, config) { \n   // 构建请求数据 \n   const requestData = { \n     messages: input.messages, \n     model: 'qwen3.5-flash', \n     stream: true,\n     enable_thinking: false,\n   }; \n   \n   console.log('阿里云百炼 请求:', requestData); \n   \n   try { \n     // 发送请求到阿里云百炼 API \n     const response = await fetch(`${config.baseUrl}/v1/chat/completions`, { \n       method: 'POST', \n       headers: { \n         'Authorization': `Bearer ${config.apiKey}`, \n         'Content-Type': 'application/json' \n       }, \n       body: JSON.stringify(requestData) \n     }); \n     \n     if (!response.ok) { \n       const errorText = await response.text(); \n       throw new Error(`阿里云百炼 API 错误 ${response.status}: ${errorText}`); \n     } \n     \n     // 处理流式响应 \n     const reader = response.body.getReader(); \n     const decoder = new TextDecoder(); \n     \n    // 返回异步生成器处理流式数据\n    return (async function* () {\n      let buffer = '';\n\n      try {\n        while (true) {\n          const { done, value } = await reader.read();\n\n          if (done) {\n            break;\n          }\n\n          // 解码数据块\n          buffer += decoder.decode(value, { stream: true });\n          const lines = buffer.split('\\n');\n          buffer = lines.pop() || '';\n\n          for (const line of lines) {\n            const trimmedLine = line.trim();\n\n            // === 调试：打印原始 SSE 行 ===\n            if (trimmedLine.startsWith('data: ')) {\n              console.log('Raw SSE chunk:', trimmedLine);\n            } else if (trimmedLine !== '') {\n              console.log('Raw non-data line:', trimmedLine);\n            }\n            // ========================================\n\n            if (trimmedLine === '' || trimmedLine === 'data: [DONE]') {\n              continue;\n            }\n\n            if (trimmedLine.startsWith('data: ')) {\n              try {\n                const jsonStr = trimmedLine.slice(6);\n                const data = JSON.parse(jsonStr);\n\n                if (data.choices && data.choices[0] && data.choices[0].delta) {\n                  const delta = data.choices[0].delta;\n\n                  // 同时获取 content 与 reasoning_content\n                  const content = delta.content ?? '';\n                  const reasoning_content = delta.reasoning_content ?? '';\n\n                  const finished = data.choices[0].finish_reason === 'stop';\n\n                  // 只要有任意内容或结束标记就 yield\n                  if (content || reasoning_content || finished) {\n                    yield {\n                      content,\n                      reasoning_content,        \n                      finished\n                    };\n                  }\n                }\n              } catch (parseError) {\n                console.warn('解析 SSE 数据失败:', parseError, trimmedLine);\n              }\n            }\n          }\n        }\n      } finally {\n        reader.releaseLock();\n      }\n    })();\n  } catch (error) {\n    console.error('阿里云百炼 调用失败:', error);\n    throw error;\n  }\n}\n",
+          "maxTokens": 4096,
+          "name": "bailian/qwen3.5-flash",
+          "platformId": "aliyun-bailian",
+          "pricing": {
+            "inputTokens": 0,
+            "outputTokens": 0
+          },
+          "temperature": 0.7,
+          "topP": 0.9
         },
         {
           "category": "vision",
@@ -217,6 +254,23 @@
           "topP": 0.9
         },
         {
+          "id": "bailian/glm-5.1",
+          "name": "bailian/glm-5.1",
+          "displayName": "GLM-5.1",
+          "platformId": "aliyun-bailian",
+          "maxTokens": 4096,
+          "temperature": 0.7,
+          "topP": 0.9,
+          "enabled": true,
+          "category": "text",
+          "description": "",
+          "pricing": {
+            "inputTokens": 0,
+            "outputTokens": 0
+          },
+          "jsCode": "async function processModel(input, config) { \n   // 构建请求数据 \n   const requestData = { \n     messages: input.messages, \n     model: 'glm-5.1', \n     stream: true,\n     enable_thinking: false,\n   }; \n   \n   console.log('阿里云百炼 请求:', requestData); \n   \n   try { \n     // 发送请求到阿里云百炼 API \n     const response = await fetch(`${config.baseUrl}/v1/chat/completions`, { \n       method: 'POST', \n       headers: { \n         'Authorization': `Bearer ${config.apiKey}`, \n         'Content-Type': 'application/json' \n       }, \n       body: JSON.stringify(requestData) \n     }); \n     \n     if (!response.ok) { \n       const errorText = await response.text(); \n       throw new Error(`阿里云百炼 API 错误 ${response.status}: ${errorText}`); \n     } \n     \n     // 处理流式响应 \n     const reader = response.body.getReader(); \n     const decoder = new TextDecoder(); \n     \n    // 返回异步生成器处理流式数据\n    return (async function* () {\n      let buffer = '';\n\n      try {\n        while (true) {\n          const { done, value } = await reader.read();\n\n          if (done) {\n            break;\n          }\n\n          // 解码数据块\n          buffer += decoder.decode(value, { stream: true });\n          const lines = buffer.split('\\n');\n          buffer = lines.pop() || '';\n\n          for (const line of lines) {\n            const trimmedLine = line.trim();\n\n            // === 调试：打印原始 SSE 行 ===\n            if (trimmedLine.startsWith('data: ')) {\n              console.log('Raw SSE chunk:', trimmedLine);\n            } else if (trimmedLine !== '') {\n              console.log('Raw non-data line:', trimmedLine);\n            }\n            // ========================================\n\n            if (trimmedLine === '' || trimmedLine === 'data: [DONE]') {\n              continue;\n            }\n\n            if (trimmedLine.startsWith('data: ')) {\n              try {\n                const jsonStr = trimmedLine.slice(6);\n                const data = JSON.parse(jsonStr);\n\n                if (data.choices && data.choices[0] && data.choices[0].delta) {\n                  const delta = data.choices[0].delta;\n\n                  // 同时获取 content 与 reasoning_content\n                  const content = delta.content ?? '';\n                  const reasoning_content = delta.reasoning_content ?? '';\n\n                  const finished = data.choices[0].finish_reason === 'stop';\n\n                  // 只要有任意内容或结束标记就 yield\n                  if (content || reasoning_content || finished) {\n                    yield {\n                      content,\n                      reasoning_content,        \n                      finished\n                    };\n                  }\n                }\n              } catch (parseError) {\n                console.warn('解析 SSE 数据失败:', parseError, trimmedLine);\n              }\n            }\n          }\n        }\n      } finally {\n        reader.releaseLock();\n      }\n    })();\n  } catch (error) {\n    console.error('阿里云百炼 调用失败:', error);\n    throw error;\n  }\n}\n"
+        },
+        {
           "category": "vision",
           "description": "",
           "displayName": "Qwen3.5-Flash-视觉",
@@ -234,9 +288,9 @@
           "topP": 0.9
         },
         {
-          "id": "bailian/glm-5.1",
-          "name": "bailian/glm-5.1",
-          "displayName": "GLM-5.1",
+          "id": "bailian/deepseek-v4-pro",
+          "name": "bailian/deepseek-v4-pro",
+          "displayName": "Deepseek-V4-Pro",
           "platformId": "aliyun-bailian",
           "maxTokens": 4096,
           "temperature": 0.7,
@@ -248,7 +302,7 @@
             "inputTokens": 0,
             "outputTokens": 0
           },
-          "jsCode": "async function processModel(input, config) { \n   // 构建请求数据 \n   const requestData = { \n     messages: input.messages, \n     model: 'glm-5.1', \n     stream: true,\n     enable_thinking: false,\n   }; \n   \n   console.log('阿里云百炼 请求:', requestData); \n   \n   try { \n     // 发送请求到阿里云百炼 API \n     const response = await fetch(`${config.baseUrl}/v1/chat/completions`, { \n       method: 'POST', \n       headers: { \n         'Authorization': `Bearer ${config.apiKey}`, \n         'Content-Type': 'application/json' \n       }, \n       body: JSON.stringify(requestData) \n     }); \n     \n     if (!response.ok) { \n       const errorText = await response.text(); \n       throw new Error(`阿里云百炼 API 错误 ${response.status}: ${errorText}`); \n     } \n     \n     // 处理流式响应 \n     const reader = response.body.getReader(); \n     const decoder = new TextDecoder(); \n     \n    // 返回异步生成器处理流式数据\n    return (async function* () {\n      let buffer = '';\n\n      try {\n        while (true) {\n          const { done, value } = await reader.read();\n\n          if (done) {\n            break;\n          }\n\n          // 解码数据块\n          buffer += decoder.decode(value, { stream: true });\n          const lines = buffer.split('\\n');\n          buffer = lines.pop() || '';\n\n          for (const line of lines) {\n            const trimmedLine = line.trim();\n\n            // === 调试：打印原始 SSE 行 ===\n            if (trimmedLine.startsWith('data: ')) {\n              console.log('Raw SSE chunk:', trimmedLine);\n            } else if (trimmedLine !== '') {\n              console.log('Raw non-data line:', trimmedLine);\n            }\n            // ========================================\n\n            if (trimmedLine === '' || trimmedLine === 'data: [DONE]') {\n              continue;\n            }\n\n            if (trimmedLine.startsWith('data: ')) {\n              try {\n                const jsonStr = trimmedLine.slice(6);\n                const data = JSON.parse(jsonStr);\n\n                if (data.choices && data.choices[0] && data.choices[0].delta) {\n                  const delta = data.choices[0].delta;\n\n                  // 同时获取 content 与 reasoning_content\n                  const content = delta.content ?? '';\n                  const reasoning_content = delta.reasoning_content ?? '';\n\n                  const finished = data.choices[0].finish_reason === 'stop';\n\n                  // 只要有任意内容或结束标记就 yield\n                  if (content || reasoning_content || finished) {\n                    yield {\n                      content,\n                      reasoning_content,        \n                      finished\n                    };\n                  }\n                }\n              } catch (parseError) {\n                console.warn('解析 SSE 数据失败:', parseError, trimmedLine);\n              }\n            }\n          }\n        }\n      } finally {\n        reader.releaseLock();\n      }\n    })();\n  } catch (error) {\n    console.error('阿里云百炼 调用失败:', error);\n    throw error;\n  }\n}\n"
+          "jsCode": "async function processModel(input, config) { \n   // 构建请求数据 \n   const requestData = { \n     messages: input.messages, \n     model: 'deepseek-v4-pro', \n     stream: true,\n     enable_thinking: false,\n   }; \n   \n   console.log('阿里云百炼 请求:', requestData); \n   \n   try { \n     // 发送请求到阿里云百炼 API \n     const response = await fetch(`${config.baseUrl}/v1/chat/completions`, { \n       method: 'POST', \n       headers: { \n         'Authorization': `Bearer ${config.apiKey}`, \n         'Content-Type': 'application/json' \n       }, \n       body: JSON.stringify(requestData) \n     }); \n     \n     if (!response.ok) { \n       const errorText = await response.text(); \n       throw new Error(`阿里云百炼 API 错误 ${response.status}: ${errorText}`); \n     } \n     \n     // 处理流式响应 \n     const reader = response.body.getReader(); \n     const decoder = new TextDecoder(); \n     \n    // 返回异步生成器处理流式数据\n    return (async function* () {\n      let buffer = '';\n\n      try {\n        while (true) {\n          const { done, value } = await reader.read();\n\n          if (done) {\n            break;\n          }\n\n          // 解码数据块\n          buffer += decoder.decode(value, { stream: true });\n          const lines = buffer.split('\\n');\n          buffer = lines.pop() || '';\n\n          for (const line of lines) {\n            const trimmedLine = line.trim();\n\n            // === 调试：打印原始 SSE 行 ===\n            if (trimmedLine.startsWith('data: ')) {\n              console.log('Raw SSE chunk:', trimmedLine);\n            } else if (trimmedLine !== '') {\n              console.log('Raw non-data line:', trimmedLine);\n            }\n            // ========================================\n\n            if (trimmedLine === '' || trimmedLine === 'data: [DONE]') {\n              continue;\n            }\n\n            if (trimmedLine.startsWith('data: ')) {\n              try {\n                const jsonStr = trimmedLine.slice(6);\n                const data = JSON.parse(jsonStr);\n\n                if (data.choices && data.choices[0] && data.choices[0].delta) {\n                  const delta = data.choices[0].delta;\n\n                  // 同时获取 content 与 reasoning_content\n                  const content = delta.content ?? '';\n                  const reasoning_content = delta.reasoning_content ?? '';\n\n                  const finished = data.choices[0].finish_reason === 'stop';\n\n                  // 只要有任意内容或结束标记就 yield\n                  if (content || reasoning_content || finished) {\n                    yield {\n                      content,\n                      reasoning_content,        \n                      finished\n                    };\n                  }\n                }\n              } catch (parseError) {\n                console.warn('解析 SSE 数据失败:', parseError, trimmedLine);\n              }\n            }\n          }\n        }\n      } finally {\n        reader.releaseLock();\n      }\n    })();\n  } catch (error) {\n    console.error('阿里云百炼 调用失败:', error);\n    throw error;\n  }\n}\n"
         }
       ],
       "name": "aliyun-bailian",
@@ -664,6 +718,71 @@
       ],
       "name": "zhipu",
       "url": "https://open.bigmodel.cn/"
+    },
+    {
+      "id": "xiaomi-mimo",
+      "name": "xiaomi-mimo",
+      "displayName": "小米 Mimo",
+      "baseUrl": "https://api.xiaomimimo.com",
+      "url": "https://platform.xiaomimimo.com?ref=R9TSXQ",
+      "inviteUrl": "https://platform.xiaomimimo.com?ref=R9TSXQ",
+      "inviteText": "使用邀请码R9TSXQ可得10体验金",
+      "inviteCode": "R9TSXQ",
+      "icon": "mimo.png",
+      "description": "",
+      "models": [
+        {
+          "id": "xiaomi/mimo-v2.5-pro",
+          "name": "xiaomi/mimo-v2.5-pro",
+          "displayName": "Mimo-V2.5-Pro",
+          "platformId": "xiaomi-mimo",
+          "maxTokens": 4096,
+          "temperature": 0.7,
+          "topP": 0.9,
+          "enabled": true,
+          "category": "text",
+          "description": "",
+          "pricing": {
+            "inputTokens": 0,
+            "outputTokens": 0
+          },
+          "jsCode": "async function processModel(input, config) { \n   // 构建请求数据 \n   const requestData = { \n     messages: input.messages, \n     model: 'mimo-v2.5-pro', \n     stream: true,\n     enable_thinking: false,\n   }; \n   \n   console.log('小米Mimo 请求:', requestData); \n   \n   try { \n     // 发送请求到阿里云百炼 API \n     const response = await fetch(`${config.baseUrl}/v1/chat/completions`, { \n       method: 'POST', \n       headers: { \n         'Authorization': `Bearer ${config.apiKey}`, \n         'Content-Type': 'application/json' \n       }, \n       body: JSON.stringify(requestData) \n     }); \n     \n     if (!response.ok) { \n       const errorText = await response.text(); \n       throw new Error(`小米Mimo API 错误 ${response.status}: ${errorText}`); \n     } \n     \n     // 处理流式响应 \n     const reader = response.body.getReader(); \n     const decoder = new TextDecoder(); \n     \n    // 返回异步生成器处理流式数据\n    return (async function* () {\n      let buffer = '';\n\n      try {\n        while (true) {\n          const { done, value } = await reader.read();\n\n          if (done) {\n            break;\n          }\n\n          // 解码数据块\n          buffer += decoder.decode(value, { stream: true });\n          const lines = buffer.split('\\n');\n          buffer = lines.pop() || '';\n\n          for (const line of lines) {\n            const trimmedLine = line.trim();\n\n            // === 调试：打印原始 SSE 行 ===\n            if (trimmedLine.startsWith('data: ')) {\n              console.log('Raw SSE chunk:', trimmedLine);\n            } else if (trimmedLine !== '') {\n              console.log('Raw non-data line:', trimmedLine);\n            }\n            // ========================================\n\n            if (trimmedLine === '' || trimmedLine === 'data: [DONE]') {\n              continue;\n            }\n\n            if (trimmedLine.startsWith('data: ')) {\n              try {\n                const jsonStr = trimmedLine.slice(6);\n                const data = JSON.parse(jsonStr);\n\n                if (data.choices && data.choices[0] && data.choices[0].delta) {\n                  const delta = data.choices[0].delta;\n\n                  // 同时获取 content 与 reasoning_content\n                  const content = delta.content ?? '';\n                  const reasoning_content = delta.reasoning_content ?? '';\n\n                  const finished = data.choices[0].finish_reason === 'stop';\n\n                  // 只要有任意内容或结束标记就 yield\n                  if (content || reasoning_content || finished) {\n                    yield {\n                      content,\n                      reasoning_content,        \n                      finished\n                    };\n                  }\n                }\n              } catch (parseError) {\n                console.warn('解析 SSE 数据失败:', parseError, trimmedLine);\n              }\n            }\n          }\n        }\n      } finally {\n        reader.releaseLock();\n      }\n    })();\n  } catch (error) {\n    console.error('小米Mimo 调用失败:', error);\n    throw error;\n  }\n}\n"
+        },
+        {
+          "id": "xiaomi/mimo-v2.5",
+          "name": "xiaomi/mimo-v2.5",
+          "displayName": "Mimo-V2.5",
+          "platformId": "xiaomi-mimo",
+          "maxTokens": 4096,
+          "temperature": 0.7,
+          "topP": 0.9,
+          "enabled": true,
+          "category": "text",
+          "description": "",
+          "pricing": {
+            "inputTokens": 0,
+            "outputTokens": 0
+          },
+          "jsCode": "async function processModel(input, config) { \n   // 构建请求数据 \n   const requestData = { \n     messages: input.messages, \n     model: 'mimo-v2.5', \n     stream: true,\n     enable_thinking: false,\n   }; \n   \n   console.log('小米Mimo 请求:', requestData); \n   \n   try { \n     // 发送请求到阿里云百炼 API \n     const response = await fetch(`${config.baseUrl}/v1/chat/completions`, { \n       method: 'POST', \n       headers: { \n         'Authorization': `Bearer ${config.apiKey}`, \n         'Content-Type': 'application/json' \n       }, \n       body: JSON.stringify(requestData) \n     }); \n     \n     if (!response.ok) { \n       const errorText = await response.text(); \n       throw new Error(`小米Mimo API 错误 ${response.status}: ${errorText}`); \n     } \n     \n     // 处理流式响应 \n     const reader = response.body.getReader(); \n     const decoder = new TextDecoder(); \n     \n    // 返回异步生成器处理流式数据\n    return (async function* () {\n      let buffer = '';\n\n      try {\n        while (true) {\n          const { done, value } = await reader.read();\n\n          if (done) {\n            break;\n          }\n\n          // 解码数据块\n          buffer += decoder.decode(value, { stream: true });\n          const lines = buffer.split('\\n');\n          buffer = lines.pop() || '';\n\n          for (const line of lines) {\n            const trimmedLine = line.trim();\n\n            // === 调试：打印原始 SSE 行 ===\n            if (trimmedLine.startsWith('data: ')) {\n              console.log('Raw SSE chunk:', trimmedLine);\n            } else if (trimmedLine !== '') {\n              console.log('Raw non-data line:', trimmedLine);\n            }\n            // ========================================\n\n            if (trimmedLine === '' || trimmedLine === 'data: [DONE]') {\n              continue;\n            }\n\n            if (trimmedLine.startsWith('data: ')) {\n              try {\n                const jsonStr = trimmedLine.slice(6);\n                const data = JSON.parse(jsonStr);\n\n                if (data.choices && data.choices[0] && data.choices[0].delta) {\n                  const delta = data.choices[0].delta;\n\n                  // 同时获取 content 与 reasoning_content\n                  const content = delta.content ?? '';\n                  const reasoning_content = delta.reasoning_content ?? '';\n\n                  const finished = data.choices[0].finish_reason === 'stop';\n\n                  // 只要有任意内容或结束标记就 yield\n                  if (content || reasoning_content || finished) {\n                    yield {\n                      content,\n                      reasoning_content,        \n                      finished\n                    };\n                  }\n                }\n              } catch (parseError) {\n                console.warn('解析 SSE 数据失败:', parseError, trimmedLine);\n              }\n            }\n          }\n        }\n      } finally {\n        reader.releaseLock();\n      }\n    })();\n  } catch (error) {\n    console.error('小米Mimo 调用失败:', error);\n    throw error;\n  }\n}\n"
+        },
+        {
+          "id": "xiaomi/mimo-v2.5",
+          "name": "xiaomi/mimo-v2.5",
+          "displayName": "Mimo-V2.5",
+          "platformId": "xiaomi-mimo",
+          "maxTokens": 4096,
+          "temperature": 0.7,
+          "topP": 0.9,
+          "enabled": true,
+          "category": "vision",
+          "description": "",
+          "pricing": {
+            "inputTokens": 0,
+            "outputTokens": 0
+          },
+          "jsCode": "async function processModel(input, config, abortSignal) { \n    // 构建请求数据，支持视觉输入 \n    const requestData = { \n      messages: input.messages, \n      model: 'mimo-v2.5', \n      stream: true, \n      max_tokens: 4096, \n      temperature: 0.7, \n      top_p: 0.9,\n      enable_thinking: false,\n    }; \n    \n    console.log('阿里云百炼 请求:', requestData); \n    \n   try { \n     // 发送请求到阿里云百炼 API \n     const response = await fetch(`${config.baseUrl}/v1/chat/completions`, { \n       method: 'POST', \n       headers: { \n         'Authorization': `Bearer ${config.apiKey}`, \n         'Content-Type': 'application/json' \n       }, \n       body: JSON.stringify(requestData) \n     }); \n     \n     if (!response.ok) { \n       const errorText = await response.text(); \n       throw new Error(`阿里云百炼 API 错误 ${response.status}: ${errorText}`); \n     } \n     \n     // 处理流式响应 \n     const reader = response.body.getReader(); \n     const decoder = new TextDecoder(); \n     \n    // 返回异步生成器处理流式数据\n    return (async function* () {\n      let buffer = '';\n\n      try {\n        while (true) {\n          const { done, value } = await reader.read();\n\n          if (done) {\n            break;\n          }\n\n          // 解码数据块\n          buffer += decoder.decode(value, { stream: true });\n          const lines = buffer.split('\\n');\n          buffer = lines.pop() || '';\n\n          for (const line of lines) {\n            const trimmedLine = line.trim();\n\n            // === 调试：打印原始 SSE 行 ===\n            if (trimmedLine.startsWith('data: ')) {\n              console.log('Raw SSE chunk:', trimmedLine);\n            } else if (trimmedLine !== '') {\n              console.log('Raw non-data line:', trimmedLine);\n            }\n            // ========================================\n\n            if (trimmedLine === '' || trimmedLine === 'data: [DONE]') {\n              continue;\n            }\n\n            if (trimmedLine.startsWith('data: ')) {\n              try {\n                const jsonStr = trimmedLine.slice(6);\n                const data = JSON.parse(jsonStr);\n\n                if (data.choices && data.choices[0] && data.choices[0].delta) {\n                  const delta = data.choices[0].delta;\n\n                  // 同时获取 content 与 reasoning_content\n                  const content = delta.content ?? '';\n                  const reasoning_content = delta.reasoning_content ?? '';\n\n                  const finished = data.choices[0].finish_reason === 'stop';\n\n                  // 只要有任意内容或结束标记就 yield\n                  if (content || reasoning_content || finished) {\n                    yield {\n                      content,\n                      reasoning_content,        \n                      finished\n                    };\n                  }\n                }\n              } catch (parseError) {\n                console.warn('解析 SSE 数据失败:', parseError, trimmedLine);\n              }\n            }\n          }\n        }\n      } finally {\n        reader.releaseLock();\n      }\n    })();\n  } catch (error) {\n    console.error('阿里云百炼 调用失败:', error);\n    throw error;\n  }\n}\n"
+        }
+      ]
     }
   ]
 }
