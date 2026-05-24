@@ -1,5 +1,5 @@
 {
-  "version": "2.2.5",
-  "downloadUrl": "https://app.zerror.cc/apps/ZError_Setup_2.2.5.exe",
-  "changelog": "1. 将选项加入匹配\n2. 修复多选题目删除的二次确认弹窗无效问题\n3. 修复8080端口占用问题\n4. 修复ai模型调用报错却存储为答案的问题"
+  "version": "2.2.6",
+  "downloadUrl": "https://app.zerror.cc/apps/ZError_Setup_2.2.6.exe",
+  "changelog": "1. 小更新，防止题目完全相同，但在api调用时不匹配"
 }
