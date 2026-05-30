@@ -641,7 +641,13 @@
   transform: translateY(-2px);
 }
 
+.sponsor-link {
+  display: inline-flex;
+  line-height: 0;
+}
+
 .sponsor-gif {
+  display: block;
   width: 320px;
   height: auto;
   max-height: 120px;
@@ -656,6 +662,14 @@
 .sponsor-gif.pangu-logo {
   width: 150px;
   max-height: 100px;
+}
+
+.sponsor-gif.sponsor-gif-tencent {
+  width: auto;
+  height: 120px;
+  max-height: none;
+  object-fit: fill;
+  background: transparent;
 }
 
 .sponsor-gif:hover {

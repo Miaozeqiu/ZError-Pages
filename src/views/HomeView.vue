@@ -252,11 +252,17 @@
           >
             <img src="@/assets/secbit.gif" alt="Sponsor Animation" class="sponsor-gif" />
           </a>
-          <a href="#" target="_blank" rel="noopener" class="sponsor-link">
-            <img src="@/assets/pangu.png" alt="Pangu" class="sponsor-gif pangu-logo" />
-          </a>
-          <a href="https://wk.bobo91.com/" target="_blank" rel="noopener" class="sponsor-link">
-            <img src="@/assets/微信图片_20260409211529.png" alt="Sponsor" class="sponsor-gif" />
+          <a
+            href="https://cloud.tencent.com/act/cps/redirect?redirect=2446&cps_key=a07574348b7b0918d22e10c0485db25a&from=console"
+            target="_blank"
+            rel="noopener"
+            class="sponsor-link"
+          >
+            <img
+              src="@/assets/rhino-design-480x320.png"
+              alt="Tencent Cloud"
+              class="sponsor-gif sponsor-gif-tencent"
+            />
           </a>
         </div>
       </div>
