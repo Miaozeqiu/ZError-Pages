@@ -43,6 +43,36 @@
       </div>
     </div>
 
+    <div v-if="showPromoAd" class="promo-ad-section animate-element">
+      <a
+        href="https://www.cheaptokens.shop"
+        target="_blank"
+        rel="noopener"
+        class="promo-ad-card"
+      >
+        <img :src="promoAdImage" alt="Cheaptokens 广告" class="promo-ad-image" />
+        <span class="promo-ad-badge">广告</span>
+      </a>
+      <button
+        type="button"
+        class="promo-ad-close"
+        aria-label="关闭广告"
+        @click="closePromoAd"
+      >
+        <svg
+          viewBox="0 0 1024 1024"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+        >
+          <path
+            d="M571.01312 523.776l311.3472-311.35232c15.7184-15.71328 15.7184-41.6256 0-57.344l-1.69472-1.69984c-15.7184-15.71328-41.6256-15.71328-57.34912 0l-311.3472 311.77728-311.35232-311.77728c-15.7184-15.71328-41.63072-15.71328-57.344 0l-1.69984 1.69984a40.0128 40.0128 0 0 0 0 57.344L452.92544 523.776l-311.35232 311.35744c-15.71328 15.71328-15.71328 41.63072 0 57.33888l1.69984 1.69984c15.71328 15.7184 41.6256 15.7184 57.344 0l311.35232-311.35232 311.3472 311.35232c15.72352 15.7184 41.63072 15.7184 57.34912 0l1.69472-1.69984c15.7184-15.70816 15.7184-41.6256 0-57.33888l-311.3472-311.35744z"
+          ></path>
+        </svg>
+      </button>
+    </div>
+
     <div class="platform-section animate-element">
       <div class="ai-model-heading animate-element">AI模型</div>
       <h3 class="platform-title animate-element">完全自定义</h3>
@@ -286,6 +316,7 @@ import multiModelImage from "@/assets/multi-model.png";
 import questionImage from "@/assets/question.png";
 import ocsImage from "@/assets/ocs.png";
 import visionImage from "@/assets/vision.png";
+import promoAdImage from "../../画板 3 (3).png";
 import { inject, onMounted, ref } from "vue";
 import "@/assets/styles/home.css"; // 导入样式文件
 
@@ -303,6 +334,11 @@ export default {
     const downloadModal = inject("downloadModal");
     const featureCanvas = ref(null);
     const ocsCanvas = ref(null);
+    const showPromoAd = ref(true);
+
+    const closePromoAd = () => {
+      showPromoAd.value = false;
+    };
 
     // Helper for rounded rect clipping
     const roundRect = (ctx, x, y, width, height, radius) => {
@@ -530,6 +566,9 @@ export default {
     return {
       featureCanvas,
       ocsCanvas,
+      promoAdImage,
+      showPromoAd,
+      closePromoAd,
       openDownloadModal: downloadModal.open,
     };
   },
