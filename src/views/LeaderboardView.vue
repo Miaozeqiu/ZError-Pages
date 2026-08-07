@@ -12,8 +12,8 @@
       <div class="lb-grid">
         <div class="axis-row" aria-hidden="true">
           <div class="axis-spacer" />
-          <div class="axis-rank" />
           <div class="axis-icon" />
+          <div class="axis-rank" />
           <div class="axis">
             <span
               v-for="tick in axisTicks"
@@ -38,7 +38,6 @@
             <span class="name">{{ m.displayName || m.name }}</span>
             <span class="provider">{{ m.provider || '' }}</span>
           </div>
-          <span class="rank">{{ m.rank }}</span>
           <img
             v-if="modelIcon(m.id)"
             class="icon"
@@ -47,6 +46,7 @@
             loading="lazy"
           />
           <span v-else class="icon icon-fallback" aria-hidden="true" />
+          <span class="rank">{{ m.rank }}</span>
           <div class="track">
             <div
               class="fill"
@@ -196,7 +196,7 @@ export default {
 
 .lb-grid {
   display: grid;
-  grid-template-columns: max-content 1.5rem 2.15rem minmax(0, 1fr) 3.4rem;
+  grid-template-columns: max-content 2.15rem 1.5rem minmax(0, 1fr) 3.4rem;
   column-gap: 0.7rem;
   row-gap: 0.4rem;
   align-items: center;
@@ -368,7 +368,7 @@ export default {
   }
 
   .lb-grid {
-    grid-template-columns: max-content 1.35rem 2rem minmax(0, 1fr) 3.2rem;
+    grid-template-columns: max-content 2rem 1.35rem minmax(0, 1fr) 3.2rem;
     column-gap: 0.5rem;
   }
 

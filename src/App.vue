@@ -3,7 +3,7 @@
     <nav>
       <div class="nav-brand">
         <img src="@/assets/zerror.svg" alt="Logo" class="nav-logo">
-        <span class="brand-name">ZError</span>
+        <span class="brand-name">rror</span>
       </div>
       <button class="hamburger" @click="toggleMenu">
         <svg t="1744518248746" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4556" width="24" height="24">
@@ -14,7 +14,7 @@
         <router-link to="/">首页</router-link>
         <a href="#" @click.prevent="showDownloadModal = true">下载</a>
         <a href="https://docs.zerror.cc/docs/introduction">文档</a>
-        <router-link to="/leaderboard">排行榜</router-link>
+        <router-link to="/leaderboard">模型排行榜</router-link>
         <router-link to="/changelog">更新日志</router-link>
         <a href="https://github.com/Miaozeqiu/ZError" target="_blank" class="github-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -24,7 +24,11 @@
       </div>
     </nav>
     <main>
-      <router-view />
+      <router-view v-slot="{ Component, route }">
+        <Transition name="page" mode="out-in">
+          <component :is="Component" :key="route.path" />
+        </Transition>
+      </router-view>
     </main>
 
     <!-- 添加下载弹窗 -->
@@ -111,6 +115,30 @@ main{
   min-height: calc(100vh - 72px);
 }
 
+.page-enter-active,
+.page-leave-active {
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter-active,
+  .page-leave-active {
+    transition: none;
+  }
+}
+
 #app {
   width: 100%;
   display: flex;
@@ -174,12 +202,12 @@ body {
 .modal-content {
   background-color: #fefefe;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(28, 36, 33, 0.12);
   width: 80%;
   max-width: 500px;
   position: relative;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.15); /* 增强阴影效果 */
-  /* border: 1px solid rgba(0,0,0,0.1);  */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
 }
 
 
@@ -246,8 +274,8 @@ nav {
   right: 0;
   z-index: 1000;
   padding: 0.5rem 1rem;
-  background: transparent; /* 改为半透明背景 */
-  backdrop-filter: blur(5px); /* 添加毛玻璃效果 */
+  background: #fff;
+  border-bottom: 1px solid rgba(28, 36, 33, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -271,7 +299,7 @@ nav {
 }
 
 .brand-name {
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 2.5rem;
   font-weight: 900;
   color: #FCB334;

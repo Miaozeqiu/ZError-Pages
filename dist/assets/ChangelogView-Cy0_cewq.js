@@ -1,4 +1,4 @@
-import{_ as d,c as s,a as n,F as a,r as c,o as i,t as o}from"./index-KO6qfK-r.js";const p={data(){return{logs:[{version:"2.2.6",date:"2026-5-16",description:"1. 小更新，防止题目完全相同，但在api调用时不匹配"},{version:"2.2.5",date:"2026-5-16",description:`1. 将选项加入匹配
+import{_ as d,c as s,a as n,F as a,r as c,o as i,t as o}from"./index-B4TDQSrZ.js";const p={data(){return{logs:[{version:"2.2.6",date:"2026-5-16",description:"1. 小更新，防止题目完全相同，但在api调用时不匹配"},{version:"2.2.5",date:"2026-5-16",description:`1. 将选项加入匹配
 2. 修复多选题目删除的二次确认弹窗无效问题；
 3. 修复8080端口占用问题；
 4. 修复ai模型调用报错却存储为答案的问题`},{version:"2.2.4",date:"2026-3-30",description:`1. 修复模型无法打开修改窗外问题 

@@ -1,27 +1,38 @@
 <template>
   <div class="detail-page">
     <div class="detail-nav">
-      <router-link class="back-link" :to="{ name: 'leaderboard' }">← 返回排行榜</router-link>
+      <router-link class="back-link" :to="{ name: 'leaderboard' }">
+        <svg class="back-icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M631.168 183.168a42.666667 42.666667 0 0 1 62.826667 57.621333l-2.496 2.709334L423.04 512l268.48 268.501333a42.666667 42.666667 0 0 1 2.496 57.621334l-2.496 2.709333a42.666667 42.666667 0 0 1-57.621333 2.496l-2.709334-2.496-298.666666-298.666667a42.666667 42.666667 0 0 1-2.496-57.621333l2.496-2.709333 298.666666-298.666667z" fill="currentColor" />
+        </svg>
+        返回
+      </router-link>
     </div>
 
     <div v-if="loading" class="lb-state">加载中…</div>
     <div v-else-if="error" class="lb-state error">{{ error }}</div>
 
     <template v-else-if="model">
-      <header class="detail-hero">
-        <div class="rank-pill">#{{ model.rank }}</div>
-        <img
-          v-if="modelIcon(model.id)"
-          class="detail-icon"
-          :src="modelIcon(model.id)"
-          :alt="model.displayName || model.name"
-        />
-        <div>
-          <h1>{{ model.displayName || model.name }}</h1>
-          <p class="detail-sub">
-            {{ model.provider || '未知提供方' }}
-            <span v-if="model.judgeModel"> · 评测判定 {{ model.judgeModel }}</span>
-          </p>
+      <header class="detail-hero" :class="'place-' + Math.min(model.rank || 99, 4)">
+        <div class="hero-main">
+          <img
+            v-if="modelIcon(model.id)"
+            class="detail-icon"
+            :src="modelIcon(model.id)"
+            :alt="model.displayName || model.name"
+          />
+          <div class="hero-text">
+            <div class="hero-top">
+              <span class="rank-pill">#{{ model.rank }}</span>
+              <span class="provider-tag">{{ model.provider || '未知提供方' }}</span>
+            </div>
+            <h1>{{ model.displayName || model.name }}</h1>
+          </div>
+        </div>
+        <div class="hero-score">
+          <span class="score-label">正确率</span>
+          <strong class="score-value">{{ formatPct(model.accuracy) }}</strong>
+          <span class="score-meta">{{ model.correct }}/{{ model.n }}</span>
         </div>
       </header>
 
@@ -364,14 +375,30 @@ export default {
 }
 
 .back-link {
-  color: #1a6b4a;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.4rem 0.85rem 0.4rem 0.55rem;
+  border: 1px solid rgba(28, 36, 33, 0.12);
+  border-radius: 999px;
+  background: #fff;
+  color: #FCB334;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 0.95rem;
+  font-weight: 650;
+  font-size: 0.92rem;
+  transition: border-color 0.15s ease, background 0.15s ease;
 }
 
 .back-link:hover {
-  text-decoration: underline;
+  border-color: rgba(252, 179, 52, 0.45);
+  background: #fffaf0;
+  text-decoration: none;
+}
+
+.back-icon {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex-shrink: 0;
 }
 
 .lb-state {
@@ -389,43 +416,142 @@ export default {
 
 .detail-hero {
   display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 0 0 1.35rem;
+  border-bottom: 1px solid rgba(28, 36, 33, 0.08);
 }
 
-.rank-pill {
-  flex-shrink: 0;
-  min-width: 3rem;
-  padding: 0.45rem 0.7rem;
-  border-radius: 999px;
-  text-align: center;
-  font-weight: 800;
-  background: linear-gradient(145deg, #f6d365, #e8a838);
-  color: #3a2500;
-  box-shadow: 0 2px 8px rgba(232, 168, 56, 0.3);
+.detail-hero.place-1 {
+  border-bottom-color: rgba(232, 160, 58, 0.28);
+}
+
+.hero-main {
+  display: flex;
+  align-items: center;
+  gap: 1.05rem;
+  min-width: 0;
 }
 
 .detail-icon {
-  width: 3.25rem;
-  height: 3.25rem;
+  width: 3.4rem;
+  height: 3.4rem;
   border-radius: 12px;
   object-fit: cover;
   flex-shrink: 0;
-  box-shadow: 0 0 0 1px rgba(20, 35, 28, 0.08);
+  background: #fff;
+}
+
+.hero-text {
+  min-width: 0;
+}
+
+.hero-top {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.rank-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 750;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  color: #9aa49e;
+  background: none;
+  padding: 0;
+  min-width: 0;
+  height: auto;
+  border-radius: 0;
+}
+
+.place-1 .rank-pill { color: #c4841e; }
+.place-2 .rank-pill { color: #d4a04a; }
+.place-3 .rank-pill { color: #e0b86e; }
+
+.provider-tag {
+  font-size: 0.82rem;
+  color: #8a9690;
+}
+
+.provider-tag::before {
+  content: '·';
+  margin-right: 0.55rem;
+  color: #c5cbc7;
 }
 
 .detail-hero h1 {
   margin: 0;
-  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  font-family: Georgia, 'Times New Roman', 'Songti SC', serif;
+  font-size: clamp(1.7rem, 3.2vw, 2.15rem);
+  font-weight: 700;
   letter-spacing: -0.03em;
-  color: #14231c;
+  color: #1c2421;
+  line-height: 1.15;
 }
 
-.detail-sub {
-  margin: 0.35rem 0 0;
-  color: #6b7a72;
-  font-size: 0.98rem;
+.hero-score {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.12rem;
+  padding-bottom: 0.1rem;
+}
+
+.score-label {
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9aa49e;
+}
+
+.score-value {
+  font-size: clamp(1.7rem, 3.2vw, 2.1rem);
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+  color: #e8a03a;
+  line-height: 1;
+}
+
+.place-1 .score-value {
+  color: #e8a03a;
+}
+
+.score-meta {
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  color: #8a9690;
+}
+
+@media (max-width: 640px) {
+  .detail-hero {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.1rem;
+    padding-bottom: 1.15rem;
+  }
+
+  .hero-score {
+    align-items: flex-start;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.55rem;
+    flex-wrap: wrap;
+  }
+
+  .score-label {
+    width: 100%;
+  }
 }
 
 .matrix-panel {
