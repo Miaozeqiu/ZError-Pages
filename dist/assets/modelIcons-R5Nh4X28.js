@@ -1,0 +1,1 @@
+const m={"kimi-k3":"/models/kimi.png","doubao-seed-2.1-turbo":"/models/doubao.png","qwen3.8-max":"/models/qwen.png","gpt-5.6-sol":"/models/openai.png","deepseek-v4-flash":"/models/deepseek.png","glm-5.2":"/models/glm.png","minimax-m3":"/models/minimax.png"};function o(e){return m[e]||null}export{o as m};

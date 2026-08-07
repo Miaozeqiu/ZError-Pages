@@ -14,6 +14,7 @@
         <router-link to="/">首页</router-link>
         <a href="#" @click.prevent="showDownloadModal = true">下载</a>
         <a href="https://docs.zerror.cc/docs/introduction">文档</a>
+        <router-link to="/leaderboard">排行榜</router-link>
         <router-link to="/changelog">更新日志</router-link>
         <a href="https://github.com/Miaozeqiu/ZError" target="_blank" class="github-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -61,6 +62,7 @@
 
 <script>
 import { provide, ref, watch } from 'vue'
+import { lockPageScroll, unlockPageScroll } from '@/utils/scrollLock.js'
 
 export default {
   setup() {
@@ -76,16 +78,10 @@ export default {
     }
 
     watch(showDownloadModal, (newVal) => {
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
-      const nav = document.querySelector('nav')
-      if(newVal) {
-        document.body.style.paddingRight = `${scrollbarWidth}px`
-        nav.style.paddingRight = `${parseInt(window.getComputedStyle(nav).paddingRight) + scrollbarWidth}px`
-        document.body.style.overflow = 'hidden'
+      if (newVal) {
+        lockPageScroll()
       } else {
-        document.body.style.paddingRight = ''
-        nav.style.paddingRight = ''
-        document.body.style.overflow = ''
+        unlockPageScroll()
       }
     })
 
@@ -110,7 +106,9 @@ main{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: calc(100vh - 72px);
 }
 
 #app {
@@ -120,9 +118,13 @@ main{
  justify-content: center;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   margin: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .modal {

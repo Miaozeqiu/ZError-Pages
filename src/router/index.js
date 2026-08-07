@@ -9,13 +9,25 @@ const router = createRouter({
       name: 'home',
       component: HomeView
     },
-    // 移除下载页面的路由
     {
       path: '/changelog',
       name: 'changelog',
       component: () => import('../views/ChangelogView.vue')
+    },
+    {
+      path: '/leaderboard',
+      name: 'leaderboard',
+      component: () => import('../views/LeaderboardView.vue')
+    },
+    {
+      path: '/leaderboard/:id',
+      name: 'leaderboard-model',
+      component: () => import('../views/ModelDetailView.vue')
     }
-  ]
+  ],
+  scrollBehavior() {
+    return { top: 0 }
+  }
 })
 
 export default router

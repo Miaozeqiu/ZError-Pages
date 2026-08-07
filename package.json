@@ -4,10 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --port 5175",
+    "dev": "vite --port 4000",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
+    "leaderboard:split": "node scripts/leaderboard/split-model-detail.mjs",
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
     "api": "python scripts/json_editor/app.py",

@@ -1,0 +1,2061 @@
+{
+  "version": 4,
+  "note": "在错题上逐题复核：缺上下文、答案不唯一、题意不明/答案损坏的题目已剔除",
+  "count": 201,
+  "originalN": 6503,
+  "effectiveN": 6302,
+  "categories": {
+    "答案不唯一/开放": 55,
+    "依赖上图：机构高副处数": 1,
+    "标准答案疑似错误：齿根圆": 1,
+    "题意干扰：题干已写( A": 1,
+    "标准答案疑似错序：Dri": 1,
+    "答案为①⑦⑩但题干无设备": 1,
+    "缺上下文/残缺": 30,
+    "题意歧义：throw/t": 1,
+    "答案为②④⑧但题干无设备": 1,
+    "标准答案与事实矛盾：SM": 1,
+    "标准答案明显错误：浏览网": 1,
+    "答案为③⑤⑥⑨但题干无设": 1,
+    "题意不明/损坏": 11,
+    "答案过窄：公信力/信誉/": 1,
+    "答案争议：投诉对象第三方": 1,
+    "主观措辞：你认为供给价格": 1,
+    "题干/答案依赖行列式图片": 1,
+    "题干仅题号A7.10": 1,
+    "答案可疑：认识是一个“漫": 2,
+    "题干写明答案并不是唯一的": 1,
+    "答案争议：自由根本前提平": 1,
+    "主观长文：林冲结局见解8": 1,
+    "答案过窄：荀子重视礼/乐": 1,
+    "偏门识记无出处：国际太空": 1,
+    "无效题干：这个是对的还是": 1,
+    "作文题：非客观填空": 1,
+    "测试占位：测试导入单选题": 2,
+    "测试占位：测试导入多选题": 2,
+    "无效题干：这个是对的": 1,
+    "题干混入卷面：麦氏点+简": 1,
+    "答案争议：传统建筑代表风": 1,
+    "答案区间不一：陈列密度百": 1,
+    "答案过窄：系统的（）性": 1,
+    "英语篇章/听力": 68,
+    "答案歧义：日夜____（": 1,
+    "名词解释且标准答案为“英": 1,
+    "教材表述依赖：气压控制系": 1,
+    "依赖上图：阳台建筑面积": 1
+  },
+  "indices": [
+    484,
+    4313,
+    6011,
+    6235,
+    6358,
+    1157,
+    1613,
+    2375,
+    3266,
+    3951,
+    4402,
+    4569,
+    4610,
+    5015,
+    5131,
+    5190,
+    5857,
+    6195,
+    6398,
+    115,
+    182,
+    694,
+    1086,
+    1328,
+    2277,
+    2395,
+    2613,
+    3198,
+    3332,
+    4430,
+    5299,
+    6041,
+    6106,
+    526,
+    1373,
+    1375,
+    1994,
+    2240,
+    4573,
+    931,
+    1033,
+    2326,
+    6224,
+    2073,
+    2084,
+    2220,
+    3002,
+    3066,
+    4444,
+    4548,
+    4962,
+    23,
+    149,
+    353,
+    430,
+    865,
+    897,
+    1305,
+    1354,
+    1473,
+    1484,
+    3611,
+    4033,
+    4187,
+    4745,
+    4881,
+    5228,
+    5447,
+    5826,
+    5842,
+    6246,
+    3661,
+    3933,
+    5150,
+    345,
+    643,
+    1407,
+    2000,
+    2433,
+    2871,
+    3531,
+    3963,
+    4672,
+    4725,
+    4911,
+    5501,
+    6126,
+    96,
+    231,
+    280,
+    331,
+    2314,
+    2420,
+    2997,
+    3191,
+    3194,
+    3512,
+    3599,
+    3728,
+    4055,
+    4432,
+    5339,
+    5462,
+    5689,
+    5920,
+    6035,
+    6411,
+    26,
+    56,
+    87,
+    176,
+    306,
+    310,
+    336,
+    376,
+    382,
+    462,
+    489,
+    785,
+    793,
+    850,
+    894,
+    948,
+    1048,
+    1088,
+    1120,
+    1200,
+    1311,
+    1533,
+    1648,
+    1685,
+    1723,
+    1738,
+    1949,
+    2082,
+    2124,
+    2222,
+    2413,
+    2498,
+    2499,
+    2823,
+    2893,
+    2940,
+    2956,
+    3001,
+    3005,
+    3093,
+    3159,
+    3212,
+    3289,
+    3358,
+    3377,
+    3446,
+    3486,
+    3575,
+    3965,
+    4152,
+    4234,
+    4236,
+    4242,
+    4260,
+    4270,
+    4295,
+    4386,
+    4464,
+    4483,
+    4602,
+    4737,
+    4739,
+    4757,
+    4864,
+    4878,
+    4946,
+    5171,
+    5191,
+    5287,
+    5336,
+    5351,
+    5430,
+    5572,
+    5715,
+    5895,
+    5952,
+    6027,
+    6110,
+    6152,
+    6383,
+    6449,
+    197,
+    1451,
+    2069,
+    2123,
+    2306,
+    2408,
+    3086,
+    3110,
+    4580,
+    4651,
+    5246,
+    5525,
+    5754
+  ],
+  "items": [
+    {
+      "index": 484,
+      "reason": "填空残缺且答案表述不唯一：主视图选择原则",
+      "subject": "机械制造",
+      "type": "填空题",
+      "title": "零件图主视图的选择原则有 和",
+      "gold": "合理位置原则、形状特征原则",
+      "okCount": 0
+    },
+    {
+      "index": 4313,
+      "reason": "答案不唯一：预定运动规律与凸轮轮廓曲线教材均常见",
+      "subject": "机械制造",
+      "type": "填空题",
+      "title": "凸轮机构能使从动杆按照 ，实现各种复杂的运动。",
+      "gold": "凸轮轮廓曲线",
+      "okCount": null
+    },
+    {
+      "index": 6011,
+      "reason": "依赖上图：机构高副处数",
+      "subject": "机械制造",
+      "type": "单选题",
+      "title": "上图机构中，可用作自由度计算的高副有（ ）处",
+      "gold": "1",
+      "okCount": 3
+    },
+    {
+      "index": 6235,
+      "reason": "标准答案疑似错误：齿根圆直径应为 m(z−2.5)=95，非100",
+      "subject": "机械制造",
+      "type": "填空题",
+      "title": "已知直齿圆柱齿轮的齿数Z=50，模数m=2，其齿根圆直径是( )",
+      "gold": "100",
+      "okCount": null
+    },
+    {
+      "index": 6358,
+      "reason": "题意干扰：题干已写( A )却标答案为心理学",
+      "subject": "机械制造",
+      "type": "单选题",
+      "title": "人机工程学开始是从( A )学上发展起来的。",
+      "gold": "心理学",
+      "okCount": null
+    },
+    {
+      "index": 1157,
+      "reason": "答案表述不唯一：磁盘清理/查错等叫法因系统而异",
+      "subject": "计算机",
+      "type": "填空题",
+      "title": "计算机系统磁盘工具中最常使用的是________、________。",
+      "gold": "查错###碎片整理",
+      "okCount": null
+    },
+    {
+      "index": 1613,
+      "reason": "标准答案疑似错序：DriverManager/Connection 与 gold 不符",
+      "subject": "计算机",
+      "type": "填空题",
+      "title": "JDBC使用 方法加载和注册驱动程序后，由 类负责管理并跟踪JDBC驱动程序，由 接口负责建立与指定数据库的连接。",
+      "gold": "class.forName###Driver###DriverManager",
+      "okCount": null
+    },
+    {
+      "index": 2375,
+      "reason": "答案为①⑦⑩但题干无设备列表",
+      "subject": "计算机",
+      "type": "填空题",
+      "title": "属于输出设备的是（ ）。",
+      "gold": "①###⑦###⑩",
+      "okCount": 0
+    },
+    {
+      "index": 3266,
+      "reason": "开放列举：参考工具书种类答案不唯一",
+      "subject": "计算机",
+      "type": "填空题",
+      "title": "参考工具书一般有 ___ 、___ 、___ 、___ 、___ 、___ 和 ___ 。",
+      "gold": "字典###词典###历谱###名录###手册###统计资料###法规",
+      "okCount": null
+    },
+    {
+      "index": 3951,
+      "reason": "题意不明：FoxPro 截取式缺运算符/语境",
+      "subject": "计算机",
+      "type": "填空题",
+      "title": "“This is a student”=“This”的值是",
+      "gold": ".T.",
+      "okCount": null
+    },
+    {
+      "index": 4402,
+      "reason": "答案不唯一：setString/setObject/setXxx 均可",
+      "subject": "计算机",
+      "type": "填空题",
+      "title": "7.PreparedStatement的( )方法可以将第n个“?”传递的参数代替。",
+      "gold": "SetString(n, 参数)",
+      "okCount": null
+    },
+    {
+      "index": 4569,
+      "reason": "题意歧义：throw/throws 与“系统/人为抛出”两套说法",
+      "subject": "计算机",
+      "type": "填空题",
+      "title": "抛出异常有两种方法： 和 。",
+      "gold": "系统自动抛出###人为手动抛出",
+      "okCount": null
+    },
+    {
+      "index": 4610,
+      "reason": "答案为②④⑧但题干无设备列表",
+      "subject": "计算机",
+      "type": "填空题",
+      "title": "属于输入设备是（ ）",
+      "gold": "②###④###⑧",
+      "okCount": 0
+    },
+    {
+      "index": 5015,
+      "reason": "标准答案与事实矛盾：SMTP≠SNMP 却标正确",
+      "subject": "计算机",
+      "type": "判断题",
+      "title": "简单邮件传输协议的英文简称为SNMP。( )",
+      "gold": "正确",
+      "okCount": null
+    },
+    {
+      "index": 5131,
+      "reason": "标准答案明显错误：浏览网页最常用软件标为QQ",
+      "subject": "计算机",
+      "type": "单选题",
+      "title": "Internet最重要的信息资源是Web网页, 浏览网页最常用的软件是 ( )",
+      "gold": "QQ",
+      "okCount": null
+    },
+    {
+      "index": 5190,
+      "reason": "答案过窄且不唯一：网络协议等更常见",
+      "subject": "计算机",
+      "type": "填空题",
+      "title": "____是用于实现网络中各种设备之间进行通信的软件。",
+      "gold": "网络通信软件",
+      "okCount": null
+    },
+    {
+      "index": 5857,
+      "reason": "题干残缺：仅一句定义无设问",
+      "subject": "计算机",
+      "type": "填空题",
+      "title": "资源子网与通信子网的接口和桥梁。",
+      "gold": "传输层",
+      "okCount": 0
+    },
+    {
+      "index": 6195,
+      "reason": "答案为③⑤⑥⑨但题干无设备列表",
+      "subject": "计算机",
+      "type": "填空题",
+      "title": "属于存储器的是（ ）。",
+      "gold": "③###⑤###⑥###⑨",
+      "okCount": 0
+    },
+    {
+      "index": 6398,
+      "reason": "题意不明：Boolean 属性方法标准答案为 is",
+      "subject": "计算机",
+      "type": "填空题",
+      "title": "5.给Boolean类型设置属性使用( )方法。",
+      "gold": "is",
+      "okCount": null
+    },
+    {
+      "index": 115,
+      "reason": "答案不唯一：企业成熟度转变两端表述教材不一",
+      "subject": "经管财经",
+      "type": "填空题",
+      "title": "企业成熟度是企业面对环境的威胁或机会作出反应的灵敏程度，是衡量企业从（ ）向（ ）转变的程度。",
+      "gold": "以产品为中心；以客户为中心",
+      "okCount": null
+    },
+    {
+      "index": 182,
+      "reason": "开放列举：数据挖掘任务有哪些",
+      "subject": "经管财经",
+      "type": "填空题",
+      "title": "数据挖掘任务有哪些？",
+      "gold": "总结规则挖掘###关联规则挖掘###分类规则挖掘###群集规则挖掘###预测分析###趋势分析###偏差分析",
+      "okCount": 0
+    },
+    {
+      "index": 694,
+      "reason": "答案过窄：公信力/信誉/中立性等多义",
+      "subject": "经管财经",
+      "type": "填空题",
+      "title": "第三方支付平台简单的说就是处于买方和卖方之间具备（________）的第三方，承担担保人和资金托管人的角色。",
+      "gold": "公信力",
+      "okCount": null
+    },
+    {
+      "index": 1086,
+      "reason": "残缺定义：即点对点信贷",
+      "subject": "经管财经",
+      "type": "填空题",
+      "title": "即点对点信贷。",
+      "gold": "P2P",
+      "okCount": 5
+    },
+    {
+      "index": 1328,
+      "reason": "题干残缺：树立____ 可填多种理念",
+      "subject": "经管财经",
+      "type": "填空题",
+      "title": "9．客房的设计要以客人为中心，以客人的需求作为客房设计的出发点，树立",
+      "gold": "客人就是上帝；",
+      "okCount": null
+    },
+    {
+      "index": 2277,
+      "reason": "答案过时且不唯一：手机银行基于短信",
+      "subject": "经管财经",
+      "type": "填空题",
+      "title": "手机银行是基于 的银行服务。",
+      "gold": "短信",
+      "okCount": null
+    },
+    {
+      "index": 2395,
+      "reason": "残缺主语题干：是由公司而不是政府发行…",
+      "subject": "经管财经",
+      "type": "填空题",
+      "title": "是由公司而不是政府发行的数字现金。",
+      "gold": "代币",
+      "okCount": 0
+    },
+    {
+      "index": 2613,
+      "reason": "答案不唯一：信息时代象征",
+      "subject": "经管财经",
+      "type": "填空题",
+      "title": "金融业是一个与信息服务高度相关的行业，而（________）一直是信息时代的象征。",
+      "gold": "数据",
+      "okCount": null
+    },
+    {
+      "index": 3198,
+      "reason": "开放罗列：CRM九阶段实施步骤教材不一",
+      "subject": "经管财经",
+      "type": "填空题",
+      "title": "结合项目管理和管理信息系统实施的特点，ＣＲＭ软件系统九阶段的实施方法：",
+      "gold": "项目准备###项目启动###分析和诊断###描绘业务蓝图###原型测试###二次开发与确认###会议室导航###切换###新系统支持",
+      "okCount": null
+    },
+    {
+      "index": 3332,
+      "reason": "答案争议：投诉对象第三方/责任方/企业",
+      "subject": "经管财经",
+      "type": "填空题",
+      "title": "从狭义上讲，客户投诉指受到损害方找到（ ）进行倾诉、控告的行为。",
+      "gold": "第三方",
+      "okCount": null
+    },
+    {
+      "index": 4430,
+      "reason": "题意不明：成熟期“长”“改”单字口诀依赖教材",
+      "subject": "经管财经",
+      "type": "填空题",
+      "title": "成熟期的营销策略应该注重“( )”和“( )”字。",
+      "gold": "长###改",
+      "okCount": null
+    },
+    {
+      "index": 5299,
+      "reason": "开放填空：金融创新不能…表述不唯一",
+      "subject": "经管财经",
+      "type": "填空题",
+      "title": "金融创新不能（）（）（），造成金融与实体经济和消费者利益的巨大背离。",
+      "gold": "牺牲风险信息的透明度###增加金融体系的脆弱性###脱离实体经济和消费者的需要",
+      "okCount": null
+    },
+    {
+      "index": 6041,
+      "reason": "答案不唯一：两重保障具体表述",
+      "subject": "经管财经",
+      "type": "填空题",
+      "title": "富二贷在出借人风险上采取了两重保障，（________），相对来说安全，但是在信息审核上，却并不完善。",
+      "gold": "抵押物和风险备用金",
+      "okCount": null
+    },
+    {
+      "index": 6106,
+      "reason": "主观措辞：你认为供给价格弹性",
+      "subject": "经管财经",
+      "type": "单选题",
+      "title": "假定一线性供给曲线与价格轴相交，那么你认为此线性供给曲线上各点的供给价格弹性是（）",
+      "gold": "富有弹性",
+      "okCount": 2
+    },
+    {
+      "index": 526,
+      "reason": "开放罗列：公路设计交通数据三项教材不一",
+      "subject": "汽车交通",
+      "type": "填空题",
+      "title": "在公路设计中应考虑的主要交通数据是 、 、和 。",
+      "gold": "设计车辆###设计车速###交通量",
+      "okCount": null
+    },
+    {
+      "index": 1373,
+      "reason": "开放罗列：公路设计交通数据三项教材不一",
+      "subject": "汽车交通",
+      "type": "填空题",
+      "title": "在公路设计中应考虑的主要交通数据是______、_______、______。",
+      "gold": "设计车辆###设计车速###交通量",
+      "okCount": null
+    },
+    {
+      "index": 1375,
+      "reason": "答案近义不唯一：桥隧/桥涵",
+      "subject": "汽车交通",
+      "type": "填空题",
+      "title": "公路是一种线形工程构造物,主要包括 、路面、 以及交通标志、路面标线等。",
+      "gold": "路基###桥隧",
+      "okCount": null
+    },
+    {
+      "index": 1994,
+      "reason": "题干/答案损坏：gold 为 CD###×",
+      "subject": "汽车交通",
+      "type": "填空题",
+      "title": "随着科技的发展,零件目录先后发展出书本零件目录、电子目录____和缩微胶片目录三种记载形式。____",
+      "gold": "CD###×",
+      "okCount": null
+    },
+    {
+      "index": 2240,
+      "reason": "题干/答案损坏：gold 为 CD###×",
+      "subject": "汽车交通",
+      "type": "填空题",
+      "title": "随着科技的发展,零件目录先后发展出书本零件目录、电子目录____和微缩胶片目录三种记载形式。____",
+      "gold": "CD###×",
+      "okCount": null
+    },
+    {
+      "index": 4573,
+      "reason": "答案表述不唯一：起降性能定义写法多样",
+      "subject": "汽车交通",
+      "type": "填空题",
+      "title": "民用飞机的起降性能是指飞机的______________________和____________。",
+      "gold": "起飞离陆速度和距离###着陆速度和着陆距离",
+      "okCount": null
+    },
+    {
+      "index": 931,
+      "reason": "作业题号残留：习题1.4题4第12小题",
+      "subject": "数学",
+      "type": "填空题",
+      "title": "习题1.4 题4 第12小题",
+      "gold": "e-1",
+      "okCount": 0
+    },
+    {
+      "index": 1033,
+      "reason": "题意不明：商的最高位指数字还是数位",
+      "subject": "数学",
+      "type": "填空题",
+      "title": "在括号中写出下面算式的商的最高位 53.5÷9（ ） 80.56÷13（ ） 7.68÷31（ ） 151.7÷23（ ）",
+      "gold": "5###6###0###6",
+      "okCount": null
+    },
+    {
+      "index": 2326,
+      "reason": "题干/答案依赖行列式图片",
+      "subject": "数学",
+      "type": "填空题",
+      "title": "计算行列式<img src=\"https",
+      "gold": "//p.ananas.chaoxing.com/star3/origin/e18d48aea4985352bb0e450fae1be170.png\">=____.\n(5.0)",
+      "okCount": 0
+    },
+    {
+      "index": 6224,
+      "reason": "题干仅题号A7.10",
+      "subject": "数学",
+      "type": "单选题",
+      "title": "A7.10",
+      "gold": "D",
+      "okCount": 0
+    },
+    {
+      "index": 2073,
+      "reason": "答案可疑：认识是一个“漫长”",
+      "subject": "思政政治",
+      "type": "填空题",
+      "title": "人们对世界的认识是一个_____。",
+      "gold": "漫长",
+      "okCount": null
+    },
+    {
+      "index": 2084,
+      "reason": "主观开放：你认为王丽应该",
+      "subject": "思政政治",
+      "type": "单选题",
+      "title": "王丽学习努力，但学习成绩不断下滑。父母误以为她早恋，对她提出了一些她感到苛刻的要求。你认为王丽应该( )",
+      "gold": "换位思考，主动沟通",
+      "okCount": 5
+    },
+    {
+      "index": 2220,
+      "reason": "答案可疑：认识是一个“漫长”的过程",
+      "subject": "思政政治",
+      "type": "填空题",
+      "title": "人们对世界的认识是一个______的过程。",
+      "gold": "漫长",
+      "okCount": null
+    },
+    {
+      "index": 3002,
+      "reason": "主观开放：你认为三大改造哪个最难",
+      "subject": "思政政治",
+      "type": "单选题",
+      "title": "你认为三大改造，哪个最难?",
+      "gold": "资本主义工商业",
+      "okCount": 4
+    },
+    {
+      "index": 3066,
+      "reason": "主观开放：你认为什么样的友谊",
+      "subject": "思政政治",
+      "type": "单选题",
+      "title": "友谊离不开现实的条件，你认为什么样的友谊更能经得住时间和风雨的考验( )",
+      "gold": "志同道合，志趣相投",
+      "okCount": 5
+    },
+    {
+      "index": 4444,
+      "reason": "题干写明答案并不是唯一的",
+      "subject": "思政政治",
+      "type": "填空题",
+      "title": "根据八个明确和十四个坚持的联系，填写对应关系。（答案并不是唯一的） 第二个明确~方略（ ） 第三个明确～方略（ ） 第四个明确～方略（ ） 第五个明确～方略（ ） 第六个明确～方略（ ） 第七个明确～方略（） 第八个明确～方略（）",
+      "gold": "2###4、5、7、8、9、6、14###3###6###11、10###13###1、14",
+      "okCount": null
+    },
+    {
+      "index": 4548,
+      "reason": "答案争议：自由根本前提平等 vs 认识必然",
+      "subject": "思政政治",
+      "type": "填空题",
+      "title": "实现自由的根本前提是（ ）",
+      "gold": "平等",
+      "okCount": null
+    },
+    {
+      "index": 4962,
+      "reason": "开放表述：滴定浓度影响说法不唯一",
+      "subject": "物理化学",
+      "type": "填空题",
+      "title": "在滴定分析中标准溶液浓度一般应与被测物浓度相近。两溶液浓度必需控制在一定范围。若浓度过小，将使_______________ ；若浓度过大则_____________。",
+      "gold": "突跃小, 终点不明显###终点误差大 ， 造成浪费",
+      "okCount": null
+    },
+    {
+      "index": 23,
+      "reason": "开放写词：照例子写词语",
+      "subject": "文史哲法",
+      "type": "填空题",
+      "title": "照例子写词语 ( 编 )故事 ( )地道 ( )公主 ( )城堡",
+      "gold": "挖###救###攻",
+      "okCount": 2
+    },
+    {
+      "index": 149,
+      "reason": "开放罗列：数字测图采集技术不唯一",
+      "subject": "文史哲法",
+      "type": "填空题",
+      "title": "数字测图的基本程序是通过（ ）、（ ）、（ ）、（ ）等先进技术方法进行地形图信息采集燕实时传输至数据终端（存贮媒介、便携机或计算机等），然后用计算机及相关成图软件在野外实时处理，或事后在室内处理与编辑，形成地形图数据文件。",
+      "gold": "全站仪###RTK GPS###CORS###摄影测量",
+      "okCount": null
+    },
+    {
+      "index": 353,
+      "reason": "答案不唯一：水准路线计算消除对象表述不一",
+      "subject": "文史哲法",
+      "type": "填空题",
+      "title": "水准测量路线计算的目的是为了检查外业观测成果质量，消除观测数据中的（1），对（2）进行平差处理，以及对观测成果和平差结果进行（3）。",
+      "gold": "系统误差###偶然误差###精度评定",
+      "okCount": null
+    },
+    {
+      "index": 430,
+      "reason": "开放仿写：仿写一句",
+      "subject": "文史哲法",
+      "type": "填空题",
+      "title": "根据课文内容答题 十个太阳像十个大火球，炙烤着大地。 （1）这是一个_______句，把_______比作_______，从“炙烤”这个词我体会出_______________。 （2）我也仿写一句。 ______像___________，___________。",
+      "gold": "比喻###太阳###大火球###太阳温度高###湖水###一面镜子###映照着柳树",
+      "okCount": 4
+    },
+    {
+      "index": 865,
+      "reason": "作业题号残留：高程基准的建立(单选)",
+      "subject": "文史哲法",
+      "type": "填空题",
+      "title": "3____高程基准的建立(单选)",
+      "gold": "2.0",
+      "okCount": 0
+    },
+    {
+      "index": 897,
+      "reason": "缺上下文：阅兵段落小题且 gold 含评分说明",
+      "subject": "文史哲法",
+      "type": "填空题",
+      "title": "是____③____。“领导带头参训、第一架次受阅”是空军历次阅兵的优良传统之一,在本次阅兵中体现得尤为突出。有的将军担任梯队机长,有的担任梯队空中指挥员,有的既担任指挥部领导,又驾机直接受阅。还有多名师长、团长直接上阵带飞。",
+      "gold": "①参阅规模和机型数量创历史之最。②多种新式装备亮相。③领导干部当先锋打头阵。(每空2分)",
+      "okCount": null
+    },
+    {
+      "index": 1305,
+      "reason": "文学开放填空：更具？",
+      "subject": "文史哲法",
+      "type": "填空题",
+      "title": "还有什么比生命之源叶绿素中的“绿色秘密”更具 ？",
+      "gold": "神秘美",
+      "okCount": 0
+    },
+    {
+      "index": 1354,
+      "reason": "文学开放填空：更具？",
+      "subject": "文史哲法",
+      "type": "填空题",
+      "title": "还有什么比“纳米”世界中用原子砌成的纤巧结构更具 ？",
+      "gold": "精致美",
+      "okCount": 1
+    },
+    {
+      "index": 1473,
+      "reason": "作业题号残留：内业计算基准(单选)",
+      "subject": "文史哲法",
+      "type": "填空题",
+      "title": "1 ____内业计算的基准线与基准面(单选)",
+      "gold": "6.0",
+      "okCount": 0
+    },
+    {
+      "index": 1484,
+      "reason": "答案不唯一：儿童散文意义中间项",
+      "subject": "文史哲法",
+      "type": "填空题",
+      "title": "儿童散文的意义有美育特质、（ ）、语言特质。",
+      "gold": "审美特质",
+      "okCount": null
+    },
+    {
+      "index": 3611,
+      "reason": "主观长文：林冲结局见解80字",
+      "subject": "文史哲法",
+      "type": "填空题",
+      "title": "关于林冲的结局,流传比较广的说法有三种:第一种是《水浒》的结局,林冲跟随梁山泊一同接受招安,在凯旋途中得了风瘫,半年后病故;第二种是《荡寇志》的结局,梁山泊被官军剿灭,他在守护头关时被王进(曾和林冲同为教头)大骂,回营后羞愤交加,郁郁而终;第三种是央视电视剧《水浒传》的结局,得知宋江放走了被生擒的高俅后,他悔恨交加,被活活气死。 比较这三种结局,你认为哪一种更切合林冲的命运?谈谈你的见解,80个字",
+      "gold": "《水浒》原书的结局是最切合林冲命运的。林冲应该还是会接受招安的,他终究不是李逵、刘唐、三阮那样的草莽汉子,梁山泊也终究不是他的归宿。在他的内心深处,仍然埋藏着对重回主流社会的渴望。",
+      "okCount": 2
+    },
+    {
+      "index": 4033,
+      "reason": "答案过窄：荀子重视礼/乐教等多说",
+      "subject": "文史哲法",
+      "type": "填空题",
+      "title": "在教育内容方面，荀子非常重视 。",
+      "gold": "乐教",
+      "okCount": null
+    },
+    {
+      "index": 4187,
+      "reason": "作业题号残留：地物符号类型(单选)",
+      "subject": "文史哲法",
+      "type": "填空题",
+      "title": "2____地物符号的类型(单选)",
+      "gold": "2.0",
+      "okCount": 0
+    },
+    {
+      "index": 4745,
+      "reason": "作业题号残留：地球曲率(单选)",
+      "subject": "文史哲法",
+      "type": "填空题",
+      "title": "5____地球曲率对测量的影响(单选)",
+      "gold": "1.0",
+      "okCount": 0
+    },
+    {
+      "index": 4881,
+      "reason": "偏门识记无出处：国际太空站作者",
+      "subject": "文史哲法",
+      "type": "填空题",
+      "title": "《国际太空站》的作者是____。",
+      "gold": "余祥钟",
+      "okCount": null
+    },
+    {
+      "index": 5228,
+      "reason": "答案不唯一：阳明核心心即理/致良知",
+      "subject": "文史哲法",
+      "type": "填空题",
+      "title": "王守仁哲学思想的核心是 。",
+      "gold": "心即理",
+      "okCount": null
+    },
+    {
+      "index": 5447,
+      "reason": "作业题号残留：系统误差消除(单选)",
+      "subject": "文史哲法",
+      "type": "填空题",
+      "title": "1____系统误差的消除(单选)",
+      "gold": "3.0",
+      "okCount": 0
+    },
+    {
+      "index": 5826,
+      "reason": "无效题干：这个是对的还是错的",
+      "subject": "文史哲法",
+      "type": "判断题",
+      "title": "这个是对的还是错的",
+      "gold": "正确",
+      "okCount": 0
+    },
+    {
+      "index": 5842,
+      "reason": "作文题：非客观填空",
+      "subject": "文史哲法",
+      "type": "填空题",
+      "title": "当今社会是一个科技发达的社会,学习知识成了每个人生活中最重要的头等大事。没有知识,就寸步难行,很难立足于这个社会,更不用说服务于社会。但在现实中,很多青少年无视知识的重要性,不愿付出努力获取知识,得过且过,甚至玩物丧志,这是很可怕的。因为知识能使人获得财富,知识能使人变得高尚,知识能使人的生活充满阳光,知识能使一个民族变得优秀,知识能使一个国家变得强大…… 阅读上面一段话,以“知识”为话题写一篇不",
+      "gold": "整段抄袭上段话扣10分",
+      "okCount": null
+    },
+    {
+      "index": 6246,
+      "reason": "作业题号残留：国家统一坐标(单选)",
+      "subject": "文史哲法",
+      "type": "填空题",
+      "title": "2____国家统一坐标的含义(单选)",
+      "gold": "3.0",
+      "okCount": 0
+    },
+    {
+      "index": 3661,
+      "reason": "开放罗列：移位寄存器功能表述不唯一",
+      "subject": "物理化学",
+      "type": "填空题",
+      "title": "移位寄存器的主要功能有 、 、 。",
+      "gold": "暂存数据###构成移存型计数器###实现并/串转换或串/并转换",
+      "okCount": null
+    },
+    {
+      "index": 3933,
+      "reason": "反应流程/编号图缺失",
+      "subject": "物理化学",
+      "type": "单选题",
+      "title": "以淀粉为基本原料可制备许多物质,如 下列有关说法中正确的是( )",
+      "gold": "反应③是消去反应,反应④是加聚反应,反应⑤是氧化反应",
+      "okCount": 5
+    },
+    {
+      "index": 5150,
+      "reason": "沸点表残缺且答案仅为℃",
+      "subject": "物理化学",
+      "type": "填空题",
+      "title": "已知某些饱和一元醇的沸点____如下表所示: 甲醇 1-丙醇 1-戊醇 1-庚醇 醇X",
+      "gold": "℃",
+      "okCount": 1
+    },
+    {
+      "index": 345,
+      "reason": "题意不明：麦氏点____: 无设问",
+      "subject": "医学护理",
+      "type": "填空题",
+      "title": "麦氏点____ :",
+      "gold": "McBurney点",
+      "okCount": null
+    },
+    {
+      "index": 643,
+      "reason": "测试占位：测试导入单选题4",
+      "subject": "医学护理",
+      "type": "单选题",
+      "title": "测试导入单选题4",
+      "gold": "选择1",
+      "okCount": 3
+    },
+    {
+      "index": 1407,
+      "reason": "测试占位：测试导入多选题4",
+      "subject": "医学护理",
+      "type": "多选题",
+      "title": "测试导入多选题4",
+      "gold": "选择1###选择2",
+      "okCount": 2
+    },
+    {
+      "index": 2000,
+      "reason": "无效题干：这个是对的",
+      "subject": "医学护理",
+      "type": "判断题",
+      "title": "这个是对的",
+      "gold": "正确",
+      "okCount": 5
+    },
+    {
+      "index": 2433,
+      "reason": "答案不唯一：健康档案建档方式",
+      "subject": "医学护理",
+      "type": "填空题",
+      "title": "健康档案的建档方式：________、________。",
+      "gold": "个别建档###社区全面建档",
+      "okCount": null
+    },
+    {
+      "index": 2871,
+      "reason": "测试占位：测试导入多选题2",
+      "subject": "医学护理",
+      "type": "多选题",
+      "title": "测试导入多选题2",
+      "gold": "选择1###选择2###选择4",
+      "okCount": 1
+    },
+    {
+      "index": 3531,
+      "reason": "测试占位：测试导入单选题12",
+      "subject": "医学护理",
+      "type": "单选题",
+      "title": "测试导入单选题12",
+      "gold": "选择2",
+      "okCount": 0
+    },
+    {
+      "index": 3963,
+      "reason": "开放列举：家庭护理对象",
+      "subject": "医学护理",
+      "type": "填空题",
+      "title": "家庭护理的主要对象：________、________、________、________。",
+      "gold": "慢性病患者###残疾人###高龄老人###临终的患者",
+      "okCount": null
+    },
+    {
+      "index": 4672,
+      "reason": "题意不明：麦氏点____: 无设问",
+      "subject": "医学护理",
+      "type": "填空题",
+      "title": "麦氏点____:",
+      "gold": "McBurney点",
+      "okCount": null
+    },
+    {
+      "index": 4725,
+      "reason": "开放列举：常见慢性病",
+      "subject": "医学护理",
+      "type": "填空题",
+      "title": "我国常见的慢性病有",
+      "gold": "心脑血管疾病###恶性肿瘤###糖尿病",
+      "okCount": null
+    },
+    {
+      "index": 4911,
+      "reason": "开放列举：预防接种异常反应",
+      "subject": "医学护理",
+      "type": "填空题",
+      "title": "预防接种时，少数人可出现异常反应，包括 、 、 、 。",
+      "gold": "过敏性休克###晕针###过敏性皮疹###扩散",
+      "okCount": null
+    },
+    {
+      "index": 5501,
+      "reason": "开放列举：常见慢性病",
+      "subject": "医学护理",
+      "type": "填空题",
+      "title": "我国常见的慢性病有________、________、________。",
+      "gold": "心脑血管疾病###恶性肿瘤###糖尿病",
+      "okCount": null
+    },
+    {
+      "index": 6126,
+      "reason": "题干混入卷面：麦氏点+简答题说明",
+      "subject": "医学护理",
+      "type": "填空题",
+      "title": "麦氏点____ : 四.简答题____",
+      "gold": "McBurney点###本大题共3题,每题5分,共15分。",
+      "okCount": null
+    },
+    {
+      "index": 96,
+      "reason": "开放问答：客户认知有哪些",
+      "subject": "艺术设计",
+      "type": "填空题",
+      "title": "地中海风格装修客户的认知有哪些?",
+      "gold": "(1)客户有较高的审美情趣和文化修养",
+      "okCount": 0
+    },
+    {
+      "index": 231,
+      "reason": "答案不唯一：调节路径可用多种工具",
+      "subject": "艺术设计",
+      "type": "填空题",
+      "title": "对路径进行调节，可以使用 工具",
+      "gold": "钢笔工具",
+      "okCount": null
+    },
+    {
+      "index": 280,
+      "reason": "题干残缺：属完全互通式立交",
+      "subject": "艺术设计",
+      "type": "填空题",
+      "title": "属完全互通式立交。",
+      "gold": "喇叭形立交",
+      "okCount": 0
+    },
+    {
+      "index": 331,
+      "reason": "答案不唯一：展示空间三分法",
+      "subject": "艺术设计",
+      "type": "填空题",
+      "title": "空间问题是展示设计首先需要解决的问题。在研究展示空间之前,先谈一下空间的概念。在这里我们把空间分为____空间、____空间以及____空间。",
+      "gold": "视觉###心理###行为",
+      "okCount": null
+    },
+    {
+      "index": 2314,
+      "reason": "开放解释：设计思维五步说明不唯一",
+      "subject": "艺术设计",
+      "type": "填空题",
+      "title": "设计思维五个步骤观察、理解、构思、原型测试、产品发布对应的解释分别是",
+      "gold": "挖掘用户需求###做好问题定义###发散思维###创建模型并测试###讲好故事",
+      "okCount": null
+    },
+    {
+      "index": 2420,
+      "reason": "缺软件界面上下文：字幕面板按钮名",
+      "subject": "艺术设计",
+      "type": "填空题",
+      "title": "单击“字幕”面板上方的 按钮，可以显示或隐藏背景视频；调整其右侧的 ，可以改变当前显示的视频图像。",
+      "gold": "显示背景视频，背景视频时间码",
+      "okCount": null
+    },
+    {
+      "index": 2997,
+      "reason": "开放分类：专题展示形式",
+      "subject": "艺术设计",
+      "type": "填空题",
+      "title": "专题展示的形式有___、___。",
+      "gold": "大型产品展示###中小型产品展示###文字与图片展示",
+      "okCount": null
+    },
+    {
+      "index": 3191,
+      "reason": "答案不唯一：汽车阻力分类（道路/滚动/坡度）",
+      "subject": "汽车交通",
+      "type": "填空题",
+      "title": "汽车在运动过程中所需克服的阻力有 、 、 。",
+      "gold": "空气阻力###道路阻力###惯性阻力",
+      "okCount": null
+    },
+    {
+      "index": 3194,
+      "reason": "答案不唯一：沥青路拱形式",
+      "subject": "汽车交通",
+      "type": "填空题",
+      "title": "沥青路面路拱的形式有 、 、 。",
+      "gold": "直线型###直线夹圆曲线型###抛物线型；圆曲线型",
+      "okCount": null
+    },
+    {
+      "index": 3512,
+      "reason": "开放罗列：PS功能模块顺序/集合",
+      "subject": "艺术设计",
+      "type": "填空题",
+      "title": "Photoshop的各功能、命令和工具主要有选区、图像绘制、图像修饰润色、色彩调整、（）应用、（）编辑、（）绘制、（）应用、（）功能、（）应用、3D功能和Camera Raw等方面。",
+      "gold": "图层###文字###路径###蒙版###通道###滤镜",
+      "okCount": null
+    },
+    {
+      "index": 3599,
+      "reason": "答案不唯一：地震主因多种表述",
+      "subject": "艺术设计",
+      "type": "填空题",
+      "title": "引起地震运动的主要原因是____。",
+      "gold": "地幔的热对流",
+      "okCount": null
+    },
+    {
+      "index": 3728,
+      "reason": "答案争议：传统建筑代表风格",
+      "subject": "艺术设计",
+      "type": "填空题",
+      "title": "中国传统建筑环境艺术是东方传统设计风格的代表，也是最常见的空间造型风格之一，多用于楼盘等展场。最具代表的是（ ）风格、（ ）园林风格以及明清建筑风格。",
+      "gold": "唐朝###苏州",
+      "okCount": null
+    },
+    {
+      "index": 4055,
+      "reason": "开放罗列：平面线型组合形式",
+      "subject": "艺术设计",
+      "type": "填空题",
+      "title": "平面线型组合形式主要有",
+      "gold": "基本型###S型###卵型",
+      "okCount": null
+    },
+    {
+      "index": 4432,
+      "reason": "答案区间不一：陈列密度百分比",
+      "subject": "艺术设计",
+      "type": "填空题",
+      "title": "陈列密度是指空间分割与组织、陈列的展品、人行通道与展厅面积之间的比例,通常情况下以____较为适宜。",
+      "gold": "40%-60%",
+      "okCount": null
+    },
+    {
+      "index": 5339,
+      "reason": "答案不唯一：广告沟通三者",
+      "subject": "艺术设计",
+      "type": "填空题",
+      "title": "广告是一种沟通的信息传递,是沟通:______、______、______三者之间的桥梁。",
+      "gold": "企业###经营者###消费者",
+      "okCount": null
+    },
+    {
+      "index": 5462,
+      "reason": "题意/答案结构混乱：自行车措施多问与 gold 三组不对齐",
+      "subject": "艺术设计",
+      "type": "填空题",
+      "title": "小张想要参加学校组织的山路自行车大赛，为了使自己的自行车更加适合比赛的要求，小张对自己自行车的结构进行了如下改进：①增加鞍座下弹簧的弹性；②更换更好的链条；③在车架上增加减震装置；④调节轮胎充气量到适中；⑤提高刹车的可靠性；⑥将车架上的斜杠改为横杠；⑦将简易链条罩改为封闭式；⑧更换合适的山地轮胎；⑨加大车把的宽度。请分析上述9项结构优化的措施，回答下面问题： 能增加自行车行使时的强度和稳定性的措施",
+      "gold": "②⑥⑧⑨###②⑤⑦###①③④⑧",
+      "okCount": null
+    },
+    {
+      "index": 5689,
+      "reason": "答案过窄：系统的（）性",
+      "subject": "艺术设计",
+      "type": "填空题",
+      "title": "人类的进化体现了系统的（ ）性。",
+      "gold": "环境适应",
+      "okCount": null
+    },
+    {
+      "index": 5920,
+      "reason": "答案不唯一：人工照明特点",
+      "subject": "艺术设计",
+      "type": "填空题",
+      "title": "人工照明具有________,不受房间方向、位置的影响等特点。在设计中可根据每个空间的需要灵活设置灯具。",
+      "gold": "光照稳定",
+      "okCount": null
+    },
+    {
+      "index": 6035,
+      "reason": "答案不唯一：汽车行驶阻力三分法",
+      "subject": "汽车交通",
+      "type": "填空题",
+      "title": "汽车的行驶阻力主要有 ， 和 三部分组成。",
+      "gold": "空气阻力###道路阻力###惯性阻力",
+      "okCount": null
+    },
+    {
+      "index": 6411,
+      "reason": "主观开放：你认为分析不合理",
+      "subject": "艺术设计",
+      "type": "单选题",
+      "title": "在王明同学设计台灯的过程中，需要对台灯的各个部件进行设计分析。你认为以下分析不合理的是：",
+      "gold": "灯罩主要起美观作用，设计时主要考虑其造型。",
+      "okCount": 5
+    },
+    {
+      "index": 26,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）；编号篇章/听力细节或词义小题；编号问对话人物",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "4.What is the woman s attitude toward Grahams idea?",
+      "gold": "She completely agrees with him.",
+      "okCount": 0
+    },
+    {
+      "index": 56,
+      "reason": "缺篇章：英语完形碎片",
+      "subject": "英语",
+      "type": "填空题",
+      "title": "1.This field is something I'm It has widened my horizons and made me .I have of others and how our daily lives are shaped",
+      "gold": "really interested in###a better person###a better understanding",
+      "okCount": null
+    },
+    {
+      "index": 87,
+      "reason": "英语篇章/听力小题：编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "3) The problem with Tom is that he does not know much about himself.（ ）",
+      "gold": "正确",
+      "okCount": 4
+    },
+    {
+      "index": 176,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "2.Have you got enough information about their talk? Listen to the conversation again and choose the correct answers to the questions below. [音频] (6) What does Linda ask Joni to do?",
+      "gold": "Both B and C.",
+      "okCount": 5
+    },
+    {
+      "index": 306,
+      "reason": "英语篇章/听力小题：划线词/段落定位题（无原文）",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "What is the best interpretation to the underlined word “light” in the first paragraph?",
+      "gold": "轻松的",
+      "okCount": 2
+    },
+    {
+      "index": 310,
+      "reason": "英语篇章/听力小题：编号篇章/听力细节或词义小题",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "2.What does \"edit decisively\" mean?",
+      "gold": "Think before we buy.",
+      "okCount": 0
+    },
+    {
+      "index": 336,
+      "reason": "英语篇章/听力小题：编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "2.Mike thinks he'd like to date someone from his high school.",
+      "gold": "错误",
+      "okCount": 5
+    },
+    {
+      "index": 376,
+      "reason": "英语篇章/听力小题：编号篇章/听力细节或词义小题",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "3.What does \"hard up for cash\" mean?",
+      "gold": "Struggling with money.",
+      "okCount": 5
+    },
+    {
+      "index": 382,
+      "reason": "英语篇章/听力小题：问作者态度/感受（无原文）",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "What does the author feel when he works four-day weeks?",
+      "gold": "Productive.",
+      "okCount": 5
+    },
+    {
+      "index": 462,
+      "reason": "英语篇章/听力小题：编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "5) Shirley asks Tom to strike a balance between his strengths and weaknesses.（ ）",
+      "gold": "错误",
+      "okCount": 1
+    },
+    {
+      "index": 489,
+      "reason": "英语篇章/听力小题：编号篇章/听力细节或词义小题",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "2.What is the expert's opinion of emojis?",
+      "gold": "It's helpful to use emojis to avoid misunderstanding.",
+      "okCount": 5
+    },
+    {
+      "index": 785,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "How does the father treat Diane?",
+      "gold": "Like a little kid",
+      "okCount": 5
+    },
+    {
+      "index": 793,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）；编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "4.It's the memory of things that makes Juliet smile.",
+      "gold": "正确",
+      "okCount": 2
+    },
+    {
+      "index": 850,
+      "reason": "英语篇章/听力小题：问作者态度/感受（无原文）；听力对话人物小题（无录音/原文）；编号篇章/听力细节或词义小题",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "25. The author’s attitude toward Myron Rolle is that of ______.",
+      "gold": "B) admiration",
+      "okCount": 5
+    },
+    {
+      "index": 894,
+      "reason": "英语篇章/听力小题：编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "2) Tom is a person who sees half a glass of water as half-empty.（ ）",
+      "gold": "错误",
+      "okCount": 1
+    },
+    {
+      "index": 948,
+      "reason": "英语篇章/听力小题：篇章细节题（无原文）",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "Why might you argue that it’s hardly a bookstore?",
+      "gold": "Because you can’t spend at least a few hours browsing through hundreds of volumes.",
+      "okCount": 0
+    },
+    {
+      "index": 1048,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）；编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "5.Feifei's sister hates spending time away from her kids.",
+      "gold": "正确",
+      "okCount": 3
+    },
+    {
+      "index": 1088,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）；编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "3.They are discussing their weekend plans.",
+      "gold": "错误",
+      "okCount": 0
+    },
+    {
+      "index": 1120,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）；编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "1.The conversation took place on Friday.",
+      "gold": "正确",
+      "okCount": 1
+    },
+    {
+      "index": 1200,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）；编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "6.Feifei loves the idea of earning to be independent.",
+      "gold": "正确",
+      "okCount": 5
+    },
+    {
+      "index": 1311,
+      "reason": "英语篇章/听力小题：According to passage/speaker（无原文）；听力对话人物小题（无录音/原文）",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "According to the speaker, what is the society's attitude toward the Humanities?",
+      "gold": "The humanities are less important than STEM.",
+      "okCount": 5
+    },
+    {
+      "index": 1533,
+      "reason": "英语篇章/听力小题：听力/阅读题组提示（无原文）",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "14 Questions 13 to 15 are based on the passage you have just heard.",
+      "gold": "When investigators found the weakness of rectangular windows.",
+      "okCount": 2
+    },
+    {
+      "index": 1648,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "Babs tells Jennie to take the train to Hulunbuir Hailar.",
+      "gold": "正确",
+      "okCount": 0
+    },
+    {
+      "index": 1685,
+      "reason": "缺篇章：英语完形碎片",
+      "subject": "英语",
+      "type": "填空题",
+      "title": "1.He emphasized and showed the materials used in construction. He helped modern architecture, with the creative idea of \"less is more",
+      "gold": "open space###industrial###define",
+      "okCount": null
+    },
+    {
+      "index": 1723,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）；编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "1.Juliet and Tom are meeting to attend a workshop together.",
+      "gold": "错误",
+      "okCount": 2
+    },
+    {
+      "index": 1738,
+      "reason": "英语篇章/听力小题：听力/阅读题组提示（无原文）；仅题组说明无题干",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "Questions 1 and 2 will be based on the following news item.",
+      "gold": "A customer shot a suspected thief.",
+      "okCount": 1
+    },
+    {
+      "index": 1949,
+      "reason": "题意不明：生气____（勃勃 vs in anger）",
+      "subject": "英语",
+      "type": "填空题",
+      "title": "生气 _______________、",
+      "gold": "in anger",
+      "okCount": null
+    },
+    {
+      "index": 2082,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）；编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "5.To Li Hua paying makes her happy.",
+      "gold": "正确",
+      "okCount": 1
+    },
+    {
+      "index": 2124,
+      "reason": "翻译片段缺上下文：开始解决这个问题",
+      "subject": "英语",
+      "type": "填空题",
+      "title": "开始解决这个问题 ____",
+      "gold": "start off solving the problem",
+      "okCount": 0
+    },
+    {
+      "index": 2222,
+      "reason": "同义词填写答案不唯一",
+      "subject": "英语",
+      "type": "填空题",
+      "title": "写出下列短语的同义词： 1.（ ）=legal,usable 2.（ ）=papersneeded for going somewhere 3.（ ）=leaving 4.（ ）=to request or ask for something 5.（ ）=money from a particular country 6.（ ）=a cream of oil that prevents sunbu",
+      "gold": "valid###travel ducuments###departure###to apply for###currency###sun cream###to water###light reading###health insurance",
+      "okCount": null
+    },
+    {
+      "index": 2413,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "2.Have you got enough information about their talk? Listen to the conversation again and choose the correct answers to the questions below. （6 ） What number does the stranger call?",
+      "gold": "585-3763.",
+      "okCount": 0
+    },
+    {
+      "index": 2498,
+      "reason": "英文释义字母表缺失",
+      "subject": "英语",
+      "type": "填空题",
+      "title": "请给下列单词匹配以正确的英文解释： 1.a cheer ______ 2.a coach ______ 3.an event ______ 4.a talent scout ______ 5.a competition ______ 6.an orchestra _______ 7.during ______ 8.carefree ______ 9.a performance _____ 10.t",
+      "gold": "g###d###c###i###h###b###j###f###a###e",
+      "okCount": null
+    },
+    {
+      "index": 2499,
+      "reason": "英语篇章/听力小题：明确依赖 passage",
+      "subject": "英语",
+      "type": "填空题",
+      "title": "2.This picture fits well _________the passage.",
+      "gold": "into",
+      "okCount": 0
+    },
+    {
+      "index": 2823,
+      "reason": "英语篇章/听力小题：编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "1.The dictionary meaning of the term \"opponent\"is\"enemy\".",
+      "gold": "正确",
+      "okCount": 2
+    },
+    {
+      "index": 2893,
+      "reason": "英语篇章/听力小题：编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "4) Tom needs to do some self-analysis, according to Shirley.（ ）",
+      "gold": "正确",
+      "okCount": 4
+    },
+    {
+      "index": 2940,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）；编号篇章/听力细节或词义小题",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "2.What is Duke's most remarkable contribution to the town?",
+      "gold": "He helps to slow down the traffic.",
+      "okCount": 1
+    },
+    {
+      "index": 2956,
+      "subject": "英语",
+      "type": "填空题",
+      "title": "阅读下面的短文，并根据短文内容和插图提示在短文空格处填入适当的单词，每个空只能写一个形式正确、意义相符的单词。 Have you ever met anyone of your age from America? Do you think you would have a lot in common with the middle school students there? In fact, t",
+      "gold": "differences###smaller###never###wake;get###under###important###but###spend###fun###studying",
+      "okCount": 3,
+      "reason": "英语篇章/听力小题：阅读短文填空但篇章/插图不完整"
+    },
+    {
+      "index": 3001,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）；编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "2.The speaker thinks it's acceptable for players to treat their opponents as enemies on court.",
+      "gold": "错误",
+      "okCount": 4
+    },
+    {
+      "index": 3005,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）；编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "2.It was difficult for Juliet to leave her stuff behind when she was packing for university",
+      "gold": "正确",
+      "okCount": 4
+    },
+    {
+      "index": 3093,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）；编号篇章/听力细节或词义小题；编号问对话人物",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "4.What is the speaker's attitude toward uncertainty and settling down?",
+      "gold": "It is not necessary for people to avoid uncertainty.",
+      "okCount": 4
+    },
+    {
+      "index": 3159,
+      "reason": "英语篇章/听力小题：听力/阅读题组提示（无原文）；仅题组说明无题干",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "Questions 13 to 15 are based on the passage you have just heard.",
+      "gold": "He died nine months ago.",
+      "okCount": 1
+    },
+    {
+      "index": 3212,
+      "reason": "英语篇章/听力小题：听力/阅读题组提示（无原文）；听力对话人物小题（无录音/原文）",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "10、Questions 9 to 12 are based on the conversation you have just heard.",
+      "gold": "To attend Harvard.",
+      "okCount": 3
+    },
+    {
+      "index": 3289,
+      "reason": "英语篇章/听力小题：听力/阅读题组提示（无原文）",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "1 Questions 1 and 2 will be based on the following news item.",
+      "gold": "Emergency responders take Mandarin classes funded by New York Fire Department.",
+      "okCount": 5
+    },
+    {
+      "index": 3358,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "2.Have you got enough information from their talk? Listen to the conversation again and choose the correct answers to the questions below. [音频] （6） What job does Cathy want to apply for?",
+      "gold": "Personnel Clerk.",
+      "okCount": 4
+    },
+    {
+      "index": 3377,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "2.Have you got enough information about their talk? Listen to the conversation again and choose the correct answers to the questions below. (6 ) How many cellphones did Tom sell last month?",
+      "gold": "15 units.",
+      "okCount": 0
+    },
+    {
+      "index": 3446,
+      "reason": "英语篇章/听力小题：编号篇章/听力细节或词义小题",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "1.How many couples were present at the Saturday ceremony?",
+      "gold": "1,201",
+      "okCount": 1
+    },
+    {
+      "index": 3486,
+      "reason": "英语篇章/听力小题：编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "3.Players tend to treat each other as enemies off the court.",
+      "gold": "错误",
+      "okCount": 5
+    },
+    {
+      "index": 3575,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）；编号篇章/听力细节或词义小题",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "2.What was Burned's problem?",
+      "gold": "His friend didn't return the money borrowed from him",
+      "okCount": 0
+    },
+    {
+      "index": 3965,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）；编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "1.Feifei found her school day exciting.",
+      "gold": "错误",
+      "okCount": 1
+    },
+    {
+      "index": 4152,
+      "reason": "缺语境：尽可能____",
+      "subject": "英语",
+      "type": "填空题",
+      "title": "尽可能________________",
+      "gold": "as soon as possible",
+      "okCount": null
+    },
+    {
+      "index": 4234,
+      "reason": "英语篇章/听力小题：篇章细节题（无原文）",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "Which of the following is not true about the additional benefits of four-day weeks?",
+      "gold": "Less salaries.",
+      "okCount": 5
+    },
+    {
+      "index": 4236,
+      "reason": "英语篇章/听力小题：编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "4.The father doesn't get along well with his children.",
+      "gold": "正确",
+      "okCount": 2
+    },
+    {
+      "index": 4242,
+      "reason": "英语篇章/听力小题：听力/阅读题组提示（无原文）；听力对话人物小题（无录音/原文）",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "6、Questions 5 to 8 are based on the conversation you have just heard.",
+      "gold": "He has not made up his mind now.",
+      "okCount": 3
+    },
+    {
+      "index": 4260,
+      "reason": "英语篇章/听力小题：问作者态度/感受（无原文）",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "The author had to open an account in the bank.",
+      "gold": "正确",
+      "okCount": 4
+    },
+    {
+      "index": 4270,
+      "reason": "英语篇章/听力小题：听力/阅读题组提示（无原文）；听力对话人物小题（无录音/原文）",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "11、Questions 9 to 12 are based on the conversation you have just heard.",
+      "gold": "Used furniture.",
+      "okCount": 0
+    },
+    {
+      "index": 4295,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）；编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "3.Juliet missed her stuff a lot when she left for university.",
+      "gold": "错误",
+      "okCount": 4
+    },
+    {
+      "index": 4386,
+      "reason": "英语篇章/听力小题：听力/阅读题组提示（无原文）；听力对话人物小题（无录音/原文）；仅题组说明无题干",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "Questions 9 to 12 are based on the conversation you have just heard.",
+      "gold": "The witnesses told different stories from varied perspectives.",
+      "okCount": 5
+    },
+    {
+      "index": 4464,
+      "reason": "英语篇章/听力小题：编号篇章/听力细节或词义小题",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "1.When did Bob's date turn un happy?",
+      "gold": "When he ordered beef",
+      "okCount": 1
+    },
+    {
+      "index": 4483,
+      "reason": "英语篇章/听力小题：问作者态度/感受（无原文）",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "The author knew clearly what she wanted to do when she entered university.",
+      "gold": "错误",
+      "okCount": 5
+    },
+    {
+      "index": 4602,
+      "reason": "英语篇章/听力小题：According to passage/speaker（无原文）；篇章细节题（无原文）",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "What are smartphone owners advised to do, according to the passage?",
+      "gold": "To make sure their phone is insured.",
+      "okCount": 3
+    },
+    {
+      "index": 4737,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）；编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "2.The father loves Diane hanging out with her friends.",
+      "gold": "错误",
+      "okCount": 5
+    },
+    {
+      "index": 4739,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "Have you got enough information about their talk? Listen to the conversation again and choose the correct answers to the questions below. [音频] (6 ) What is Jinfs job?",
+      "gold": "A Customer Service Manager.",
+      "okCount": 4
+    },
+    {
+      "index": 4757,
+      "reason": "英语篇章/听力小题：编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "5.The key to minimalism is freedom.",
+      "gold": "错误",
+      "okCount": 0
+    },
+    {
+      "index": 4864,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）；编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "4.The speaker thinks replacing the term\"opponent\"with\"associate\"might change the players reactions.",
+      "gold": "正确",
+      "okCount": 4
+    },
+    {
+      "index": 4878,
+      "reason": "英语篇章/听力小题：编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "5.Jane thinks it is important to date in college.",
+      "gold": "错误",
+      "okCount": 1
+    },
+    {
+      "index": 4946,
+      "reason": "缺篇章：听力/阅读填空",
+      "subject": "英语",
+      "type": "填空题",
+      "title": "4.He's battling between his superhuman and his of being 40 and single.",
+      "gold": "standards###anxiety",
+      "okCount": null
+    },
+    {
+      "index": 5171,
+      "reason": "英语篇章/听力小题：听力/阅读题组提示（无原文）；听力对话人物小题（无录音/原文）",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "12 Questions 9 to 12 are based on the conversation you have just heard.",
+      "gold": "He is optimistic about tomorrow.",
+      "okCount": 1
+    },
+    {
+      "index": 5191,
+      "reason": "英语篇章/听力小题：编号篇章/听力细节或词义小题",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "2.What does\"a wild goose chase\"mean now?",
+      "gold": "A hopeless search for something.",
+      "okCount": 5
+    },
+    {
+      "index": 5287,
+      "reason": "题意不明：阅览室____ 方向不清",
+      "subject": "英语",
+      "type": "填空题",
+      "title": "阅览室________________、",
+      "gold": "reading room",
+      "okCount": null
+    },
+    {
+      "index": 5336,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）；编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "4.Feifei helped her sister with the baby's pre-school years.",
+      "gold": "错误",
+      "okCount": 5
+    },
+    {
+      "index": 5351,
+      "reason": "题干残缺：众所周知____",
+      "subject": "英语",
+      "type": "填空题",
+      "title": "众所周知___________________",
+      "gold": "It is known that...; It is known that",
+      "okCount": null
+    },
+    {
+      "index": 5430,
+      "reason": "英语篇章/听力小题：编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "4.Mary doesn't think experiencing more people as the point of college.",
+      "gold": "正确",
+      "okCount": 1
+    },
+    {
+      "index": 5572,
+      "reason": "答案歧义：日夜____（兼程/around the clock）",
+      "subject": "英语",
+      "type": "填空题",
+      "title": "日夜____________",
+      "gold": "around the clock",
+      "okCount": null
+    },
+    {
+      "index": 5715,
+      "reason": "题干残缺：service foremost",
+      "subject": "英语",
+      "type": "填空题",
+      "title": "service foremost ____",
+      "gold": "服务第一",
+      "okCount": null
+    },
+    {
+      "index": 5895,
+      "reason": "英语篇章/听力小题：编号篇章/听力细节或词义小题",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "2.What is Bob's opinion of eating meat?",
+      "gold": "People can eat beef but dogs are man’s friends.",
+      "okCount": 1
+    },
+    {
+      "index": 5952,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "2.Have you got enough information about their talk? Listen to the conversation again and choose the correct answers to the questions below. [音频] (6 ) When do the employees have a medical examination?",
+      "gold": "Before they start work.",
+      "okCount": 5
+    },
+    {
+      "index": 6027,
+      "reason": "英语篇章/听力小题：编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "2.Male students in Tom's class are for the idea of women being stay-at-home moms after they have a baby.",
+      "gold": "错误",
+      "okCount": 4
+    },
+    {
+      "index": 6110,
+      "reason": "英语篇章/听力小题：听力对话人物小题（无录音/原文）；编号听力判断题",
+      "subject": "英语",
+      "type": "判断题",
+      "title": "4.Li Hua likes to invite her friends out to dinner because she wants to show off.",
+      "gold": "错误",
+      "okCount": 4
+    },
+    {
+      "index": 6152,
+      "reason": "英语篇章/听力小题：划线词/段落定位题（无原文）；问作者态度/感受（无原文）",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "28. By \"there's an aspect of salesmanship to be found when reading between the lines\" (Lines1–2, Para. 3), the author means ______.",
+      "gold": "Elon Musk is actually a businessman with a product to sell",
+      "okCount": 5
+    },
+    {
+      "index": 6383,
+      "reason": "英语篇章/听力小题：明确依赖 passage",
+      "subject": "英语",
+      "type": "单选题",
+      "title": "Most small talks occur in places in the passage EXCEPT .",
+      "gold": "Cinema",
+      "okCount": 5
+    },
+    {
+      "index": 6449,
+      "reason": "题型混乱：句子后填 anticipate 却像判断",
+      "subject": "英语",
+      "type": "填空题",
+      "title": "We thought the concert in the park would be popular but we didn’t expect so many people to turn up so early. ( )",
+      "gold": "anticipate",
+      "okCount": null
+    },
+    {
+      "index": 197,
+      "reason": "题干/答案损坏：中英夹杂残片",
+      "subject": "综合其他",
+      "type": "填空题",
+      "title": "In a strict sense, the Chinese novel ____ arose rather early. ____",
+      "gold": "particularly the long ones###B",
+      "okCount": null
+    },
+    {
+      "index": 1451,
+      "reason": "缺平台上下文：接口摘要命令厂商不一",
+      "subject": "综合其他",
+      "type": "填空题",
+      "title": "查看接口摘要信息的命令是（）",
+      "gold": "display ip interface brief;",
+      "okCount": null
+    },
+    {
+      "index": 2069,
+      "reason": "缺规范上下文：无组织排水保温层算法",
+      "subject": "综合其他",
+      "type": "填空题",
+      "title": "无组织排水中保温层算到( )。",
+      "gold": "外墙外皮",
+      "okCount": null
+    },
+    {
+      "index": 2123,
+      "reason": "举例列举答案不唯一：基础种植树木等",
+      "subject": "综合其他",
+      "type": "填空题",
+      "title": "园林中常用作基础种植的树木有 、 、 等。",
+      "gold": "小叶女贞###月季###龟甲冬青",
+      "okCount": null
+    },
+    {
+      "index": 2306,
+      "reason": "答案不唯一：分组键形式",
+      "subject": "综合其他",
+      "type": "填空题",
+      "title": "分组键的形式可以有 、 、 、 。",
+      "gold": "列表或数组###DataFrame对象某列的名称###字典或Series对象###函数",
+      "okCount": null
+    },
+    {
+      "index": 2408,
+      "reason": "开放举例：观黄花的树木有",
+      "subject": "综合其他",
+      "type": "填空题",
+      "title": "观黄花的树木有 、 、 等。",
+      "gold": "桂花###腊瓣花###迎春",
+      "okCount": 0
+    },
+    {
+      "index": 3086,
+      "reason": "名词解释且标准答案为“英文作答”",
+      "subject": "综合其他",
+      "type": "填空题",
+      "title": "什么叫电力系统、电力网?____",
+      "gold": "英文作答",
+      "okCount": 0
+    },
+    {
+      "index": 3110,
+      "reason": "开放问答：绿茶茶具的选择",
+      "subject": "综合其他",
+      "type": "填空题",
+      "title": "绿茶茶具的选择？",
+      "gold": "直筒玻璃高杯",
+      "okCount": 0
+    },
+    {
+      "index": 4580,
+      "reason": "教材表述依赖：气压控制系统组成",
+      "subject": "综合其他",
+      "type": "填空题",
+      "title": "机器人气压控制系统就是利用 加上电子控制技术组成的 ，可以满足各种各样的控制要求。",
+      "gold": "比例控制阀###气动比例控制系统",
+      "okCount": null
+    },
+    {
+      "index": 4651,
+      "reason": "依赖上图：阳台建筑面积",
+      "subject": "综合其他",
+      "type": "单选题",
+      "title": "上图中的阳台计算建筑面积时，（ ）。",
+      "gold": "按1/2计算，算两层",
+      "okCount": 3
+    },
+    {
+      "index": 5246,
+      "reason": "题干残缺：样式表包括____",
+      "subject": "综合其他",
+      "type": "填空题",
+      "title": ") 样式是一组格式属性。样式表包括____,而使用外部样式表还可以一次控制若干篇网页的格式。",
+      "gold": "多种样式",
+      "okCount": null
+    },
+    {
+      "index": 5525,
+      "reason": "缺平台上下文：华为 delete 与 Linux rm",
+      "subject": "综合其他",
+      "type": "填空题",
+      "title": "[R1]（1）//彻底删除将根目录下的swut的目录中swut.zip，不经过回收站",
+      "gold": "delete /unreserved flash:/swut/swut.zip",
+      "okCount": null
+    },
+    {
+      "index": 5754,
+      "reason": "主观开放：你觉得红脸与白脸",
+      "subject": "综合其他",
+      "type": "单选题",
+      "title": "京剧戏歌《说唱脸谱》中这样唱到：“红脸的关公战长沙，黄脸的典韦，白脸的曹操，黑脸的张飞叫喳喳”。根据你对《三国演义》的阅读与理解，你觉得红脸与白脸分别对应什么样的性格特征呢？",
+      "gold": "红脸忠义英勇；白脸阴险凶诈",
+      "okCount": 5
+    }
+  ]
+}
