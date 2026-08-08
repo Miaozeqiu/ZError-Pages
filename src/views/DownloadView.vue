@@ -9,11 +9,17 @@
       <section class="download-card">
         <div class="os-badge mac">macOS</div>
         <h2>Mac（Apple Silicon）</h2>
-        <p class="hint">适用于 M 系列芯片。下载 DMG 后拖入「应用程序」。</p>
+        <p class="hint">适用于 M 系列芯片。下载 DMG 后，将 ZError 拖入「应用程序」。</p>
         <a class="download-btn" :href="macUrl" download>
           下载 macOS 版
         </a>
         <p class="meta">{{ macFileName }}</p>
+        <div class="tip">
+          <strong>若提示「已损坏，无法打开」</strong>
+          <p>这是 macOS 安全隔离导致，不是安装包坏了。打开「终端」执行：</p>
+          <pre class="tip-code">xattr -cr /Applications/ZError.app
+open /Applications/ZError.app</pre>
+        </div>
       </section>
 
       <section class="download-card">
@@ -36,13 +42,31 @@
 </template>
 
 <script>
+const FALLBACK = {
+  version: '2.2.7',
+  macUrl: 'https://webapi.zaizhexue.top/apps/ZError_2.2.7_aarch64_r6.dmg',
+  winUrl: 'https://webapi.zaizhexue.top/apps/ZError_2.2.7_x64-setup_r2.exe',
+}
+
+function applyVersionPayload(vm, data) {
+  if (!data || typeof data !== 'object') return
+  if (data.version) vm.version = data.version
+  if (data.downloadUrlMac || data.downloadUrlDarwin) {
+    vm.macUrl = data.downloadUrlMac || data.downloadUrlDarwin
+  }
+  if (data.downloadUrlWin || data.downloadUrlWindows || data.downloadUrl) {
+    vm.winUrl = data.downloadUrlWin || data.downloadUrlWindows || data.downloadUrl
+  }
+  if (data.changelog) vm.changelog = data.changelog
+}
+
 export default {
   name: 'DownloadView',
   data() {
     return {
-      version: '2.2.7',
-      macUrl: 'https://webapi.zaizhexue.top/apps/ZError_2.2.7_aarch64_r5.dmg',
-      winUrl: 'https://webapi.zaizhexue.top/apps/ZError_2.2.7_x64-setup.exe',
+      version: FALLBACK.version,
+      macUrl: FALLBACK.macUrl,
+      winUrl: FALLBACK.winUrl,
       changelog: '',
     }
   },
@@ -63,20 +87,19 @@ export default {
     },
   },
   async mounted() {
-    try {
-      const res = await fetch('/latest_version.json', { cache: 'no-store' })
-      if (!res.ok) return
-      const data = await res.json()
-      if (data.version) this.version = data.version
-      if (data.downloadUrlMac || data.downloadUrlDarwin) {
-        this.macUrl = data.downloadUrlMac || data.downloadUrlDarwin
+    const sources = [
+      'https://webapi.zaizhexue.top/live/latest_version.json',
+      '/latest_version.json',
+    ]
+    for (const url of sources) {
+      try {
+        const res = await fetch(url, { cache: 'no-store' })
+        if (!res.ok) continue
+        applyVersionPayload(this, await res.json())
+        return
+      } catch (e) {
+        console.warn('加载版本信息失败', url, e)
       }
-      if (data.downloadUrlWin || data.downloadUrlWindows || data.downloadUrl) {
-        this.winUrl = data.downloadUrlWin || data.downloadUrlWindows || data.downloadUrl
-      }
-      if (data.changelog) this.changelog = data.changelog
-    } catch (e) {
-      console.warn('加载 latest_version.json 失败', e)
     }
   },
 }
@@ -155,7 +178,6 @@ export default {
   color: #7f8c8d;
   line-height: 1.5;
   font-size: 0.95rem;
-  flex: 1;
 }
 
 .download-btn {
@@ -182,6 +204,42 @@ export default {
   font-size: 0.8rem;
   color: #95a5a6;
   word-break: break-all;
+}
+
+.tip {
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  background: #f8faf9;
+  border: 1px solid rgba(28, 36, 33, 0.08);
+  box-sizing: border-box;
+}
+
+.tip strong {
+  display: block;
+  color: #2c3e50;
+  font-size: 0.9rem;
+  margin-bottom: 0.35rem;
+}
+
+.tip p {
+  margin: 0 0 0.5rem;
+  color: #7f8c8d;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.tip-code {
+  margin: 0;
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  background: #1c2421;
+  color: #e8f0ec;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  overflow-x: auto;
+  white-space: pre;
 }
 
 .changelog-box {
