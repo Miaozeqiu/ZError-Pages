@@ -6,20 +6,14 @@
     </div>
 
     <div class="download-grid">
-      <section class="download-card">
+      <section class="download-card is-disabled">
         <div class="os-badge mac">macOS</div>
         <h2>Mac（Apple Silicon）</h2>
-        <p class="hint">适用于 M 系列芯片。下载 DMG 后，将 ZError 拖入「应用程序」。</p>
-        <a class="download-btn" :href="macUrl" download>
-          下载 macOS 版
-        </a>
-        <p class="meta">{{ macFileName }}</p>
-        <div class="tip">
-          <strong>若提示「已损坏，无法打开」</strong>
-          <p>这是 macOS 安全隔离导致，不是安装包坏了。打开「终端」执行：</p>
-          <pre class="tip-code">xattr -cr /Applications/ZError.app
-open /Applications/ZError.app</pre>
-        </div>
+        <p class="hint">macOS 版暂时下架，修复安装签名问题后会重新开放。</p>
+        <button class="download-btn is-disabled" type="button" disabled>
+          暂时不可用
+        </button>
+        <p class="meta">敬请关注后续更新</p>
       </section>
 
       <section class="download-card">
@@ -44,16 +38,12 @@ open /Applications/ZError.app</pre>
 <script>
 const FALLBACK = {
   version: '2.2.7',
-  macUrl: 'https://webapi.zaizhexue.top/apps/ZError_2.2.7_aarch64_r6.dmg',
   winUrl: 'https://webapi.zaizhexue.top/apps/ZError_2.2.7_x64-setup_r2.exe',
 }
 
 function applyVersionPayload(vm, data) {
   if (!data || typeof data !== 'object') return
   if (data.version) vm.version = data.version
-  if (data.downloadUrlMac || data.downloadUrlDarwin) {
-    vm.macUrl = data.downloadUrlMac || data.downloadUrlDarwin
-  }
   if (data.downloadUrlWin || data.downloadUrlWindows || data.downloadUrl) {
     vm.winUrl = data.downloadUrlWin || data.downloadUrlWindows || data.downloadUrl
   }
@@ -65,19 +55,11 @@ export default {
   data() {
     return {
       version: FALLBACK.version,
-      macUrl: FALLBACK.macUrl,
       winUrl: FALLBACK.winUrl,
       changelog: '',
     }
   },
   computed: {
-    macFileName() {
-      try {
-        return decodeURIComponent(new URL(this.macUrl).pathname.split('/').pop() || '')
-      } catch {
-        return 'ZError macOS.dmg'
-      }
-    },
     winFileName() {
       try {
         return decodeURIComponent(new URL(this.winUrl).pathname.split('/').pop() || '')
@@ -197,6 +179,18 @@ export default {
 .download-btn:hover {
   background: #e5a02c;
   transform: translateY(-1px);
+}
+
+.download-btn.is-disabled,
+.download-btn:disabled {
+  background: #cfd8dc;
+  color: #fff;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.download-card.is-disabled {
+  opacity: 0.92;
 }
 
 .meta {
