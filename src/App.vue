@@ -11,11 +11,11 @@
         </svg>
       </button>
       <div class="nav-links" :class="{ 'active': isMenuOpen }">
-        <router-link to="/">首页</router-link>
-        <a href="#" @click.prevent="showDownloadModal = true">下载</a>
+        <router-link to="/" @click="closeMenu">首页</router-link>
+        <router-link to="/download" @click="closeMenu">下载</router-link>
         <a href="https://docs.zerror.cc/docs/introduction">文档</a>
-        <router-link to="/leaderboard">模型排行榜</router-link>
-        <router-link to="/changelog">更新日志</router-link>
+        <router-link to="/leaderboard" @click="closeMenu">模型排行榜</router-link>
+        <router-link to="/changelog" @click="closeMenu">更新日志</router-link>
         <a href="https://github.com/Miaozeqiu/ZError" target="_blank" class="github-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
@@ -30,80 +30,60 @@
         </Transition>
       </router-view>
     </main>
-
-    <!-- 添加下载弹窗 -->
-    <transition name="modal-fade">
-      <div class="modal" v-if="showDownloadModal">
-        <div class="modal-content">
-          <span class="close" @click="showDownloadModal = false">&times;</span>
-          <a>下载 ZError for Windows</a>
-          <div class="download-options">
-            <a href="https://app.zerror.cc/apps/ZError_Setup_2.2.6.exe" class="download-btn direct-download">
-              <i class="icon-download"></i> 直链下载
-            </a>
-            <a href="https://wwyl.lanzoum.com/b00ocrzzje" class="download-btn cloud-download">
-              <i class="icon-cloud"></i> 蓝奏云下载(密码:43so)
-            </a>
-            <a href="https://www.123865.com/s/RnebVv-m6b3v" class="download-btn cloud-download">
-              <i class="icon-cloud"></i> 123网盘下载
-            </a>
-            <a href="https://www.123684.com/s/RnebVv-m6b3v" class="download-btn cloud-download">
-              <i class="icon-cloud"></i> 123网盘下载（备用）
-            </a>
-            <a href="https://pan.quark.cn/s/b5302b71bb09" class="download-btn cloud-download">
-              <i class="icon-cloud"></i> 夸克网盘
-            </a>
-            <a href="https://pan.quark.cn/s/7142e7e19adb" class="download-btn cloud-download">
-              <i class="icon-cloud"></i> 夸克网盘（备用）
-            </a>
-
-          </div>
-        </div>
-      </div>
-    </transition>
   </div>
 </template>
 
 <script>
-import { provide, ref, watch } from 'vue'
-import { lockPageScroll, unlockPageScroll } from '@/utils/scrollLock.js'
+import { ref } from 'vue'
 
 export default {
   setup() {
-    const showDownloadModal = ref(false)
     const isMenuOpen = ref(false)
 
     const toggleMenu = () => {
       isMenuOpen.value = !isMenuOpen.value
     }
 
-    const openDownloadModal = () => {
-      showDownloadModal.value = true
+    const closeMenu = () => {
+      isMenuOpen.value = false
     }
 
-    watch(showDownloadModal, (newVal) => {
-      if (newVal) {
-        lockPageScroll()
-      } else {
-        unlockPageScroll()
-      }
-    })
-
-    provide('downloadModal', {
-      show: showDownloadModal,
-      open: openDownloadModal
-    })
-
     return {
-      showDownloadModal,
       isMenuOpen,
-      toggleMenu
+      toggleMenu,
+      closeMenu,
     }
   }
 }
 </script>
 
 <style>
+
+.page-enter-active,
+.page-leave-active {
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter-active,
+  .page-leave-active {
+    transition: none;
+  }
+}
+
+
 /* 新增body样式防止偏移 */
 
 main{
@@ -155,111 +135,7 @@ body {
   overflow-y: auto;
 }
 
-.modal {
-  /* 保持原有样式 */
-  backdrop-filter: blur(20px);
-}
-
 /* 添加过渡动画 */
-.modal-fade-enter-active,
-.modal-fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.modal-fade-enter-from,
-.modal-fade-leave-to {
-  opacity: 0;
-}
-
-.modal-content {
-  animation: modal-in 0.3s ease;
-}
-
-@keyframes modal-in {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.modal {
-  position: fixed;
-  z-index: 2000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(20px); /* 添加背景模糊效果 */
-}
-
-.modal-content {
-  background-color: #fefefe;
-  padding: 20px;
-  border-radius: 20px;
-  border: 1px solid rgba(28, 36, 33, 0.12);
-  width: 80%;
-  max-width: 500px;
-  position: relative;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-}
-
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.close:hover {
-  color: black;
-}
-
-.download-options {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.download-btn {
-  padding: 12px 20px;
-  border-radius: 6px;
-  text-align: center;
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.direct-download {
-  background: #ffffff;
-  color: #FCB334;
-  border: 1px solid #FCB334;
-}
-
-.direct-download:hover {
-  background: #FCB334;
-  color: #fff;
-}
-
-.cloud-download {
-  background: #ffffff;
-  color: #FCB334;
-  border: 1px solid #FCB334;
-}
-
-.cloud-download:hover {
-  background: #FCB334;
-  color: #fff;
-}
 
 
 .app-container {

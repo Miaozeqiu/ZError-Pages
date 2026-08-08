@@ -1,4 +1,5 @@
 <template>
+  <div class="home-root">
   <div class="home-page">
     <div class="hero-section">
       <div class="hero-content">
@@ -12,7 +13,7 @@
           >
         </p>
         <div class="button-group animate-element">
-          <a href="#" @click.prevent="openDownloadModal" class="cta-button">立即下载</a>
+          <router-link to="/download" class="cta-button">立即下载</router-link>
           <a href="https://tiku.zerror.cc" class="cta-button bank-button">在线题库</a>
         </div>
       </div>
@@ -304,6 +305,7 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
@@ -317,7 +319,7 @@ import questionImage from "@/assets/question.png";
 import ocsImage from "@/assets/ocs.png";
 import visionImage from "@/assets/vision.png";
 import promoAdImage from "../../画板 3 (3).png";
-import { inject, onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import "@/assets/styles/home.css"; // 导入样式文件
 
 export default {
@@ -331,7 +333,6 @@ export default {
     };
   },
   setup() {
-    const downloadModal = inject("downloadModal");
     const featureCanvas = ref(null);
     const ocsCanvas = ref(null);
     const showPromoAd = ref(true);
@@ -569,7 +570,6 @@ export default {
       promoAdImage,
       showPromoAd,
       closePromoAd,
-      openDownloadModal: downloadModal.open,
     };
   },
 };

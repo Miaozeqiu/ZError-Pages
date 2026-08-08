@@ -22,6 +22,11 @@ export default {
   data() {
     return {
       logs: [
+        {
+          version: '2.2.7',
+          date: '2026-8-9',
+          description: '相对 2.2.6 主要更新：\n1. 应用内自动更新：Mac 原地替换、Windows 安装更新，完成后可自动重启\n2. 默认窗口更小，更适配常见笔记本屏幕\n3. 远程模型的 API 协议与思考开关由管理员统一下发并锁定\n4. 平台/模型图标改为从官方 webapi 加载\n5. 修复返回箭头在 Mac 与 Windows 上朝向不一致\n6. Windows 安装包默认简体中文，图标与打包体验优化\n7. 右键菜单互斥动画、题目列表更紧凑；未选模型时错误提示更明确'
+        },
         { version: '2.2.6', date: '2026-5-16', description: '1. 小更新，防止题目完全相同，但在api调用时不匹配' },
         { version: '2.2.5', date: '2026-5-16', description: '1. 将选项加入匹配\n2. 修复多选题目删除的二次确认弹窗无效问题；\n3. 修复8080端口占用问题；\n4. 修复ai模型调用报错却存储为答案的问题' },
         { version: '2.2.4', date: '2026-3-30', description: '1. 修复模型无法打开修改窗外问题 \n 2. 优化模型输出显示\n 3. 添加操作引导' },
@@ -113,5 +118,6 @@ export default {
   font-size: 1.1rem;
   line-height: 1.6;
   color: #2c3e50;
+  white-space: pre-wrap;
 }
 </style>
