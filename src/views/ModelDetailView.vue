@@ -32,14 +32,14 @@
         <div class="hero-score">
           <span class="score-label">正确率</span>
           <strong class="score-value">{{ formatPct(model.accuracy) }}</strong>
-          <span class="score-meta">{{ model.correct }}/{{ model.n }}</span>
+          <span class="score-meta">答对 {{ model.correct }} / {{ model.n }}</span>
         </div>
       </header>
 
       <section class="matrix-panel">
         <div class="matrix-head">
           <h2>科目 × 题型正确率</h2>
-          <p>点击有数据的格子可查看该分组下的具体题目</p>
+          <p>格子内为该分组正确率与答对/题量；点击有数据的格子可查看具体题目</p>
         </div>
 
         <div class="matrix-wrap">
@@ -533,16 +533,38 @@ export default {
   color: #8a9690;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .detail-page {
+    width: calc(100% + 60px);
+    margin-left: -30px;
+    margin-right: -30px;
+    padding: 1.15rem 1rem 3rem;
+  }
+
   .detail-hero {
     flex-direction: column;
     align-items: stretch;
-    gap: 1.1rem;
-    padding-bottom: 1.15rem;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .detail-icon {
+    width: 2.85rem;
+    height: 2.85rem;
+    border-radius: 10px;
+  }
+
+  .hero-main {
+    gap: 0.8rem;
+  }
+
+  .detail-hero h1 {
+    font-size: clamp(1.35rem, 6.5vw, 1.75rem);
+    word-break: break-word;
   }
 
   .hero-score {
-    align-items: flex-start;
     flex-direction: row;
     align-items: baseline;
     gap: 0.55rem;
@@ -551,6 +573,78 @@ export default {
 
   .score-label {
     width: 100%;
+  }
+
+  .score-value {
+    font-size: 1.65rem;
+  }
+
+  .matrix-panel {
+    border-radius: 14px;
+    box-shadow: none;
+  }
+
+  .matrix-head {
+    padding: 0.95rem 0.9rem 0.7rem;
+  }
+
+  .matrix-head h2 {
+    font-size: 1.05rem;
+  }
+
+  .matrix-head p {
+    font-size: 0.82rem;
+  }
+
+  .matrix-head p::after {
+    content: ' · 左右滑动查看更多题型';
+  }
+
+  .matrix-wrap {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+
+  .matrix-table {
+    min-width: 640px;
+  }
+
+  .matrix-table th,
+  .matrix-table td {
+    padding: 0.6rem 0.55rem;
+  }
+
+  .sticky-col {
+    min-width: 4.5rem;
+  }
+
+  .cell-acc {
+    font-size: 0.88rem;
+  }
+
+  .cell-n {
+    font-size: 0.68rem;
+  }
+
+  .drawer-head {
+    padding: 1rem 1rem 0.85rem;
+  }
+
+  .drawer-head h3 {
+    font-size: 1.02rem;
+  }
+
+  .drawer-toolbar {
+    padding: 0.75rem 1rem;
+  }
+
+  .filter-seg {
+    width: 100%;
+  }
+
+  .filter-seg button {
+    flex: 1;
+    justify-content: center;
   }
 }
 

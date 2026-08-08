@@ -15,8 +15,10 @@ const MODEL_IDS = [
   'qwen3.8-max',
   'gpt-5.6-sol',
   'deepseek-v4-flash',
+  'deepseek-v4-pro',
   'glm-5.2',
   'minimax-m3',
+  'grok-4.5',
 ]
 
 function cellKey(subject, type) {
