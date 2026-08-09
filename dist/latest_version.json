@@ -3,7 +3,7 @@
   "downloadUrl": "https://webapi.zaizhexue.top/apps/ZError_2.2.7_x64-setup_r2.exe",
   "downloadUrlWin": "https://webapi.zaizhexue.top/apps/ZError_2.2.7_x64-setup_r2.exe",
   "downloadUrlWindows": "https://webapi.zaizhexue.top/apps/ZError_2.2.7_x64-setup_r2.exe",
-  "downloadUrlMac": "https://webapi.zaizhexue.top/apps/ZError_2.2.7_aarch64_r7.dmg",
-  "downloadUrlDarwin": "https://webapi.zaizhexue.top/apps/ZError_2.2.7_aarch64_r7.dmg",
-  "changelog": "相对 2.2.6 主要更新：\n1. 应用内自动更新：Mac 原地替换、Windows 安装更新，完成后可自动重启\n2. 默认窗口尺寸按屏幕自适应（1080p 更合适）\n3. 远程模型的 API 协议与思考开关由管理员统一下发并锁定\n4. 平台/模型图标改为从官方 webapi 加载\n5. 修复返回箭头在 Mac 与 Windows 上朝向不一致\n6. Windows 安装包默认简体中文，图标与打包体验优化\n7. 右键菜单互斥动画、题目列表更紧凑；未选模型时错误提示更明确\n\n说明：macOS 安装包请使用官网提供的 .dmg；若提示“已损坏”，在终端执行 xattr -cr /Applications/ZError.app 后重新打开。"
+  "downloadUrlMac": "",
+  "downloadUrlDarwin": "",
+  "changelog": "相对 2.2.6 主要更新：\n1. 应用内自动更新：Mac 原地替换、Windows 安装更新，完成后可自动重启\n2. 默认窗口尺寸按屏幕自适应（1080p 更合适）\n3. 远程模型的 API 协议与思考开关由管理员统一下发并锁定\n4. 平台/模型图标改为从官方 webapi 加载\n5. 修复返回箭头在 Mac 与 Windows 上朝向不一致\n6. Windows 安装包默认简体中文，图标与打包体验优化\n7. 右键菜单互斥动画、题目列表更紧凑；未选模型时错误提示更明确\n\n说明：macOS 版暂时下架，修复签名问题后重新开放。"
 }
