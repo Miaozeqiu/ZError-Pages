@@ -9,6 +9,8 @@ const MODEL_ICONS = {
   'glm-5.2': '/models/glm.png',
   'minimax-m3': '/models/minimax.png',
   'grok-4.5': '/models/grok.png',
+  'longcat-2.0': '/models/longcat.png',
+  'mimo-v2.5': '/models/mimo.png',
 }
 
 export function modelIcon(modelId) {

@@ -1,4 +1,4 @@
-import{_ as a,c as s,a as n,F as d,g as c,o as i,t as o}from"./index-Dbv68D_L.js";const p={data(){return{logs:[{version:"2.2.7",date:"2026-8-9",description:`相对 2.2.6 主要更新：
+import{_ as a,c as s,a as n,F as d,g as c,o as i,t as o}from"./index-RQtIYRzC.js";const p={data(){return{logs:[{version:"2.2.7",date:"2026-8-9",description:`相对 2.2.6 主要更新：
 1. 应用内自动更新：Mac 原地替换、Windows 安装更新，完成后可自动重启
 2. 默认窗口尺寸按屏幕自适应（1080p 更合适）
 3. 远程模型的 API 协议与思考开关由管理员统一下发并锁定

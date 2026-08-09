@@ -19,6 +19,8 @@ const MODEL_IDS = [
   'glm-5.2',
   'minimax-m3',
   'grok-4.5',
+  'longcat-2.0',
+  'mimo-v2.5',
 ]
 
 function cellKey(subject, type) {
@@ -44,6 +46,17 @@ function splitModel(id) {
       cells[key] = cell.questions
       delete cell.questions
     }
+  }
+
+  // 已拆分过的模型 summary 里没有 questions；勿覆盖已有 *-questions.json
+  if (!Object.keys(cells).length) {
+    const existingQ = path.join(outDir, `${id}-questions.json`)
+    if (fs.existsSync(existingQ)) {
+      console.log(`skip (already split): ${id}`)
+      return
+    }
+    console.warn('skip (no questions embedded):', id)
+    return
   }
 
   const summaryPath = path.join(outDir, `${id}.json`)

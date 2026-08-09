@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-08T11:44:16.983Z",
+  "updatedAt": "2026-08-09T14:01:46.854Z",
   "title": "ZError 模型排行榜",
   "description": "基于公开题库评测集的模型正确率排行（已剔除 201 道不可靠题；ai_judge_error 已人工判定；多选题已按集合完全一致重判；已纠科目串类 791 题；有效题量 6302）",
   "excludedCount": 201,
@@ -185,8 +185,96 @@
       "multiStrictFixed": 93
     },
     {
-      "id": "deepseek-v4-pro",
+      "id": "mimo-v2.5",
       "rank": 5,
+      "name": "MiMO v2.5",
+      "displayName": "MiMO v2.5",
+      "provider": "小米",
+      "judgeModel": "glm-5.2-fast-preview",
+      "accuracy": 0.8464,
+      "n": 6302,
+      "correct": 5334,
+      "wrong": 968,
+      "errors": 0,
+      "by_type": {
+        "单选题": {
+          "n": 2827,
+          "ok": 2556,
+          "err": 0,
+          "acc": 0.9041
+        },
+        "多选题": {
+          "n": 1363,
+          "ok": 995,
+          "err": 0,
+          "acc": 0.73
+        },
+        "判断题": {
+          "n": 1190,
+          "ok": 1046,
+          "err": 0,
+          "acc": 0.879
+        },
+        "填空题": {
+          "n": 922,
+          "ok": 737,
+          "err": 0,
+          "acc": 0.7993
+        }
+      },
+      "datasetMode": "text",
+      "exportedAt": "2026-08-09T13:57:32.886Z",
+      "excludedCount": 201,
+      "manualJudgeFixed": 0,
+      "multiStrictFixed": 0
+    },
+    {
+      "id": "longcat-2.0",
+      "rank": 6,
+      "name": "Longcat 2.0",
+      "displayName": "Longcat 2.0",
+      "provider": "Longcat",
+      "judgeModel": "glm-5.2-fast-preview",
+      "accuracy": 0.8456,
+      "n": 6302,
+      "correct": 5329,
+      "wrong": 973,
+      "errors": 0,
+      "by_type": {
+        "单选题": {
+          "n": 2827,
+          "ok": 2558,
+          "err": 0,
+          "acc": 0.9048
+        },
+        "多选题": {
+          "n": 1363,
+          "ok": 995,
+          "err": 0,
+          "acc": 0.73
+        },
+        "判断题": {
+          "n": 1190,
+          "ok": 1046,
+          "err": 0,
+          "acc": 0.879
+        },
+        "填空题": {
+          "n": 922,
+          "ok": 730,
+          "err": 0,
+          "acc": 0.7918
+        }
+      },
+      "datasetMode": "text",
+      "exportedAt": "2026-08-09T11:35:37.731Z",
+      "excludedCount": 201,
+      "manualJudgeFixed": 0,
+      "multiStrictFixed": 0
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "rank": 7,
       "name": "DeepSeek-V4-Pro (Pre)",
       "displayName": "DeepSeek-V4-Pro (Pre)",
       "provider": "DeepSeek",
@@ -230,7 +318,7 @@
     },
     {
       "id": "grok-4.5",
-      "rank": 6,
+      "rank": 8,
       "name": "Grok 4.5",
       "displayName": "Grok 4.5",
       "provider": "xAI",
@@ -274,7 +362,7 @@
     },
     {
       "id": "glm-5.2",
-      "rank": 7,
+      "rank": 9,
       "name": "GLM-5.2",
       "displayName": "GLM-5.2",
       "provider": "智谱 AI",
@@ -318,7 +406,7 @@
     },
     {
       "id": "deepseek-v4-flash",
-      "rank": 8,
+      "rank": 10,
       "name": "DeepSeek-V4-Flash",
       "displayName": "DeepSeek-V4-Flash",
       "provider": "DeepSeek",
@@ -362,7 +450,7 @@
     },
     {
       "id": "minimax-m3",
-      "rank": 9,
+      "rank": 11,
       "name": "MiniMax-M3",
       "displayName": "MiniMax-M3",
       "provider": "MiniMax",
