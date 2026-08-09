@@ -1,4 +1,14 @@
-import{_ as d,c as s,a as n,F as a,r as c,o as i,t as o}from"./index-B4TDQSrZ.js";const p={data(){return{logs:[{version:"2.2.6",date:"2026-5-16",description:"1. 小更新，防止题目完全相同，但在api调用时不匹配"},{version:"2.2.5",date:"2026-5-16",description:`1. 将选项加入匹配
+import{_ as a,c as s,a as n,F as d,f as c,o as i,t as o}from"./index-DD9OOkDg.js";const p={data(){return{logs:[{version:"2.2.7",date:"2026-8-9",description:`相对 2.2.6 主要更新：
+1. 应用内自动更新：Mac 原地替换、Windows 安装更新，完成后可自动重启
+2. 默认窗口尺寸按屏幕自适应（1080p 更合适）
+3. 远程模型的 API 协议与思考开关由管理员统一下发并锁定
+4. 平台/模型图标改为从官方 webapi 加载
+5. 修复返回箭头在 Mac 与 Windows 上朝向不一致
+6. Windows 安装包默认简体中文，图标与打包体验优化
+7. 右键菜单互斥动画、题目列表更紧凑；未选模型时错误提示更明确
+
+若 Mac 提示「已损坏，无法打开」，在终端执行：
+xattr -cr /Applications/ZError.app`},{version:"2.2.6",date:"2026-5-16",description:"1. 小更新，防止题目完全相同，但在api调用时不匹配"},{version:"2.2.5",date:"2026-5-16",description:`1. 将选项加入匹配
 2. 修复多选题目删除的二次确认弹窗无效问题；
 3. 修复8080端口占用问题；
 4. 修复ai模型调用报错却存储为答案的问题`},{version:"2.2.4",date:"2026-3-30",description:`1. 修复模型无法打开修改窗外问题 
@@ -35,4 +45,4 @@ import{_ as d,c as s,a as n,F as a,r as c,o as i,t as o}from"./index-B4TDQSrZ.js
  5.美化界面`},{version:"1.2.0",date:"2025-05-2",description:`1. 添加截图搜题
 2. 修复题库无法修改的问题`},{version:"1.1.2",date:"2025-04-21",description:`1. 优化提示词
 2. 修复删除题目失败的问题`},{version:"1.1.1",date:"2025-03-21",description:"1. 修复密钥保存问题"},{version:"1.1.0",date:"2025-03-21",description:`1. 批量导入问题
-2. 修复文件权限问题`},{version:"1.0.0",date:"2025-03-20",description:"首次发布版本"}]}}},l={class:"changelog-page"},v={class:"changelog-container"},_={class:"version-badge"},g={class:"log-content"},u={class:"log-date"},h={class:"log-description"};function f(b,t,k,x,r,I){return i(),s("div",l,[t[0]||(t[0]=n("div",{class:"changelog-header"},[n("h1",null,"更新日志"),n("p",{class:"subtitle"},"ZError版本更新记录")],-1)),n("div",v,[(i(!0),s(a,null,c(r.logs,e=>(i(),s("div",{key:e.version,class:"log-card"},[n("div",_,o(e.version),1),n("div",g,[n("div",u,o(e.date),1),n("div",h,o(e.description),1)])]))),128))])])}const w=d(p,[["render",f],["__scopeId","data-v-6f621b36"]]);export{w as default};
+2. 修复文件权限问题`},{version:"1.0.0",date:"2025-03-20",description:"首次发布版本"}]}}},l={class:"changelog-page"},v={class:"changelog-container"},_={class:"version-badge"},g={class:"log-content"},u={class:"log-date"},h={class:"log-description"};function f(w,t,x,I,r,b){return i(),s("div",l,[t[0]||(t[0]=n("div",{class:"changelog-header"},[n("h1",null,"更新日志"),n("p",{class:"subtitle"},"ZError版本更新记录")],-1)),n("div",v,[(i(!0),s(d,null,c(r.logs,e=>(i(),s("div",{key:e.version,class:"log-card"},[n("div",_,o(e.version),1),n("div",g,[n("div",u,o(e.date),1),n("div",h,o(e.description),1)])]))),128))])])}const A=a(p,[["render",f],["__scopeId","data-v-a6c9053a"]]);export{A as default};

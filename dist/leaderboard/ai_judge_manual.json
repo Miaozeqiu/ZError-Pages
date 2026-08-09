@@ -1,9 +1,9 @@
 {
   "version": 1,
   "note": "对 ai_judge_error 条目的人工逐题判定（语义等价即算对；gold 明显笔误时以正确知识为准）",
-  "count": 164,
-  "correct": 92,
-  "wrong": 72,
+  "count": 191,
+  "correct": 105,
+  "wrong": 86,
   "judgments": [
     {
       "key": "qwen3.8-max::252",
@@ -1808,6 +1808,303 @@
       "title": "把句子中的空补充完整。 在沙滩上，我们( )起城堡，城堡周围( )起围墙，围墙外再( )上干树枝，那就是我们的树。",
       "gold": "垒###筑###插",
       "pred": "堆###筑###插"
+    },
+    {
+      "key": "grok-4.5::301",
+      "correct": true,
+      "index": 301,
+      "model": "grok-4.5",
+      "subject": "医学护理",
+      "type": "填空题",
+      "title": "躯干四肢痛温觉和粗触觉导通路中，第一级神经元胞体位于________，第二级神经元胞体位于________，第三级神经元胞体位于________ 。",
+      "gold": "脊神经节###脊髓后角###丘脑腹后核",
+      "pred": "脊神经节###脊髓后角###丘脑腹后外侧核"
+    },
+    {
+      "key": "grok-4.5::576",
+      "correct": true,
+      "index": 576,
+      "model": "grok-4.5",
+      "subject": "汽车交通",
+      "type": "填空题",
+      "title": "怠速控制装置的类型主要分为( )和( )两类。",
+      "gold": "节气门直动控制装置###旁通空气控制装置",
+      "pred": "旁通空气式###节气门直动式"
+    },
+    {
+      "key": "grok-4.5::1446",
+      "correct": true,
+      "index": 1446,
+      "model": "grok-4.5",
+      "subject": "计算机",
+      "type": "填空题",
+      "title": "八个基准键位是 。",
+      "gold": "A###S###D###F###J###K###L###;",
+      "pred": "A、S、D、F、J、K、L、;"
+    },
+    {
+      "key": "grok-4.5::1460",
+      "correct": false,
+      "index": 1460,
+      "model": "grok-4.5",
+      "subject": "思政政治",
+      "type": "填空题",
+      "title": "下列数字分别有几位有效数字 （1）0.12（） （2）0.0120（） （3）1.2 （） （4）1.200（） （5）12.00%（） （6）pH=1.20（） （7）1000（） （8）π（） （9）1.0005（） （10）0.700",
+      "gold": "2###3###2###4###4###2###无限多位###无限多位###5###4###3",
+      "pred": "2###3###2###4###4###2###1###无限###5###4###3"
+    },
+    {
+      "key": "grok-4.5::3193",
+      "correct": true,
+      "index": 3193,
+      "model": "grok-4.5",
+      "subject": "文史哲法",
+      "type": "填空题",
+      "title": "陆游《书愤》“ ， 。”抒发了岁月蹉跎壮志木酬的感慨。",
+      "gold": "塞上长空自许###镜中衰鬓已先斑",
+      "pred": "塞上长城空自许###镜中衰鬓已先斑"
+    },
+    {
+      "key": "grok-4.5::3251",
+      "correct": true,
+      "index": 3251,
+      "model": "grok-4.5",
+      "subject": "物理化学",
+      "type": "填空题",
+      "title": "一个人用200N的力竖直向上提起重150N的物体，物体收到的合力是______N，方向是 ________。 .",
+      "gold": "50；竖直向上",
+      "pred": "50###竖直向上"
+    },
+    {
+      "key": "grok-4.5::3382",
+      "correct": true,
+      "index": 3382,
+      "model": "grok-4.5",
+      "subject": "经管财经",
+      "type": "填空题",
+      "title": "( )是企业与同行业的其他企业联合起来共同生产和经营某种产品和业务。",
+      "gold": "水平一体化",
+      "pred": "横向联合"
+    },
+    {
+      "key": "deepseek-v4-pro::584",
+      "correct": true,
+      "index": 584,
+      "model": "deepseek-v4-pro",
+      "subject": "思政政治",
+      "type": "填空题",
+      "title": "全面推进依法治国的总目标是：",
+      "gold": "建设中国特色社会主义法制体系",
+      "pred": "建设中国特色社会主义法治体系，建设社会主义法治国家"
+    },
+    {
+      "key": "deepseek-v4-pro::687",
+      "correct": true,
+      "index": 687,
+      "model": "deepseek-v4-pro",
+      "subject": "计算机",
+      "type": "填空题",
+      "title": "数学式子20≤X<35对应Visual FoxPro表达式是 或者",
+      "gold": "x>=20 and x<35###x<35 and x>=20",
+      "pred": "X>=20 AND X<35###X>=20 .AND. X<35"
+    },
+    {
+      "key": "deepseek-v4-pro::1033",
+      "correct": false,
+      "index": 1033,
+      "model": "deepseek-v4-pro",
+      "subject": "数学",
+      "type": "填空题",
+      "title": "在括号中写出下面算式的商的最高位 53.5÷9（ ） 80.56÷13（ ） 7.68÷31（ ） 151.7÷23（ ）",
+      "gold": "5###6###0###6",
+      "pred": "个位###个位###十分位###个位"
+    },
+    {
+      "key": "deepseek-v4-pro::1283",
+      "correct": true,
+      "index": 1283,
+      "model": "deepseek-v4-pro",
+      "subject": "计算机",
+      "type": "填空题",
+      "title": "10Base-T采用AUI接头。____",
+      "gold": "O\n第二部分 非选择题",
+      "pred": "错误"
+    },
+    {
+      "key": "deepseek-v4-pro::1368",
+      "correct": false,
+      "index": 1368,
+      "model": "deepseek-v4-pro",
+      "subject": "汽车交通",
+      "type": "填空题",
+      "title": "船舶向着大型化、________,高速化, _______,绿色化方向发展。",
+      "gold": "自动化###专业化",
+      "pred": "智能化###自动化"
+    },
+    {
+      "key": "deepseek-v4-pro::1569",
+      "correct": false,
+      "index": 1569,
+      "model": "deepseek-v4-pro",
+      "subject": "英语",
+      "type": "填空题",
+      "title": "为政府机关做事 ____",
+      "gold": "work for the government",
+      "pred": "为政府机关做事"
+    },
+    {
+      "key": "deepseek-v4-pro::1588",
+      "correct": true,
+      "index": 1588,
+      "model": "deepseek-v4-pro",
+      "subject": "数学",
+      "type": "填空题",
+      "title": "填空 (1)设3x>6,则x>____",
+      "gold": "(2)设1-5x<-1,则x>",
+      "pred": "2"
+    },
+    {
+      "key": "deepseek-v4-pro::1883",
+      "correct": false,
+      "index": 1883,
+      "model": "deepseek-v4-pro",
+      "subject": "艺术设计",
+      "type": "填空题",
+      "title": "压力容器的封头常见形式有 ① ② ③ ④ 和 ⑤ 。",
+      "gold": "半球形封头###椭圆形封头###碟形封头###锥形封头###平盖",
+      "pred": "半球形###椭圆形###碟形###球冠形###锥形"
+    },
+    {
+      "key": "deepseek-v4-pro::2041",
+      "correct": false,
+      "index": 2041,
+      "model": "deepseek-v4-pro",
+      "subject": "综合其他",
+      "type": "填空题",
+      "title": "项目编码7-9位表示（ ）。",
+      "gold": "分项工程项目名称顺序码",
+      "pred": "分部工程顺序码"
+    },
+    {
+      "key": "deepseek-v4-pro::2073",
+      "correct": false,
+      "index": 2073,
+      "model": "deepseek-v4-pro",
+      "subject": "思政政治",
+      "type": "填空题",
+      "title": "人们对世界的认识是一个_____。",
+      "gold": "漫长",
+      "pred": "过程"
+    },
+    {
+      "key": "deepseek-v4-pro::2326",
+      "correct": false,
+      "index": 2326,
+      "model": "deepseek-v4-pro",
+      "subject": "数学",
+      "type": "填空题",
+      "title": "计算行列式<img src=\"https",
+      "gold": "//p.ananas.chaoxing.com/star3/origin/e18d48aea4985352bb0e450fae1be170.png\">=____.\n(5.0)",
+      "pred": "0"
+    },
+    {
+      "key": "deepseek-v4-pro::2498",
+      "correct": false,
+      "index": 2498,
+      "model": "deepseek-v4-pro",
+      "subject": "英语",
+      "type": "填空题",
+      "title": "请给下列单词匹配以正确的英文解释： 1.a cheer ______ 2.a coach ______ 3.an event ______ 4.a talent scout ______ 5.a competition ______ 6.a",
+      "gold": "g###d###c###i###h###b###j###f###a###e",
+      "pred": "a shout of encouragement###a person who trains sports players###something that happens, especially something important###a person who looks for new talented people###an organized event in which people try to win a prize###a large group of musicians playing different instruments###at some point in a period of time###without problems or worries###the act of entertaining people by doing something###to leave a place secretly"
+    },
+    {
+      "key": "deepseek-v4-pro::3008",
+      "correct": true,
+      "index": 3008,
+      "model": "deepseek-v4-pro",
+      "subject": "物理化学",
+      "type": "填空题",
+      "title": "用动力臂是阻力臂两倍的杠杆，将重400N的货物抬高20cm，手向下压杠杆的力是220N．则手向下降得高度是 ________cm，这根杠杆的机械效率是 ________ .",
+      "gold": "40；90.1%",
+      "pred": "40###90.9%"
+    },
+    {
+      "key": "deepseek-v4-pro::3193",
+      "correct": true,
+      "index": 3193,
+      "model": "deepseek-v4-pro",
+      "subject": "文史哲法",
+      "type": "填空题",
+      "title": "陆游《书愤》“ ， 。”抒发了岁月蹉跎壮志木酬的感慨。",
+      "gold": "塞上长空自许###镜中衰鬓已先斑",
+      "pred": "塞上长城空自许###镜中衰鬓已先斑"
+    },
+    {
+      "key": "deepseek-v4-pro::3266",
+      "correct": false,
+      "index": 3266,
+      "model": "deepseek-v4-pro",
+      "subject": "计算机",
+      "type": "填空题",
+      "title": "参考工具书一般有 ___ 、___ 、___ 、___ 、___ 、___ 和 ___ 。",
+      "gold": "字典###词典###历谱###名录###手册###统计资料###法规",
+      "pred": "字典###词典###百科全书###年鉴###手册###名录###指南"
+    },
+    {
+      "key": "deepseek-v4-pro::3613",
+      "correct": true,
+      "index": 3613,
+      "model": "deepseek-v4-pro",
+      "subject": "物理化学",
+      "type": "填空题",
+      "title": "n个输入端的二进制译码器，共有______个输出端。对于每一组输入代码，有________个输出端是有效电平。",
+      "gold": "2n###1",
+      "pred": "2^n###1"
+    },
+    {
+      "key": "deepseek-v4-pro::3669",
+      "correct": false,
+      "index": 3669,
+      "model": "deepseek-v4-pro",
+      "subject": "汽车交通",
+      "type": "填空题",
+      "title": "汽车故障的成因主要有（ ）和（ ）",
+      "gold": "人为故障，自然故障;自然故障，人为故障",
+      "pred": "内部原因###外部原因"
+    },
+    {
+      "key": "deepseek-v4-pro::3839",
+      "correct": false,
+      "index": 3839,
+      "model": "deepseek-v4-pro",
+      "subject": "物理化学",
+      "type": "填空题",
+      "title": "利用机械做功时，并非我们需要，但又不得不做的功叫________功，记做________．",
+      "gold": "额外；W额外",
+      "pred": "额外###W额"
+    },
+    {
+      "key": "deepseek-v4-pro::4933",
+      "correct": false,
+      "index": 4933,
+      "model": "deepseek-v4-pro",
+      "subject": "物理化学",
+      "type": "填空题",
+      "title": "某高山顶峰要设一个旅游景点，需要开挖盘山公路，要求盘山公路对车的总阻力是车重的0.1倍，机械效率是50%，若山高2000m，则要开挖长________m的盘山公路．",
+      "gold": "2×10000",
+      "pred": "40000"
+    },
+    {
+      "key": "deepseek-v4-pro::5299",
+      "correct": false,
+      "index": 5299,
+      "model": "deepseek-v4-pro",
+      "subject": "经管财经",
+      "type": "填空题",
+      "title": "金融创新不能（）（）（），造成金融与实体经济和消费者利益的巨大背离。",
+      "gold": "牺牲风险信息的透明度###增加金融体系的脆弱性###脱离实体经济和消费者的需要",
+      "pred": "脱实向虚"
     }
   ]
 }

@@ -6,14 +6,17 @@
     </div>
 
     <div class="download-grid">
-      <section class="download-card is-disabled">
+      <section class="download-card" :class="{ 'is-disabled': !macUrl }">
         <div class="os-badge mac">macOS</div>
         <h2>Mac（Apple Silicon）</h2>
-        <p class="hint">macOS 版暂时下架，修复安装签名问题后会重新开放。</p>
-        <button class="download-btn is-disabled" type="button" disabled>
+        <p class="hint">适用于 Apple Silicon Mac。下载后打开 DMG，将 ZError 拖入「应用程序」。</p>
+        <a v-if="macUrl" class="download-btn" :href="macUrl" download>
+          下载 macOS 版
+        </a>
+        <button v-else class="download-btn is-disabled" type="button" disabled>
           暂时不可用
         </button>
-        <p class="meta">敬请关注后续更新</p>
+        <p class="meta">{{ macUrl ? macFileName : '敬请关注后续更新' }}</p>
       </section>
 
       <section class="download-card">
@@ -39,6 +42,7 @@
 const FALLBACK = {
   version: '2.2.7',
   winUrl: 'https://webapi.zaizhexue.top/apps/ZError_2.2.7_x64-setup_r2.exe',
+  macUrl: 'https://webapi.zaizhexue.top/apps/ZError_2.2.7_aarch64_r7.dmg',
 }
 
 function applyVersionPayload(vm, data) {
@@ -46,6 +50,9 @@ function applyVersionPayload(vm, data) {
   if (data.version) vm.version = data.version
   if (data.downloadUrlWin || data.downloadUrlWindows || data.downloadUrl) {
     vm.winUrl = data.downloadUrlWin || data.downloadUrlWindows || data.downloadUrl
+  }
+  if (data.downloadUrlMac || data.downloadUrlDarwin) {
+    vm.macUrl = data.downloadUrlMac || data.downloadUrlDarwin
   }
   if (data.changelog) vm.changelog = data.changelog
 }
@@ -56,6 +63,7 @@ export default {
     return {
       version: FALLBACK.version,
       winUrl: FALLBACK.winUrl,
+      macUrl: FALLBACK.macUrl,
       changelog: '',
     }
   },
@@ -65,6 +73,13 @@ export default {
         return decodeURIComponent(new URL(this.winUrl).pathname.split('/').pop() || '')
       } catch {
         return 'ZError Windows.exe'
+      }
+    },
+    macFileName() {
+      try {
+        return decodeURIComponent(new URL(this.macUrl).pathname.split('/').pop() || '')
+      } catch {
+        return 'ZError macOS.dmg'
       }
     },
   },
