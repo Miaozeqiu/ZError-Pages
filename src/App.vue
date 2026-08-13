@@ -3,7 +3,7 @@
     <nav>
       <div class="nav-brand">
         <img src="@/assets/zerror.svg" alt="Logo" class="nav-logo">
-        <span class="brand-name">rror</span>
+        <span class="brand-name">RROR</span>
       </div>
       <button class="hamburger" @click="toggleMenu">
         <svg t="1744518248746" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4556" width="24" height="24">
@@ -175,11 +175,12 @@ nav {
 }
 
 .brand-name {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 2.5rem;
-  font-weight: 900;
+  font-family: "Avenir Next Condensed", Futura, "Century Gothic", "Gill Sans", sans-serif;
+  font-size: 2.35rem;
+  font-weight: 700;
   color: #FCB334;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .nav-links {

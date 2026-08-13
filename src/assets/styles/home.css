@@ -5,25 +5,6 @@
   align-items: center;
 }
 
-.platform-item {
-  background: #fffefc;
-  width: 100px;
-  padding: 10px;
-  margin-left: 100px;
-  margin-right: 100px;
-  border-radius: 10px;
-  box-shadow: 0 5px 20px #ffe5b0;
-}
-
-.platform-item span {
-  font-size: 1.2rem;
-  margin-top: 0.8rem;
-}
-
-.platform-item:nth-child(1) .platform-icon {
-  width: 80px;
-  height: 80px;
-}
 .home-page {
   max-width: 1200px;
   width: 100%;
@@ -35,16 +16,19 @@
 
 .platform-section {
   box-sizing: border-box;
+  width: 100%;
   max-width: 1200px;
-  border-radius: 16px;
   display: flex;
   flex-direction: column;
-  padding: 50px;
-  background-color: #fff8ea;
-  width: 100%;
+  align-items: center;
+  padding: 3.25rem 2.5rem 3rem;
+  border-radius: 28px;
+  background:
+    radial-gradient(1200px 280px at 50% -40%, rgba(255, 186, 92, 0.22), transparent 70%),
+    #fff6e6;
+  border: 1px solid rgba(252, 179, 52, 0.16);
 }
 
-/* 让整块平台区域也平滑淡入 */
 .platform-section.animate-element {
   will-change: opacity, transform;
 }
@@ -53,33 +37,128 @@
   transition-delay: 0.6s;
 }
 
-.platform-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.platform-item {
-  margin: 1rem 0;
+.platform-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  text-align: center;
+  max-width: 36rem;
+  margin-bottom: 2rem;
+}
+
+.ai-model-heading {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0 0.7rem;
+  padding: 0.28rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(255, 122, 0, 0.1);
+  color: #e56a00;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.platform-title {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(1.7rem, 3vw, 2.15rem);
+  line-height: 1.2;
+  color: #2c3e50;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.platform-subtitle {
+  margin: 0.7rem 0 0;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  font-weight: 400;
+  color: #6b7280;
+}
+
+.platform-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
+  max-width: 760px;
+}
+
+.platform-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 1.25rem 0.85rem 1.1rem;
+  width: auto;
+  background: #fffefb;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 18px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.8) inset,
+    0 10px 28px rgba(252, 179, 52, 0.14);
+  transition:
+    transform 180ms ease-out,
+    box-shadow 180ms ease-out;
+}
+
+.platform-item:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 16px 32px rgba(252, 179, 52, 0.2);
+}
+
+.platform-item:active {
+  transform: scale(0.98);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .platform-item,
+  .platform-item:hover,
+  .platform-item:active {
+    transition: none;
+    transform: none;
+  }
 }
 
 .platform-icon {
-  width: 80px; /* 从60px增大到80px */
-  height: 80px; /* 从60px增大到80px */
+  width: 64px;
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 18px;
+  background: #fff8ee;
+  overflow: hidden;
 }
 
-.platform-item span {
-  font-size: 1.2rem; /* 新增：调整文字大小 */
+.platform-icon svg,
+.platform-icon img {
+  width: 40px;
+  height: 40px;
+  display: block;
+  object-fit: contain;
 }
+
+.platform-icon-custom {
+  color: #8b7355;
+}
+
+.platform-name {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #3d4a45;
+  letter-spacing: 0.01em;
+}
+
+.platform-item:nth-child(1).animate-element.visible { transition-delay: 0.05s; }
+.platform-item:nth-child(2).animate-element.visible { transition-delay: 0.12s; }
+.platform-item:nth-child(3).animate-element.visible { transition-delay: 0.19s; }
+.platform-item:nth-child(4).animate-element.visible { transition-delay: 0.26s; }
 
 .hero-section {
   box-sizing: border-box;
@@ -181,34 +260,6 @@
   font-weight: 150;
 }
 
-.platform-title {
-  text-align: center;
-  font-size: 1.8rem;
-  color: #2c3e50;
-  font-weight: 500;
-  margin-top: 0rem;
-  margin-bottom: 0rem;
-  /* 移除 animation 属性 */
-}
-
-.platform-subtitle {
-  text-align: center;
-  font-size: 0.9rem;
-  font-weight: 300;
-  color: #555;
-  margin-bottom: 2rem;
-}
-
-/* 新增：AI模型标题样式 */
-.ai-model-heading {
-  text-align: center;
-  color: #ff7a00; /* 橙色 */
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  margin: 1rem 0 0.5rem;
-}
-
 .social-title {
   margin-bottom: 0.2rem;
   /* 移除 animation 属性 */
@@ -245,7 +296,7 @@
   padding: 1rem 2.5rem;
   background: #fcb334;
   color: white;
-  border-radius: 8px;
+  border-radius: 999px;
   text-decoration: none;
   font-weight: 300;
   transition: all 0.3s ease;
@@ -573,11 +624,13 @@
   }
 
   .platform-grid {
-    align-items: center;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.85rem;
   }
 
   .platform-item {
-    margin: 1rem 0;
+    margin: 0;
+    padding: 1.1rem 0.6rem 1rem;
   }
 }
 
@@ -634,26 +687,39 @@
   }
 
   .ai-model-heading {
-    margin-top: 40px;
+    margin-top: 0;
   }
 
   .platform-subtitle {
-    padding-left: 30px;
-    padding-right: 30px;
-    font-size: 0.9rem;
+    padding: 0;
+    font-size: 0.88rem;
   }
 
   .platform-grid {
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
   }
 
   .platform-section {
-    padding: 0px;
+    padding: 2rem 1.15rem 1.6rem;
+    border-radius: 20px;
   }
 
   .platform-item {
-    width: 100px;
-    margin: 1rem 0;
+    width: auto;
+    margin: 0;
+  }
+
+  .platform-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+  }
+
+  .platform-icon svg,
+  .platform-icon img {
+    width: 32px;
+    height: 32px;
   }
 }
 

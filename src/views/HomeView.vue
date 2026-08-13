@@ -46,7 +46,7 @@
 
     <div v-if="showPromoAd" class="promo-ad-section animate-element">
       <a
-        href="https://www.cheaptokens.shop"
+        href="https://c.submarinedrivers.top/register?invite=yy2ak4rr"
         target="_blank"
         rel="noopener"
         class="promo-ad-card"
@@ -75,47 +75,43 @@
     </div>
 
     <div class="platform-section animate-element">
-      <div class="ai-model-heading animate-element">AI模型</div>
-      <h3 class="platform-title animate-element">完全自定义</h3>
-      <p class="platform-subtitle animate-element">
-        支持AI平台以及AI模型的完全自定义，兼容所有格式
-      </p>
+      <div class="platform-header">
+        <div class="ai-model-heading animate-element">AI 模型</div>
+        <h3 class="platform-title animate-element">完全自定义</h3>
+        <p class="platform-subtitle animate-element">
+          接入任意 AI 平台与模型，兼容 OpenAI 等常见接口格式
+        </p>
+      </div>
       <div class="platform-grid">
         <div class="platform-item animate-element">
           <div class="platform-icon" v-html="siliconSvg"></div>
-          <span>硅基流动</span>
+          <span class="platform-name">硅基流动</span>
         </div>
 
         <div class="platform-item animate-element">
           <div class="platform-icon" v-html="bailianSvg"></div>
-          <span>阿里百炼</span>
+          <span class="platform-name">阿里百炼</span>
         </div>
 
         <div class="platform-item animate-element">
           <div class="platform-icon" v-html="deepseekSvg"></div>
-          <span>DeepSeek</span>
+          <span class="platform-name">DeepSeek</span>
         </div>
 
         <div class="platform-item animate-element">
-          <div class="platform-icon">
+          <div class="platform-icon platform-icon-custom">
             <svg
-              fill="#999"
-              t="1762607486013"
-              class="icon"
+              fill="currentColor"
               viewBox="0 0 1024 1024"
-              version="1.1"
               xmlns="http://www.w3.org/2000/svg"
-              p-id="8674"
-              width="200"
-              height="200"
+              aria-hidden="true"
             >
               <path
                 d="M811.008 768.170667v106.666666a106.666667 106.666667 0 0 1-106.666667 106.666667h-128a21.248 21.248 0 0 1-21.333333-21.333333V938.666667c0-75.52-43.306667-127.872-128.341333-127.872-84.224 0-128.085333 52.821333-128.085334 127.872v21.461333a21.333333 21.333333 0 0 1-21.333333 21.333333h-128a106.666667 106.666667 0 0 1-106.666667-106.709333l0.426667-128a21.333333 21.333333 0 0 1 21.333333-21.248h42.666667c58.752 0 106.410667-55.210667 106.410667-128 0-73.386667-47.36-128-106.410667-128H64.213333a21.333333 21.333333 0 0 1-21.333333-21.333333v-128a106.666667 106.666667 0 0 1 106.666667-106.666667h106.368V213.333333c0-97.066667 61.013333-170.538667 170.752-170.538666 107.008 0 171.392 75.434667 171.392 170.538666v0.128h106.837333a106.666667 106.666667 0 0 1 106.666667 106.666667v106.666667h20.778666c84.053333 0 149.077333 75.008 149.077334 170.666666 0 95.104-65.28 170.666667-149.077334 170.666667h-21.333333z m-42.666667-20.736v-0.597334a21.333333 21.333333 0 0 1 21.333334-21.333333h42.666666c58.752 0 106.410667-55.210667 106.410667-128 0-73.386667-47.36-128-106.410667-128h-42.666666a21.333333 21.333333 0 0 1-20.778667-26.325333V320.128a64 64 0 0 0-64-64h-126.890667a21.76 21.76 0 0 1-1.28 0 21.333333 21.333333 0 0 1-21.333333-21.333333V213.333333c0-72.917333-46.933333-127.872-128.725333-127.872-84.224 0-128.085333 52.821333-128.085334 127.872v21.461334a21.248 21.248 0 0 1-21.333333 21.333333H149.546667a64 64 0 0 0-64 64v106.666667h21.461333c84.053333 0 149.077333 75.008 149.077333 170.666666 0 95.104-65.28 170.666667-149.077333 170.666667h-21.418667l-0.341333 106.666667a64 64 0 0 0 64 64h106.666667V938.666667c0-97.066667 61.013333-170.538667 170.752-170.538667 110.592 0 171.008 73.002667 171.008 170.538667v0.170666h106.666666a64 64 0 0 0 64-64v-127.402666z"
-                p-id="8675"
               ></path>
             </svg>
           </div>
-          <span>自定义</span>
+          <span class="platform-name">自定义</span>
         </div>
       </div>
     </div>

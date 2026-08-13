@@ -1,14 +1,47 @@
 <template>
   <div class="lb-page">
-    <header class="lb-hero">
-      <h1>模型排行榜</h1>
-      <p class="lb-sub">公开题库评测 · 点击查看明细</p>
-      <p v-if="meta.effectiveN" class="lb-desc">
-        测试集为 ZError 公开题库的文本题，覆盖单选、多选、判断、填空；
-        当前有效题量 <strong>{{ formatInt(meta.effectiveN) }}</strong> 道。
-        右侧百分比为<strong>正确率</strong>：答对题数 ÷ 有效题量。
-      </p>
-    </header>
+    <div class="lb-hero-row">
+      <header ref="hero" class="lb-hero">
+        <h1>模型排行榜</h1>
+        <p class="lb-sub">公开题库评测 · 点击查看明细</p>
+        <p v-if="meta.effectiveN" class="lb-desc">
+          测试集为 ZError 公开题库的文本题，覆盖单选、多选、判断、填空；
+          当前有效题量 <strong>{{ formatInt(meta.effectiveN) }}</strong> 道。
+          右侧百分比为<strong>正确率</strong>：答对题数 ÷ 有效题量。
+        </p>
+      </header>
+
+      <div v-if="showSponsorAd" class="lb-sponsor">
+        <a
+          href="https://c.submarinedrivers.top/register?invite=yy2ak4rr"
+          target="_blank"
+          rel="noopener"
+          class="lb-sponsor-card"
+        >
+          <img
+            ref="sponsorImg"
+            :src="sponsorAdImage"
+            alt="Cheaptokens 赞助商广告"
+            class="lb-sponsor-image"
+            @load="syncSponsorHeight"
+          />
+          <span class="lb-sponsor-badge">广告</span>
+        </a>
+        <button
+          type="button"
+          class="lb-sponsor-close"
+          aria-label="关闭广告"
+          @click="showSponsorAd = false"
+        >
+          <svg viewBox="0 0 1024 1024" width="16" height="16" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M571.01312 523.776l311.3472-311.35232c15.7184-15.71328 15.7184-41.6256 0-57.344l-1.69472-1.69984c-15.7184-15.71328-41.6256-15.71328-57.34912 0l-311.3472 311.77728-311.35232-311.77728c-15.7184-15.71328-41.63072-15.71328-57.344 0l-1.69984 1.69984a40.0128 40.0128 0 0 0 0 57.344L452.92544 523.776l-311.35232 311.35744c-15.71328 15.71328-15.71328 41.63072 0 57.33888l1.69984 1.69984c15.71328 15.7184 41.6256 15.7184 57.344 0l311.35232-311.35232 311.3472 311.35232c15.72352 15.7184 41.63072 15.7184 57.34912 0l1.69472-1.69984c15.7184-15.70816 15.7184-41.6256 0-57.33888l-311.3472-311.35744z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
 
     <div v-if="loading" class="lb-state">加载中…</div>
     <div v-else-if="error" class="lb-state error">{{ error }}</div>
@@ -74,6 +107,7 @@
 
 <script>
 import { modelIcon } from '@/utils/modelIcons.js'
+import sponsorAdImage from '../../画板 3 (3).png'
 
 export default {
   name: 'LeaderboardView',
@@ -86,6 +120,8 @@ export default {
         effectiveN: 0,
         excludedCount: 0,
       },
+      showSponsorAd: true,
+      sponsorAdImage,
     }
   },
   computed: {
@@ -114,13 +150,65 @@ export default {
   },
   mounted() {
     this.fetchBoard()
+    this.$nextTick(this.bindSponsorSync)
   },
   beforeUnmount() {
+    this.unbindSponsorSync()
     this.stopMatrixFx()
     this._matrixEl = null
   },
   methods: {
     modelIcon,
+    bindSponsorSync() {
+      this.unbindSponsorSync()
+      const hero = this.$refs.hero
+      if (typeof window !== 'undefined' && typeof ResizeObserver !== 'undefined' && hero) {
+        this._sponsorRo = new ResizeObserver(() => this.syncSponsorHeight())
+        this._sponsorRo.observe(hero)
+      }
+      if (typeof window !== 'undefined' && window.matchMedia) {
+        this._sponsorMq = window.matchMedia('(max-width: 860px)')
+        this._onSponsorMq = () => this.syncSponsorHeight()
+        if (this._sponsorMq.addEventListener) {
+          this._sponsorMq.addEventListener('change', this._onSponsorMq)
+        } else {
+          this._sponsorMq.addListener(this._onSponsorMq)
+        }
+      }
+      this.syncSponsorHeight()
+    },
+    unbindSponsorSync() {
+      this._sponsorRo?.disconnect()
+      this._sponsorRo = null
+      if (this._sponsorMq && this._onSponsorMq) {
+        if (this._sponsorMq.removeEventListener) {
+          this._sponsorMq.removeEventListener('change', this._onSponsorMq)
+        } else {
+          this._sponsorMq.removeListener(this._onSponsorMq)
+        }
+      }
+      this._sponsorMq = null
+      this._onSponsorMq = null
+    },
+    isCompactSponsor() {
+      return typeof window !== 'undefined' && window.matchMedia('(max-width: 860px)').matches
+    },
+    syncSponsorHeight() {
+      const img = this.$refs.sponsorImg
+      if (!img) return
+      if (this.isCompactSponsor()) {
+        img.style.height = ''
+        img.style.width = ''
+        return
+      }
+      const hero = this.$refs.hero
+      if (!hero) return
+      const height = Math.round(hero.getBoundingClientRect().height)
+      if (height > 0) {
+        img.style.height = `${height}px`
+        img.style.width = 'auto'
+      }
+    },
     bindMatrixCanvas(el) {
       this._matrixEl = el || null
       if (el) {
@@ -141,6 +229,7 @@ export default {
           effectiveN: Number(data.effectiveN) || this.models[0]?.n || 0,
           excludedCount: Number(data.excludedCount) || 0,
         }
+        this.$nextTick(this.syncSponsorHeight)
       } catch (e) {
         this.error = e.message || '加载排行榜失败'
       } finally {
@@ -380,8 +469,84 @@ export default {
   box-sizing: border-box;
 }
 
-.lb-hero {
+.lb-hero-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
   margin-bottom: 1.75rem;
+}
+
+.lb-hero {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+}
+
+.lb-sponsor {
+  position: relative;
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.lb-sponsor-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.lb-sponsor-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+}
+
+.lb-sponsor-image {
+  display: block;
+  height: 148px;
+  width: auto;
+  max-width: 100%;
+}
+
+.lb-sponsor-badge {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.68);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.lb-sponsor-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #1f2937;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
+
+.lb-sponsor-close:hover {
+  background: #fff;
 }
 
 .lb-hero h1 {
@@ -634,8 +799,52 @@ export default {
     padding: 1.75rem 0.75rem 3.5rem;
   }
 
-  .lb-hero {
+  .lb-hero-row {
+    flex-direction: column;
+    gap: 1rem;
     margin-bottom: 1.25rem;
+  }
+
+  .lb-hero {
+    margin-bottom: 0;
+  }
+
+  .lb-sponsor {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+    align-self: stretch;
+  }
+
+  .lb-sponsor-card {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: none;
+  }
+
+  .lb-sponsor-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .lb-sponsor-image {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100%;
+  }
+
+  .lb-sponsor-badge {
+    left: 8px;
+    bottom: 8px;
+    padding: 0.15rem 0.45rem;
+    font-size: 0.62rem;
+  }
+
+  .lb-sponsor-close {
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
   }
 
   .lb-hero h1 {
