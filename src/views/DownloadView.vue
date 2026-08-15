@@ -37,8 +37,8 @@
 
 <script>
 const FALLBACK = {
-  version: '2.2.7',
-  winUrl: 'https://webapi.zaizhexue.top/apps/ZError_2.2.7_x64-setup_r2.exe',
+  version: '2.2.8',
+  winUrl: 'https://webapi.zaizhexue.top/apps/ZError_2.2.8_x64-setup_r2.exe',
 }
 
 function applyVersionPayload(vm, data) {

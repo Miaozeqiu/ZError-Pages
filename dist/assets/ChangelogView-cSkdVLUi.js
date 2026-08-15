@@ -1,4 +1,12 @@
-import{_ as a,c as s,a as n,F as d,g as c,o as i,t as o}from"./index-RQtIYRzC.js";const p={data(){return{logs:[{version:"2.2.7",date:"2026-8-9",description:`相对 2.2.6 主要更新：
+import{_ as a,c as s,a as n,F as d,g as c,o as i,t as o}from"./index-CQaaChNY.js";const p={data(){return{logs:[{version:"2.2.8",date:"2026-8-15",description:`相对 2.2.7 主要更新：
+1. 新增 Agent：可以对话讲解，也能识别本地文件并把题目写入题库
+2. 支持 CSV、Excel、Word、PDF、文本导入；题库文件夹可一键整理
+3. 对话可附带图片和文件，视觉模型可直接看图识题
+4. 远程模型的 API 协议改到平台上统一配置
+5. 其他体验优化
+
+说明：macOS 版仍暂时下架，签名公证完成后重新开放。
+近期功能迭代较快，更新可能会比较频繁，给大家带来不便请见谅。`},{version:"2.2.7",date:"2026-8-9",description:`相对 2.2.6 主要更新：
 1. 应用内自动更新：Mac 原地替换、Windows 安装更新，完成后可自动重启
 2. 默认窗口尺寸按屏幕自适应（1080p 更合适）
 3. 远程模型的 API 协议与思考开关由管理员统一下发并锁定
@@ -45,4 +53,4 @@ xattr -cr /Applications/ZError.app`},{version:"2.2.6",date:"2026-5-16",descripti
  5.美化界面`},{version:"1.2.0",date:"2025-05-2",description:`1. 添加截图搜题
 2. 修复题库无法修改的问题`},{version:"1.1.2",date:"2025-04-21",description:`1. 优化提示词
 2. 修复删除题目失败的问题`},{version:"1.1.1",date:"2025-03-21",description:"1. 修复密钥保存问题"},{version:"1.1.0",date:"2025-03-21",description:`1. 批量导入问题
-2. 修复文件权限问题`},{version:"1.0.0",date:"2025-03-20",description:"首次发布版本"}]}}},l={class:"changelog-page"},v={class:"changelog-container"},_={class:"version-badge"},g={class:"log-content"},u={class:"log-date"},h={class:"log-description"};function w(f,t,x,I,r,b){return i(),s("div",l,[t[0]||(t[0]=n("div",{class:"changelog-header"},[n("h1",null,"更新日志"),n("p",{class:"subtitle"},"ZError版本更新记录")],-1)),n("div",v,[(i(!0),s(d,null,c(r.logs,e=>(i(),s("div",{key:e.version,class:"log-card"},[n("div",_,o(e.version),1),n("div",g,[n("div",u,o(e.date),1),n("div",h,o(e.description),1)])]))),128))])])}const A=a(p,[["render",w],["__scopeId","data-v-a6c9053a"]]);export{A as default};
+2. 修复文件权限问题`},{version:"1.0.0",date:"2025-03-20",description:"首次发布版本"}]}}},l={class:"changelog-page"},v={class:"changelog-container"},g={class:"version-badge"},_={class:"log-content"},u={class:"log-date"},h={class:"log-description"};function w(f,t,x,A,r,I){return i(),s("div",l,[t[0]||(t[0]=n("div",{class:"changelog-header"},[n("h1",null,"更新日志"),n("p",{class:"subtitle"},"ZError版本更新记录")],-1)),n("div",v,[(i(!0),s(d,null,c(r.logs,e=>(i(),s("div",{key:e.version,class:"log-card"},[n("div",g,o(e.version),1),n("div",_,[n("div",u,o(e.date),1),n("div",h,o(e.description),1)])]))),128))])])}const k=a(p,[["render",w],["__scopeId","data-v-2a6cda3e"]]);export{k as default};
