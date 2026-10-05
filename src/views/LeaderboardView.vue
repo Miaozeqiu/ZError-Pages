@@ -101,6 +101,9 @@
           <strong class="pct" :title="pctTitle(m)">{{ formatPct(m.accuracy) }}</strong>
         </button>
       </div>
+      <p class="lb-credit">
+        感谢提供数据的小伙伴 @narrow wood bridge（DeepSeek-V4.1-Flash）。
+      </p>
     </div>
   </div>
 </template>
@@ -575,6 +578,13 @@ export default {
 .lb-desc strong {
   color: var(--ink);
   font-weight: 700;
+}
+
+.lb-credit {
+  margin: 1.15rem 0.35rem 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.6;
 }
 
 .lb-state {

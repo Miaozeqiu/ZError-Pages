@@ -1,496 +1,540 @@
 {
-  "updatedAt": "2026-08-09T14:01:46.854Z",
-  "title": "ZError 模型排行榜",
-  "description": "基于公开题库评测集的模型正确率排行（已剔除 201 道不可靠题；ai_judge_error 已人工判定；多选题已按集合完全一致重判；已纠科目串类 791 题；有效题量 6302）",
-  "excludedCount": 201,
-  "effectiveN": 6302,
-  "subjectRemapCount": 791,
-  "multiStrictNote": "多选题旧规则允许多选1个干扰项仍算对，已按集合完全一致打回",
-  "judgeErrorNote": "ai_judge_error 已人工逐条判定，详见 ai_judge_manual.json",
-  "models": [
-    {
-      "id": "kimi-k3",
-      "rank": 1,
-      "name": "Kimi K3",
-      "displayName": "Kimi K3",
-      "provider": "月之暗面",
-      "judgeModel": "glm-5.2-fast-preview",
-      "accuracy": 0.9005,
-      "n": 6302,
-      "correct": 5675,
-      "wrong": 627,
-      "errors": 0,
-      "by_type": {
-        "单选题": {
-          "n": 2827,
-          "ok": 2654,
-          "err": 0,
-          "acc": 0.9388
-        },
-        "多选题": {
-          "n": 1363,
-          "ok": 1131,
-          "err": 0,
-          "acc": 0.8298
-        },
-        "判断题": {
-          "n": 1190,
-          "ok": 1082,
-          "err": 0,
-          "acc": 0.9092
-        },
-        "填空题": {
-          "n": 922,
-          "ok": 808,
-          "err": 0,
-          "acc": 0.8764
-        }
-      },
-      "datasetMode": "text",
-      "exportedAt": "2026-08-07T05:36:59.155Z",
-      "excludedCount": 201,
-      "manualJudgeFixed": 20,
-      "multiStrictFixed": 75
+ "updatedAt": "2026-10-05T09:12:43.893Z",
+ "title": "ZError 模型排行榜",
+ "description": "基于公开题库评测集的模型正确率排行（已剔除 201 道不可靠题；ai_judge_error 已人工判定；多选题已按集合完全一致重判；已纠科目串类 791 题；有效题量 6302）",
+ "excludedCount": 201,
+ "effectiveN": 6302,
+ "subjectRemapCount": 791,
+ "multiStrictNote": "多选题旧规则允许多选1个干扰项仍算对，已按集合完全一致打回",
+ "judgeErrorNote": "ai_judge_error 已人工逐条判定，详见 ai_judge_manual.json",
+ "models": [
+  {
+   "id": "kimi-k3",
+   "rank": 1,
+   "name": "Kimi K3",
+   "displayName": "Kimi K3",
+   "provider": "月之暗面",
+   "judgeModel": "glm-5.2-fast-preview",
+   "accuracy": 0.9005,
+   "n": 6302,
+   "correct": 5675,
+   "wrong": 627,
+   "errors": 0,
+   "by_type": {
+    "单选题": {
+     "n": 2827,
+     "ok": 2654,
+     "err": 0,
+     "acc": 0.9388
     },
-    {
-      "id": "doubao-seed-2.1-turbo",
-      "rank": 2,
-      "name": "Doubao-Seed-2.1-Turbo",
-      "displayName": "Doubao-Seed-2.1-Turbo",
-      "provider": "字节跳动",
-      "judgeModel": "glm-5.2-fast-preview",
-      "accuracy": 0.8816,
-      "n": 6302,
-      "correct": 5556,
-      "wrong": 746,
-      "errors": 0,
-      "by_type": {
-        "单选题": {
-          "n": 2827,
-          "ok": 2607,
-          "err": 0,
-          "acc": 0.9222
-        },
-        "多选题": {
-          "n": 1363,
-          "ok": 1106,
-          "err": 0,
-          "acc": 0.8114
-        },
-        "判断题": {
-          "n": 1190,
-          "ok": 1061,
-          "err": 0,
-          "acc": 0.8916
-        },
-        "填空题": {
-          "n": 922,
-          "ok": 782,
-          "err": 0,
-          "acc": 0.8482
-        }
-      },
-      "datasetMode": "text",
-      "exportedAt": "2026-08-07T07:17:01.069Z",
-      "excludedCount": 201,
-      "manualJudgeFixed": 16,
-      "multiStrictFixed": 80
+    "多选题": {
+     "n": 1363,
+     "ok": 1131,
+     "err": 0,
+     "acc": 0.8298
     },
-    {
-      "id": "qwen3.8-max",
-      "rank": 3,
-      "name": "Qwen3.8-Max",
-      "displayName": "Qwen3.8-Max",
-      "provider": "阿里云",
-      "judgeModel": "glm-5.2-fast-preview",
-      "accuracy": 0.8737,
-      "n": 6302,
-      "correct": 5506,
-      "wrong": 796,
-      "errors": 0,
-      "by_type": {
-        "单选题": {
-          "n": 2827,
-          "ok": 2601,
-          "err": 0,
-          "acc": 0.9201
-        },
-        "多选题": {
-          "n": 1363,
-          "ok": 1062,
-          "err": 0,
-          "acc": 0.7792
-        },
-        "判断题": {
-          "n": 1190,
-          "ok": 1061,
-          "err": 0,
-          "acc": 0.8916
-        },
-        "填空题": {
-          "n": 922,
-          "ok": 782,
-          "err": 0,
-          "acc": 0.8482
-        }
-      },
-      "datasetMode": "text",
-      "exportedAt": "2026-08-06T15:37:28.625Z",
-      "excludedCount": 201,
-      "manualJudgeFixed": 21,
-      "multiStrictFixed": 89
+    "判断题": {
+     "n": 1190,
+     "ok": 1082,
+     "err": 0,
+     "acc": 0.9092
     },
-    {
-      "id": "gpt-5.6-sol",
-      "rank": 4,
-      "name": "GPT-5.6 Sol",
-      "displayName": "GPT-5.6 Sol",
-      "provider": "OpenAI",
-      "judgeModel": "",
-      "accuracy": 0.8683,
-      "n": 6302,
-      "correct": 5472,
-      "wrong": 830,
-      "errors": 0,
-      "by_type": {
-        "单选题": {
-          "n": 2827,
-          "ok": 2585,
-          "err": 0,
-          "acc": 0.9144
-        },
-        "多选题": {
-          "n": 1363,
-          "ok": 1051,
-          "err": 0,
-          "acc": 0.7711
-        },
-        "判断题": {
-          "n": 1190,
-          "ok": 1053,
-          "err": 0,
-          "acc": 0.8849
-        },
-        "填空题": {
-          "n": 922,
-          "ok": 783,
-          "err": 0,
-          "acc": 0.8492
-        }
-      },
-      "datasetMode": "text",
-      "exportedAt": null,
-      "excludedCount": 201,
-      "manualJudgeFixed": 13,
-      "multiStrictFixed": 93
-    },
-    {
-      "id": "mimo-v2.5",
-      "rank": 5,
-      "name": "MiMO v2.5",
-      "displayName": "MiMO v2.5",
-      "provider": "小米",
-      "judgeModel": "glm-5.2-fast-preview",
-      "accuracy": 0.8464,
-      "n": 6302,
-      "correct": 5334,
-      "wrong": 968,
-      "errors": 0,
-      "by_type": {
-        "单选题": {
-          "n": 2827,
-          "ok": 2556,
-          "err": 0,
-          "acc": 0.9041
-        },
-        "多选题": {
-          "n": 1363,
-          "ok": 995,
-          "err": 0,
-          "acc": 0.73
-        },
-        "判断题": {
-          "n": 1190,
-          "ok": 1046,
-          "err": 0,
-          "acc": 0.879
-        },
-        "填空题": {
-          "n": 922,
-          "ok": 737,
-          "err": 0,
-          "acc": 0.7993
-        }
-      },
-      "datasetMode": "text",
-      "exportedAt": "2026-08-09T13:57:32.886Z",
-      "excludedCount": 201,
-      "manualJudgeFixed": 0,
-      "multiStrictFixed": 0
-    },
-    {
-      "id": "longcat-2.0",
-      "rank": 6,
-      "name": "Longcat 2.0",
-      "displayName": "Longcat 2.0",
-      "provider": "Longcat",
-      "judgeModel": "glm-5.2-fast-preview",
-      "accuracy": 0.8456,
-      "n": 6302,
-      "correct": 5329,
-      "wrong": 973,
-      "errors": 0,
-      "by_type": {
-        "单选题": {
-          "n": 2827,
-          "ok": 2558,
-          "err": 0,
-          "acc": 0.9048
-        },
-        "多选题": {
-          "n": 1363,
-          "ok": 995,
-          "err": 0,
-          "acc": 0.73
-        },
-        "判断题": {
-          "n": 1190,
-          "ok": 1046,
-          "err": 0,
-          "acc": 0.879
-        },
-        "填空题": {
-          "n": 922,
-          "ok": 730,
-          "err": 0,
-          "acc": 0.7918
-        }
-      },
-      "datasetMode": "text",
-      "exportedAt": "2026-08-09T11:35:37.731Z",
-      "excludedCount": 201,
-      "manualJudgeFixed": 0,
-      "multiStrictFixed": 0
-    },
-    {
-      "id": "deepseek-v4-pro",
-      "rank": 7,
-      "name": "DeepSeek-V4-Pro (Pre)",
-      "displayName": "DeepSeek-V4-Pro (Pre)",
-      "provider": "DeepSeek",
-      "judgeModel": "glm-5.2-fast-preview",
-      "accuracy": 0.8426,
-      "n": 6302,
-      "correct": 5310,
-      "wrong": 992,
-      "errors": 0,
-      "by_type": {
-        "单选题": {
-          "n": 2827,
-          "ok": 2538,
-          "err": 0,
-          "acc": 0.8978
-        },
-        "多选题": {
-          "n": 1363,
-          "ok": 988,
-          "err": 0,
-          "acc": 0.7249
-        },
-        "判断题": {
-          "n": 1190,
-          "ok": 1025,
-          "err": 0,
-          "acc": 0.8613
-        },
-        "填空题": {
-          "n": 922,
-          "ok": 759,
-          "err": 0,
-          "acc": 0.8232
-        }
-      },
-      "datasetMode": "text",
-      "exportedAt": "2026-08-08T11:34:41.725Z",
-      "excludedCount": 201,
-      "manualJudgeFixed": 14,
-      "multiStrictFixed": 125
-    },
-    {
-      "id": "grok-4.5",
-      "rank": 8,
-      "name": "Grok 4.5",
-      "displayName": "Grok 4.5",
-      "provider": "xAI",
-      "judgeModel": "glm-5.2-fast-preview",
-      "accuracy": 0.8259,
-      "n": 6302,
-      "correct": 5205,
-      "wrong": 1097,
-      "errors": 0,
-      "by_type": {
-        "单选题": {
-          "n": 2827,
-          "ok": 2453,
-          "err": 0,
-          "acc": 0.8677
-        },
-        "多选题": {
-          "n": 1363,
-          "ok": 1003,
-          "err": 0,
-          "acc": 0.7359
-        },
-        "判断题": {
-          "n": 1190,
-          "ok": 1015,
-          "err": 0,
-          "acc": 0.8529
-        },
-        "填空题": {
-          "n": 922,
-          "ok": 734,
-          "err": 0,
-          "acc": 0.7961
-        }
-      },
-      "datasetMode": "text",
-      "exportedAt": "2026-08-08T04:11:30.349Z",
-      "excludedCount": 201,
-      "manualJudgeFixed": 7,
-      "multiStrictFixed": 64
-    },
-    {
-      "id": "glm-5.2",
-      "rank": 9,
-      "name": "GLM-5.2",
-      "displayName": "GLM-5.2",
-      "provider": "智谱 AI",
-      "judgeModel": "glm-5.2-fast-preview",
-      "accuracy": 0.8231,
-      "n": 6302,
-      "correct": 5187,
-      "wrong": 1115,
-      "errors": 0,
-      "by_type": {
-        "单选题": {
-          "n": 2827,
-          "ok": 2475,
-          "err": 0,
-          "acc": 0.8755
-        },
-        "多选题": {
-          "n": 1363,
-          "ok": 963,
-          "err": 0,
-          "acc": 0.7065
-        },
-        "判断题": {
-          "n": 1190,
-          "ok": 1023,
-          "err": 0,
-          "acc": 0.8597
-        },
-        "填空题": {
-          "n": 922,
-          "ok": 726,
-          "err": 0,
-          "acc": 0.7874
-        }
-      },
-      "datasetMode": "text",
-      "exportedAt": "2026-08-05T07:49:00.026Z",
-      "excludedCount": 201,
-      "manualJudgeFixed": 1,
-      "multiStrictFixed": 117
-    },
-    {
-      "id": "deepseek-v4-flash",
-      "rank": 10,
-      "name": "DeepSeek-V4-Flash",
-      "displayName": "DeepSeek-V4-Flash",
-      "provider": "DeepSeek",
-      "judgeModel": "glm-5.2-fast-preview",
-      "accuracy": 0.8228,
-      "n": 6302,
-      "correct": 5185,
-      "wrong": 1117,
-      "errors": 0,
-      "by_type": {
-        "单选题": {
-          "n": 2827,
-          "ok": 2488,
-          "err": 0,
-          "acc": 0.8801
-        },
-        "多选题": {
-          "n": 1363,
-          "ok": 961,
-          "err": 0,
-          "acc": 0.7051
-        },
-        "判断题": {
-          "n": 1190,
-          "ok": 1006,
-          "err": 0,
-          "acc": 0.8454
-        },
-        "填空题": {
-          "n": 922,
-          "ok": 730,
-          "err": 0,
-          "acc": 0.7918
-        }
-      },
-      "datasetMode": "text",
-      "exportedAt": "2026-08-06T10:59:02.975Z",
-      "excludedCount": 201,
-      "manualJudgeFixed": 37,
-      "multiStrictFixed": 121
-    },
-    {
-      "id": "minimax-m3",
-      "rank": 11,
-      "name": "MiniMax-M3",
-      "displayName": "MiniMax-M3",
-      "provider": "MiniMax",
-      "judgeModel": "glm-5.2-fast-preview",
-      "accuracy": 0.7745,
-      "n": 6302,
-      "correct": 4881,
-      "wrong": 1420,
-      "errors": 1,
-      "by_type": {
-        "单选题": {
-          "n": 2827,
-          "ok": 2357,
-          "err": 1,
-          "acc": 0.8337
-        },
-        "多选题": {
-          "n": 1363,
-          "ok": 859,
-          "err": 0,
-          "acc": 0.6302
-        },
-        "判断题": {
-          "n": 1190,
-          "ok": 995,
-          "err": 0,
-          "acc": 0.8361
-        },
-        "填空题": {
-          "n": 922,
-          "ok": 670,
-          "err": 0,
-          "acc": 0.7267
-        }
-      },
-      "datasetMode": "text",
-      "exportedAt": "2026-08-07T08:38:31.864Z",
-      "excludedCount": 201,
-      "manualJudgeFixed": 23,
-      "multiStrictFixed": 153
+    "填空题": {
+     "n": 922,
+     "ok": 808,
+     "err": 0,
+     "acc": 0.8764
     }
-  ]
+   },
+   "datasetMode": "text",
+   "exportedAt": "2026-08-07T05:36:59.155Z",
+   "excludedCount": 201,
+   "manualJudgeFixed": 20,
+   "multiStrictFixed": 75
+  },
+  {
+   "id": "deepseek-v4.1-flash",
+   "rank": 2,
+   "name": "DeepSeek-V4.1-Flash",
+   "displayName": "DeepSeek-V4.1-Flash",
+   "provider": "DeepSeek",
+   "judgeModel": "严格判 + LLM 逐题复核（deepseek v4.1，非 glm-5.2）",
+   "accuracy": 0.8865,
+   "n": 6302,
+   "correct": 5587,
+   "wrong": 715,
+   "errors": 0,
+   "by_type": {
+    "单选题": {
+     "n": 2827,
+     "ok": 2627,
+     "err": 0,
+     "acc": 0.9293
+    },
+    "多选题": {
+     "n": 1363,
+     "ok": 1069,
+     "err": 0,
+     "acc": 0.7843
+    },
+    "判断题": {
+     "n": 1190,
+     "ok": 1081,
+     "err": 0,
+     "acc": 0.9084
+    },
+    "填空题": {
+     "n": 922,
+     "ok": 810,
+     "err": 0,
+     "acc": 0.8785
+    }
+   },
+   "datasetMode": "text",
+   "exportedAt": "2026-09-22T21:47:40.131684+08:00",
+   "excludedCount": 201,
+   "manualJudgeFixed": 90,
+   "multiStrictFixed": 17
+  },
+  {
+   "id": "doubao-seed-2.1-turbo",
+   "rank": 3,
+   "name": "Doubao-Seed-2.1-Turbo",
+   "displayName": "Doubao-Seed-2.1-Turbo",
+   "provider": "字节跳动",
+   "judgeModel": "glm-5.2-fast-preview",
+   "accuracy": 0.8816,
+   "n": 6302,
+   "correct": 5556,
+   "wrong": 746,
+   "errors": 0,
+   "by_type": {
+    "单选题": {
+     "n": 2827,
+     "ok": 2607,
+     "err": 0,
+     "acc": 0.9222
+    },
+    "多选题": {
+     "n": 1363,
+     "ok": 1106,
+     "err": 0,
+     "acc": 0.8114
+    },
+    "判断题": {
+     "n": 1190,
+     "ok": 1061,
+     "err": 0,
+     "acc": 0.8916
+    },
+    "填空题": {
+     "n": 922,
+     "ok": 782,
+     "err": 0,
+     "acc": 0.8482
+    }
+   },
+   "datasetMode": "text",
+   "exportedAt": "2026-08-07T07:17:01.069Z",
+   "excludedCount": 201,
+   "manualJudgeFixed": 16,
+   "multiStrictFixed": 80
+  },
+  {
+   "id": "qwen3.8-max",
+   "rank": 4,
+   "name": "Qwen3.8-Max",
+   "displayName": "Qwen3.8-Max",
+   "provider": "阿里云",
+   "judgeModel": "glm-5.2-fast-preview",
+   "accuracy": 0.8737,
+   "n": 6302,
+   "correct": 5506,
+   "wrong": 796,
+   "errors": 0,
+   "by_type": {
+    "单选题": {
+     "n": 2827,
+     "ok": 2601,
+     "err": 0,
+     "acc": 0.9201
+    },
+    "多选题": {
+     "n": 1363,
+     "ok": 1062,
+     "err": 0,
+     "acc": 0.7792
+    },
+    "判断题": {
+     "n": 1190,
+     "ok": 1061,
+     "err": 0,
+     "acc": 0.8916
+    },
+    "填空题": {
+     "n": 922,
+     "ok": 782,
+     "err": 0,
+     "acc": 0.8482
+    }
+   },
+   "datasetMode": "text",
+   "exportedAt": "2026-08-06T15:37:28.625Z",
+   "excludedCount": 201,
+   "manualJudgeFixed": 21,
+   "multiStrictFixed": 89
+  },
+  {
+   "id": "gpt-5.6-sol",
+   "rank": 5,
+   "name": "GPT-5.6 Sol",
+   "displayName": "GPT-5.6 Sol",
+   "provider": "OpenAI",
+   "judgeModel": "",
+   "accuracy": 0.8683,
+   "n": 6302,
+   "correct": 5472,
+   "wrong": 830,
+   "errors": 0,
+   "by_type": {
+    "单选题": {
+     "n": 2827,
+     "ok": 2585,
+     "err": 0,
+     "acc": 0.9144
+    },
+    "多选题": {
+     "n": 1363,
+     "ok": 1051,
+     "err": 0,
+     "acc": 0.7711
+    },
+    "判断题": {
+     "n": 1190,
+     "ok": 1053,
+     "err": 0,
+     "acc": 0.8849
+    },
+    "填空题": {
+     "n": 922,
+     "ok": 783,
+     "err": 0,
+     "acc": 0.8492
+    }
+   },
+   "datasetMode": "text",
+   "exportedAt": null,
+   "excludedCount": 201,
+   "manualJudgeFixed": 13,
+   "multiStrictFixed": 93
+  },
+  {
+   "id": "mimo-v2.5",
+   "rank": 6,
+   "name": "MiMO v2.5",
+   "displayName": "MiMO v2.5",
+   "provider": "小米",
+   "judgeModel": "glm-5.2-fast-preview",
+   "accuracy": 0.8464,
+   "n": 6302,
+   "correct": 5334,
+   "wrong": 968,
+   "errors": 0,
+   "by_type": {
+    "单选题": {
+     "n": 2827,
+     "ok": 2556,
+     "err": 0,
+     "acc": 0.9041
+    },
+    "多选题": {
+     "n": 1363,
+     "ok": 995,
+     "err": 0,
+     "acc": 0.73
+    },
+    "判断题": {
+     "n": 1190,
+     "ok": 1046,
+     "err": 0,
+     "acc": 0.879
+    },
+    "填空题": {
+     "n": 922,
+     "ok": 737,
+     "err": 0,
+     "acc": 0.7993
+    }
+   },
+   "datasetMode": "text",
+   "exportedAt": "2026-08-09T13:57:32.886Z",
+   "excludedCount": 201,
+   "manualJudgeFixed": 0,
+   "multiStrictFixed": 0
+  },
+  {
+   "id": "longcat-2.0",
+   "rank": 7,
+   "name": "Longcat 2.0",
+   "displayName": "Longcat 2.0",
+   "provider": "Longcat",
+   "judgeModel": "glm-5.2-fast-preview",
+   "accuracy": 0.8456,
+   "n": 6302,
+   "correct": 5329,
+   "wrong": 973,
+   "errors": 0,
+   "by_type": {
+    "单选题": {
+     "n": 2827,
+     "ok": 2558,
+     "err": 0,
+     "acc": 0.9048
+    },
+    "多选题": {
+     "n": 1363,
+     "ok": 995,
+     "err": 0,
+     "acc": 0.73
+    },
+    "判断题": {
+     "n": 1190,
+     "ok": 1046,
+     "err": 0,
+     "acc": 0.879
+    },
+    "填空题": {
+     "n": 922,
+     "ok": 730,
+     "err": 0,
+     "acc": 0.7918
+    }
+   },
+   "datasetMode": "text",
+   "exportedAt": "2026-08-09T11:35:37.731Z",
+   "excludedCount": 201,
+   "manualJudgeFixed": 0,
+   "multiStrictFixed": 0
+  },
+  {
+   "id": "deepseek-v4-pro",
+   "rank": 8,
+   "name": "DeepSeek-V4-Pro (Pre)",
+   "displayName": "DeepSeek-V4-Pro (Pre)",
+   "provider": "DeepSeek",
+   "judgeModel": "glm-5.2-fast-preview",
+   "accuracy": 0.8426,
+   "n": 6302,
+   "correct": 5310,
+   "wrong": 992,
+   "errors": 0,
+   "by_type": {
+    "单选题": {
+     "n": 2827,
+     "ok": 2538,
+     "err": 0,
+     "acc": 0.8978
+    },
+    "多选题": {
+     "n": 1363,
+     "ok": 988,
+     "err": 0,
+     "acc": 0.7249
+    },
+    "判断题": {
+     "n": 1190,
+     "ok": 1025,
+     "err": 0,
+     "acc": 0.8613
+    },
+    "填空题": {
+     "n": 922,
+     "ok": 759,
+     "err": 0,
+     "acc": 0.8232
+    }
+   },
+   "datasetMode": "text",
+   "exportedAt": "2026-08-08T11:34:41.725Z",
+   "excludedCount": 201,
+   "manualJudgeFixed": 14,
+   "multiStrictFixed": 125
+  },
+  {
+   "id": "grok-4.5",
+   "rank": 9,
+   "name": "Grok 4.5",
+   "displayName": "Grok 4.5",
+   "provider": "xAI",
+   "judgeModel": "glm-5.2-fast-preview",
+   "accuracy": 0.8259,
+   "n": 6302,
+   "correct": 5205,
+   "wrong": 1097,
+   "errors": 0,
+   "by_type": {
+    "单选题": {
+     "n": 2827,
+     "ok": 2453,
+     "err": 0,
+     "acc": 0.8677
+    },
+    "多选题": {
+     "n": 1363,
+     "ok": 1003,
+     "err": 0,
+     "acc": 0.7359
+    },
+    "判断题": {
+     "n": 1190,
+     "ok": 1015,
+     "err": 0,
+     "acc": 0.8529
+    },
+    "填空题": {
+     "n": 922,
+     "ok": 734,
+     "err": 0,
+     "acc": 0.7961
+    }
+   },
+   "datasetMode": "text",
+   "exportedAt": "2026-08-08T04:11:30.349Z",
+   "excludedCount": 201,
+   "manualJudgeFixed": 7,
+   "multiStrictFixed": 64
+  },
+  {
+   "id": "glm-5.2",
+   "rank": 10,
+   "name": "GLM-5.2",
+   "displayName": "GLM-5.2",
+   "provider": "智谱 AI",
+   "judgeModel": "glm-5.2-fast-preview",
+   "accuracy": 0.8231,
+   "n": 6302,
+   "correct": 5187,
+   "wrong": 1115,
+   "errors": 0,
+   "by_type": {
+    "单选题": {
+     "n": 2827,
+     "ok": 2475,
+     "err": 0,
+     "acc": 0.8755
+    },
+    "多选题": {
+     "n": 1363,
+     "ok": 963,
+     "err": 0,
+     "acc": 0.7065
+    },
+    "判断题": {
+     "n": 1190,
+     "ok": 1023,
+     "err": 0,
+     "acc": 0.8597
+    },
+    "填空题": {
+     "n": 922,
+     "ok": 726,
+     "err": 0,
+     "acc": 0.7874
+    }
+   },
+   "datasetMode": "text",
+   "exportedAt": "2026-08-05T07:49:00.026Z",
+   "excludedCount": 201,
+   "manualJudgeFixed": 1,
+   "multiStrictFixed": 117
+  },
+  {
+   "id": "deepseek-v4-flash",
+   "rank": 11,
+   "name": "DeepSeek-V4-Flash",
+   "displayName": "DeepSeek-V4-Flash",
+   "provider": "DeepSeek",
+   "judgeModel": "glm-5.2-fast-preview",
+   "accuracy": 0.8228,
+   "n": 6302,
+   "correct": 5185,
+   "wrong": 1117,
+   "errors": 0,
+   "by_type": {
+    "单选题": {
+     "n": 2827,
+     "ok": 2488,
+     "err": 0,
+     "acc": 0.8801
+    },
+    "多选题": {
+     "n": 1363,
+     "ok": 961,
+     "err": 0,
+     "acc": 0.7051
+    },
+    "判断题": {
+     "n": 1190,
+     "ok": 1006,
+     "err": 0,
+     "acc": 0.8454
+    },
+    "填空题": {
+     "n": 922,
+     "ok": 730,
+     "err": 0,
+     "acc": 0.7918
+    }
+   },
+   "datasetMode": "text",
+   "exportedAt": "2026-08-06T10:59:02.975Z",
+   "excludedCount": 201,
+   "manualJudgeFixed": 37,
+   "multiStrictFixed": 121
+  },
+  {
+   "id": "minimax-m3",
+   "rank": 12,
+   "name": "MiniMax-M3",
+   "displayName": "MiniMax-M3",
+   "provider": "MiniMax",
+   "judgeModel": "glm-5.2-fast-preview",
+   "accuracy": 0.7745,
+   "n": 6302,
+   "correct": 4881,
+   "wrong": 1420,
+   "errors": 1,
+   "by_type": {
+    "单选题": {
+     "n": 2827,
+     "ok": 2357,
+     "err": 1,
+     "acc": 0.8337
+    },
+    "多选题": {
+     "n": 1363,
+     "ok": 859,
+     "err": 0,
+     "acc": 0.6302
+    },
+    "判断题": {
+     "n": 1190,
+     "ok": 995,
+     "err": 0,
+     "acc": 0.8361
+    },
+    "填空题": {
+     "n": 922,
+     "ok": 670,
+     "err": 0,
+     "acc": 0.7267
+    }
+   },
+   "datasetMode": "text",
+   "exportedAt": "2026-08-07T08:38:31.864Z",
+   "excludedCount": 201,
+   "manualJudgeFixed": 23,
+   "multiStrictFixed": 153
+  }
+ ]
 }

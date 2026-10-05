@@ -1,4 +1,4 @@
-import{_ as a,c as s,a as n,F as d,g as c,o as i,t as o}from"./index-CQaaChNY.js";const p={data(){return{logs:[{version:"2.2.8",date:"2026-8-15",description:`相对 2.2.7 主要更新：
+import{_ as a,c as s,a as n,F as d,g as c,o as i,t as o}from"./index-1Ks3QVbw.js";const p={data(){return{logs:[{version:"2.2.8",date:"2026-8-15",description:`相对 2.2.7 主要更新：
 1. 新增 Agent：可以对话讲解，也能识别本地文件并把题目写入题库
 2. 支持 CSV、Excel、Word、PDF、文本导入；题库文件夹可一键整理
 3. 对话可附带图片和文件，视觉模型可直接看图识题

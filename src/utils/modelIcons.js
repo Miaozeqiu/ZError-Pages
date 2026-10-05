@@ -5,6 +5,7 @@ const MODEL_ICONS = {
   'qwen3.8-max': '/models/qwen.png',
   'gpt-5.6-sol': '/models/openai.png',
   'deepseek-v4-flash': '/models/deepseek.png',
+  'deepseek-v4.1-flash': '/models/deepseek.png',
   'deepseek-v4-pro': '/models/deepseek.png',
   'glm-5.2': '/models/glm.png',
   'minimax-m3': '/models/minimax.png',
