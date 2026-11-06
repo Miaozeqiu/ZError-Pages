@@ -1,43 +1,40 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, type RouterHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import DownloadView from '../views/DownloadView.vue'
+import ChangelogView from '../views/ChangelogView.vue'
 
-const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: HomeView,
-    },
-    {
-      path: '/download',
-      name: 'download',
-      component: () => import('../views/DownloadView.vue'),
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/AboutView.vue'),
-    },
-    {
-      path: '/changelog',
-      name: 'changelog',
-      component: () => import('../views/ChangelogView.vue'),
-    },
-    {
-      path: '/leaderboard',
-      name: 'leaderboard',
-      component: () => import('../views/LeaderboardView.vue'),
-    },
-    {
-      path: '/leaderboard/:id',
-      name: 'leaderboard-model',
-      component: () => import('../views/ModelDetailView.vue'),
-    },
-  ],
-  scrollBehavior() {
-    return { top: 0 }
-  },
-})
-
-export default router
+export function makeRouter(history: RouterHistory) {
+  return createRouter({
+    history,
+    routes: [
+      {
+        path: '/',
+        name: 'home',
+        component: HomeView
+      },
+      {
+        path: '/download',
+        name: 'download',
+        component: DownloadView
+      },
+      {
+        path: '/changelog',
+        name: 'changelog',
+        component: ChangelogView
+      },
+      {
+        path: '/leaderboard',
+        name: 'leaderboard',
+        component: () => import('../views/LeaderboardView.vue')
+      },
+      {
+        path: '/leaderboard/:id',
+        name: 'leaderboard-model',
+        component: () => import('../views/ModelDetailView.vue')
+      }
+    ],
+    scrollBehavior() {
+      return { top: 0 }
+    }
+  })
+}

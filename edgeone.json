@@ -17,5 +17,15 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/download",
+      "destination": "/download/index.html"
+    },
+    {
+      "source": "/changelog",
+      "destination": "/changelog/index.html"
+    }
   ]
 }

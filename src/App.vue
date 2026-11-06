@@ -13,7 +13,7 @@
       <div class="nav-links" :class="{ 'active': isMenuOpen }">
         <router-link to="/" @click="closeMenu">首页</router-link>
         <router-link to="/download" @click="closeMenu">下载</router-link>
-        <a href="https://docs.zerror.cc/docs/introduction">文档</a>
+        <a href="https://docs.zerror.cc/introduction">文档</a>
         <router-link to="/leaderboard" @click="closeMenu">模型排行榜</router-link>
         <router-link to="/changelog" @click="closeMenu">更新日志</router-link>
         <a href="https://github.com/Miaozeqiu/ZError" target="_blank" class="github-icon">

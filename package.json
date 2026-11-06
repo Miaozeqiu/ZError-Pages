@@ -7,7 +7,7 @@
     "dev": "vite --port 4000",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
-    "build-only": "vite build",
+    "build-only": "vite build && node scripts/prerender.mjs",
     "leaderboard:split": "node scripts/leaderboard/split-model-detail.mjs",
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",

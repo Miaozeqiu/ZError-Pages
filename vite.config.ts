@@ -5,8 +5,8 @@ import vue from "@vitejs/plugin-vue";
 import vueDevTools from "vite-plugin-vue-devtools";
 
 // https://vite.dev/config/
-export default defineConfig({
-  plugins: [vue(), vueDevTools()],
+export default defineConfig(({ command }) => ({
+  plugins: command === "serve" ? [vue(), vueDevTools()] : [vue()],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
@@ -17,4 +17,4 @@ export default defineConfig({
     port: 5175, // 与当前开发端口保持一致
     strictPort: false, // 如被占用允许自动选择临近端口
   },
-});
+}));

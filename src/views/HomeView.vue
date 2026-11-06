@@ -3,7 +3,7 @@
   <div class="home-page">
     <div class="hero-section">
       <div class="hero-content">
-        <p class="title animate-element">开源的大学生的AI题库</p>
+        <h1 class="title animate-element">开源的大学生的AI题库</h1>
         <p class="subtitle animate-element">
           支持<a
             href="https://docs.ocsjs.com/"
