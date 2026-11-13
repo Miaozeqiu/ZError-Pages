@@ -1,4 +1,4 @@
-export const siteOrigin = 'https://app.zerror.cc'
+export const siteOrigin = 'https://app.zerrorai.com'
 
 const publicPages = {
   '/': {
