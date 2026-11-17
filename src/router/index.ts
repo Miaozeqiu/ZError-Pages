@@ -2,6 +2,7 @@ import { createRouter, type RouterHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import DownloadView from '../views/DownloadView.vue'
 import ChangelogView from '../views/ChangelogView.vue'
+import PrivacyView from '../views/PrivacyView.vue'
 
 export function makeRouter(history: RouterHistory) {
   return createRouter({
@@ -21,6 +22,17 @@ export function makeRouter(history: RouterHistory) {
         path: '/changelog',
         name: 'changelog',
         component: ChangelogView
+      },
+      {
+        path: '/privacy',
+        name: 'privacy',
+        component: PrivacyView
+      },
+      {
+        path: '/privacy/en',
+        name: 'privacy-english',
+        component: PrivacyView,
+        props: { english: true }
       },
       {
         path: '/leaderboard',

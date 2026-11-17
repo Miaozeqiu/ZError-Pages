@@ -30,6 +30,10 @@
         </Transition>
       </router-view>
     </main>
+    <footer class="site-footer">
+      <router-link to="/privacy">隐私政策</router-link>
+      <router-link to="/privacy/en" lang="en">Privacy Policy</router-link>
+    </footer>
   </div>
 </template>
 
@@ -58,6 +62,21 @@ export default {
 </script>
 
 <style>
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.25rem;
+  padding: 1.25rem 1rem;
+  border-top: 1px solid rgba(28, 36, 33, 0.1);
+}
+
+.site-footer a {
+  color: #49565f;
+  font-size: 0.875rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
 
 .page-enter-active,
 .page-leave-active {

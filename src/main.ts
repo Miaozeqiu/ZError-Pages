@@ -15,6 +15,7 @@ app.use(router)
 
 router.afterEach((to) => {
   const page = getPageSeo(to.path)
+  document.documentElement.lang = page.lang
   document.title = page.title
   document.querySelector('meta[name="description"]')?.setAttribute('content', page.description)
   document.querySelector('meta[property="og:title"]')?.setAttribute('content', page.title)

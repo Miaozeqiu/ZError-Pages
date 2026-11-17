@@ -22,6 +22,7 @@ try {
     const page = getPageSeo(path)
     const markup = await render(path)
     const html = shell
+      .replace(/<html lang="[^"]*">/, () => `<html lang="${escape(page.lang)}">`)
       .replace(/<title>[^<]*<\/title>/, () => `<title>${escape(page.title)}</title>`)
       .replace(/(<meta name="description" content=")[^"]*/, (_, tag) => tag + escape(page.description))
       .replace(/(<meta property="og:title" content=")[^"]*/, (_, tag) => tag + escape(page.title))

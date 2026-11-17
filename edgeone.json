@@ -26,6 +26,14 @@
     {
       "source": "/changelog",
       "destination": "/changelog/index.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy/index.html"
+    },
+    {
+      "source": "/privacy/en",
+      "destination": "/privacy/en/index.html"
     }
   ]
 }

@@ -13,6 +13,14 @@ const publicPages = {
     title: 'ZError 更新日志 | 版本发布记录',
     description: '查看 ZError 的版本更新记录，了解题库导入、Agent 对话、模型配置和安装更新的变化。',
   },
+  '/privacy': {
+    title: 'ZError 隐私政策',
+    description: '了解 ZError 桌面软件和官网处理哪些数据、使用哪些第三方服务，以及如何联系项目维护者。',
+  },
+  '/privacy/en': {
+    title: 'ZError Privacy Policy',
+    description: 'Learn what data ZError desktop and its official website process, what services receive data, and how to contact the project.',
+  },
 } as const
 
 export const publicPaths = Object.keys(publicPages)
@@ -20,5 +28,9 @@ export const publicPaths = Object.keys(publicPages)
 export function getPageSeo(path: string) {
   const normalized = path.replace(/\/$/, '') || '/'
   const page = publicPages[normalized as keyof typeof publicPages] || publicPages['/']
-  return { ...page, url: new URL(normalized, siteOrigin).href }
+  return {
+    ...page,
+    url: new URL(normalized, siteOrigin).href,
+    lang: normalized === '/privacy/en' ? 'en' : 'zh-CN',
+  }
 }
