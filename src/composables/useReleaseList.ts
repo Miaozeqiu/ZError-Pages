@@ -1,11 +1,13 @@
 import { onMounted, ref } from 'vue'
 
 export const githubReleases = 'https://github.com/Miaozeqiu/ZError/releases'
-const releaseApi = 'https://open.zerrorai.com/v1/app-updates/releases'
+const openAppUpdates = 'https://open.zerrorai.com/v1/app-updates'
+const releaseApi = openAppUpdates + '/releases'
+const downloadBase = openAppUpdates + '/download/'
 
 type Installer = {
   name: string
-  url: string
+  downloadUrl: string
   platform: 'windows' | 'macos' | 'linux'
   arch: string
   format: 'exe' | 'msi' | 'dmg' | 'appimage' | 'deb'
@@ -35,7 +37,7 @@ function verifyReleases(list: unknown): Release[] {
         && ['exe', 'msi', 'dmg', 'appimage', 'deb'].includes(asset.format)
         && typeof asset.name === 'string' && /^[a-zA-Z0-9_.-]+$/.test(asset.name)
         && typeof asset.arch === 'string'
-        && asset.url === githubReleases + '/download/' + release.tag + '/' + asset.name),
+        && asset.downloadUrl === downloadBase + release.tag + '/' + asset.name),
     }))
 }
 

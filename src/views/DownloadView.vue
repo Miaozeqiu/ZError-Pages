@@ -14,9 +14,9 @@
         <div class="os-badge" :class="group.badge">{{ group.name }}</div>
         <a
           v-for="asset in group.installers"
-          :key="asset.url"
+          :key="asset.downloadUrl"
           class="download-btn"
-          :href="asset.url"
+          :href="asset.downloadUrl"
           :aria-label="'下载 ' + group.name + ' ' + (architectureNames[asset.arch] || asset.arch) + ' ' + formatNames[asset.format]"
         >
           {{ architectureNames[asset.arch] || asset.arch }} · {{ formatNames[asset.format] }}
