@@ -2,8 +2,10 @@
   <div class="app-container">
     <nav>
       <div class="nav-brand">
-        <img src="@/assets/zerror.svg" alt="Logo" class="nav-logo">
-        <span class="brand-name">RROR</span>
+        <router-link to="/" class="nav-brand-link" active-class="brand-current" exact-active-class="brand-current" aria-label="返回 ZError 官网首页" @click="closeMenu">
+          <img src="@/assets/zerror.svg" alt="" width="28" height="28" class="nav-logo">
+          <span class="brand-name">ZError<span class="brand-dot">.</span></span>
+        </router-link>
       </div>
       <button class="hamburger" @click="toggleMenu">
         <svg t="1744518248746" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4556" width="24" height="24">
@@ -11,8 +13,19 @@
         </svg>
       </button>
       <div class="nav-links" :class="{ 'active': isMenuOpen }">
-        <router-link to="/" @click="closeMenu">首页</router-link>
-        <router-link to="/download" @click="closeMenu">下载</router-link>
+        <router-link
+          to="/"
+          :exact-active-class="$route.hash ? 'home-nav-anchor' : 'router-link-exact-active'"
+          :aria-current-value="$route.hash ? 'false' : 'page'"
+          @click="closeMenu"
+        >首页</router-link>
+        <router-link
+          to="/#all-downloads"
+          exact-active-class="download-nav-anchor"
+          :class="{ 'router-link-exact-active': $route.path === '/' && $route.hash.startsWith('#') }"
+          :aria-current-value="$route.hash ? 'location' : 'false'"
+          @click="closeMenu"
+        >下载</router-link>
         <a href="https://docs.zerror.cc/introduction">文档</a>
         <router-link to="/leaderboard" @click="closeMenu">模型排行榜</router-link>
         <router-link to="/changelog" @click="closeMenu">更新日志</router-link>
@@ -30,17 +43,16 @@
         </Transition>
       </router-view>
     </main>
-    <footer class="site-footer">
-      <router-link to="/privacy">隐私政策</router-link>
-      <router-link to="/privacy/en" lang="en">Privacy Policy</router-link>
-    </footer>
+    <SiteFooter />
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
+import SiteFooter from '@/components/SiteFooter.vue'
 
 export default {
+  components: { SiteFooter },
   setup() {
     const isMenuOpen = ref(false)
 
@@ -62,22 +74,6 @@ export default {
 </script>
 
 <style>
-.site-footer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem 1.25rem;
-  padding: 1.25rem 1rem;
-  border-top: 1px solid rgba(28, 36, 33, 0.1);
-}
-
-.site-footer a {
-  color: #49565f;
-  font-size: 0.875rem;
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-}
-
 .page-enter-active,
 .page-leave-active {
   transition:
@@ -163,6 +159,8 @@ body {
 }
 
 nav {
+  box-sizing: border-box;
+  min-height: 64px;
   position: fixed;
   top: 0;
   left: 0;
@@ -184,8 +182,23 @@ nav {
 }
 
 .nav-logo {
-  height: 48px; /* 稍微缩小图标 */
-  width: 48px;
+  display: block;
+  height: 28px;
+  width: 28px;
+  border-radius: 7px;
+}
+
+.nav-brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.nav-brand-link:focus-visible {
+  outline: 2px solid #fcb334;
+  outline-offset: 4px;
+  border-radius: 7px;
 }
 
 .nav-links {
@@ -194,12 +207,16 @@ nav {
 }
 
 .brand-name {
-  font-family: "Avenir Next Condensed", Futura, "Century Gothic", "Gill Sans", sans-serif;
-  font-size: 2.35rem;
-  font-weight: 700;
-  color: #FCB334;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-family: system-ui, -apple-system, "PingFang SC", sans-serif;
+  font-size: 23px;
+  font-weight: 750;
+  line-height: 32px;
+  color: #171717;
+  letter-spacing: -0.8px;
+}
+
+.brand-dot {
+  color: #f5a400;
 }
 
 .nav-links {

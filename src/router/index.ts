@@ -45,7 +45,11 @@ export function makeRouter(history: RouterHistory) {
         component: () => import('../views/ModelDetailView.vue')
       }
     ],
-    scrollBehavior() {
+    scrollBehavior(to, _from, savedPosition) {
+      if (to.path === '/' && /^#(?:all-downloads|download-(?:macos|windows|linux))$/.test(to.hash)) {
+        return { el: to.hash, top: 95 }
+      }
+      if (savedPosition) return savedPosition
       return { top: 0 }
     }
   })

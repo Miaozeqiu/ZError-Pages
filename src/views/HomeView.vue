@@ -3,8 +3,8 @@
   <div class="home-page">
     <div class="hero-section">
       <div class="hero-content">
-        <h1 class="title animate-element">开源的大学生的AI题库</h1>
-        <p class="subtitle animate-element">
+        <h1 class="title home-hero-title">开源的大学生 AI 题库</h1>
+        <p class="subtitle home-hero-subtitle">
           支持<a
             href="https://docs.ocsjs.com/"
             target="_blank"
@@ -12,66 +12,41 @@
             >OCS网课助手</a
           >
         </p>
-        <div class="button-group animate-element">
-          <router-link to="/download" class="cta-button">立即下载</router-link>
-          <a href="https://tiku.zerror.cc" class="cta-button bank-button">在线题库</a>
+        <div class="home-download-actions">
+          <div class="home-download-choice">
+            <a v-if="recommended" :href="recommended.downloadUrl" class="home-action-button home-action-download">
+              <img :src="downloadPlatformIcons[recommended.platform]" alt="" class="home-download-system-icon" width="24" height="24" />
+              <span>
+                <strong>立即下载 ZError</strong>
+                <small>{{ recommended.platformName }} · {{ recommended.architecture }} · {{ recommended.fileFormat }}</small>
+              </span>
+            </a>
+            <router-link
+              v-else
+              :to="{ path: '/', hash: platformGroup ? '#download-' + platformGroup.id : '#all-downloads' }"
+              class="home-action-button home-action-download"
+            >
+              <img v-if="platformGroup" :src="downloadPlatformIcons[platformGroup.id]" alt="" class="home-download-system-icon" width="24" height="24" />
+              <ActionIcon v-else name="download" class="home-fallback-download-icon" />
+              <span>
+                <strong>{{ platformGroup ? '选择 ' + platformGroup.name + ' 安装包' : '查看全部下载' }}</strong>
+                <small v-if="downloadStatus === 'loading'">正在读取可用版本…</small>
+              </span>
+            </router-link>
+            <router-link v-if="recommended || platformGroup" to="/#all-downloads" class="home-download-secondary">
+              查看全部下载 <ActionIcon name="chevron-down" />
+            </router-link>
+          </div>
+          <a href="https://tiku.zerror.cc" class="home-action-button home-action-bank">
+            <img :src="bankIcon" alt="" width="24" height="24" class="home-bank-icon" />
+            <span>
+              <strong>在线题库</strong>
+              <small>在浏览器中使用</small>
+            </span>
+          </a>
         </div>
       </div>
-      <img src="@/assets/ZError2.0.0.png" alt="ZError首页" class="hero-image animate-element" />
-    </div>
-
-    <div class="search-feature-section">
-      <div class="search-feature-content">
-        <h3 class="search-feature-title animate-element">多模型并发请求。</h3>
-        <p class="search-feature-desc animate-element">
-          支持多个模型并发请求，并由总结模型最终给出答案，提高回答准确性。
-        </p>
-      </div>
-      <div class="feature-visual-stack animate-element">
-        <canvas ref="featureCanvas" class="feature-canvas" width="800" height="600" alt="功能展示"></canvas>
-      </div>
-    </div>
-
-    <div class="search-feature-section reverse">
-      <div class="search-feature-content">
-        <h3 class="search-feature-title animate-element">完美支持图片题目。</h3>
-        <p class="search-feature-desc animate-element">
-          完美兼容 OCS 网课助手。借助强大的视觉大模型，能够轻松识别并解析复杂的公式，实现图片题目的自动回答。
-        </p>
-      </div>
-      <div class="feature-visual-stack animate-element">
-        <canvas ref="ocsCanvas" class="feature-canvas" width="800" height="600" alt="OCS与视觉模型展示"></canvas>
-      </div>
-    </div>
-
-    <div v-if="showPromoAd" class="promo-ad-section animate-element">
-      <a
-        href="https://c.submarinedrivers.top/register?invite=yy2ak4rr"
-        target="_blank"
-        rel="noopener"
-        class="promo-ad-card"
-      >
-        <img :src="promoAdImage" alt="Cheaptokens 广告" class="promo-ad-image" />
-        <span class="promo-ad-badge">广告</span>
-      </a>
-      <button
-        type="button"
-        class="promo-ad-close"
-        aria-label="关闭广告"
-        @click="closePromoAd"
-      >
-        <svg
-          viewBox="0 0 1024 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-        >
-          <path
-            d="M571.01312 523.776l311.3472-311.35232c15.7184-15.71328 15.7184-41.6256 0-57.344l-1.69472-1.69984c-15.7184-15.71328-41.6256-15.71328-57.34912 0l-311.3472 311.77728-311.35232-311.77728c-15.7184-15.71328-41.63072-15.71328-57.344 0l-1.69984 1.69984a40.0128 40.0128 0 0 0 0 57.344L452.92544 523.776l-311.35232 311.35744c-15.71328 15.71328-15.71328 41.63072 0 57.33888l1.69984 1.69984c15.71328 15.7184 41.6256 15.7184 57.344 0l311.35232-311.35232 311.3472 311.35232c15.72352 15.7184 41.63072 15.7184 57.34912 0l1.69472-1.69984c15.7184-15.70816 15.7184-41.6256 0-57.33888l-311.3472-311.35744z"
-          ></path>
-        </svg>
-      </button>
+      <img src="@/assets/ZError2.0.0.png" alt="ZError首页" width="1407" height="942" class="hero-image animate-element" />
     </div>
 
     <div class="platform-section animate-element">
@@ -116,191 +91,75 @@
       </div>
     </div>
 
-    <!-- 交流分享区域 -->
-    <div class="communication-section">
-      <div class="comm-header">
-        <h3 class="comm-title animate-element">交流分享</h3>
-        <p class="comm-subtitle animate-element">加入社区，获取最新资讯</p>
+    <div class="search-feature-section">
+      <div class="search-feature-content">
+        <h3 class="search-feature-title animate-element">多模型并发请求。</h3>
+        <p class="search-feature-desc animate-element">
+          支持多个模型并发请求，并由总结模型最终给出答案，提高回答准确性。
+        </p>
       </div>
-      <div class="comm-items">
-        <!-- QQ Group -->
-        <div class="comm-item animate-element">
-          <div class="comm-link-wrapper">
-            <div class="comm-icon-wrapper">
-              <svg
-                t="1764490701048"
-                class="icon"
-                viewBox="0 0 1024 1024"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                p-id="5616"
-                width="40"
-                height="40"
-              >
-                <path
-                  d="M824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3C766.5 262.2 689.3 112 511.5 112 331.7 112 256.2 265.2 261 447.9c-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z"
-                  p-id="5617"
-                  fill="#12B7F5"
-                ></path>
-              </svg>
-            </div>
-            <div class="comm-text">
-              <p class="comm-name">QQ群聊</p>
-              <a href="https://qm.qq.com/q/yfMO6AqVyM" target="_blank" class="comm-link"
-                >点击加入</a
-              >
-            </div>
-          </div>
-          <div class="comm-qr">
-            <img :src="qqGroupQr" alt="QQ Group QR" />
-          </div>
-        </div>
-
-        <!-- Channel -->
-        <div class="comm-item animate-element">
-          <div class="comm-link-wrapper">
-            <div class="comm-icon-wrapper">
-              <svg
-                t="1764490832120"
-                class="icon"
-                viewBox="0 0 1024 1024"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                p-id="6604"
-                width="40"
-                height="40"
-              >
-                <path
-                  d="M630.125714 1001.033143l-78.774857-153.088H262.144l-24.868571 158.866286-155.794286-22.966858 21.284571-135.899428H0V694.857143h126.683429l59.830857-382.756572H0V159.012571h210.432L235.300571 0l155.794286 22.966857-21.284571 135.972572h389.705143L783.945143 0l155.794286 22.966857-20.918858 136.045714H1024v153.088h-128.731429L836.461714 694.857143H1024v153.088h-211.017143L785.92 1024l-155.794286-22.966857z m105.837715-689.005714H345.965714L285.988571 694.857143h265.289143l104.96 135.899428 79.725715-518.656z"
-                  fill="#28C9DA"
-                  p-id="6605"
-                ></path>
-              </svg>
-            </div>
-            <div class="comm-text">
-              <p class="comm-name">ZE题库交流</p>
-              <a href="https://pd.qq.com/s/51jqhjhn9" target="_blank" class="comm-link"
-                >点击加入频道</a
-              >
-            </div>
-          </div>
-          <div class="comm-qr">
-            <img :src="channelQr" alt="Channel QR" />
-          </div>
-        </div>
+      <div class="feature-visual-stack animate-element">
+        <canvas ref="featureCanvas" class="feature-canvas" width="800" height="600" alt="功能展示"></canvas>
       </div>
     </div>
 
-    <!-- 移动社交媒体区域到平台区域之后 -->
-    <div class="social-media-section">
-      <div class="social-header">
-        <h3 class="social-title animate-element">关注我们</h3>
-        <p class="social-subtitle animate-element">了解开发者动态</p>
+    <div class="search-feature-section reverse">
+      <div class="search-feature-content">
+        <h3 class="search-feature-title animate-element">完美支持图片题目。</h3>
+        <p class="search-feature-desc animate-element">
+          完美兼容 OCS 网课助手。借助强大的视觉大模型，能够轻松识别并解析复杂的公式，实现图片题目的自动回答。
+        </p>
       </div>
-      <div class="social-icons">
-        <div class="social-item animate-element">
-          <a class="social-icon wechat">
-            <svg
-              t="1744442807199"
-              class="icon"
-              viewBox="0 0 1024 1024"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              p-id="11101"
-              width="24"
-              height="24"
-            >
-              <path
-                d="M1010.8 628c0-141.2-141.3-256.2-299.9-256.2-168 0-300.3 115.1-300.3 256.2 0 141.4 132.3 256.2 300.3 256.2 35.2 0 70.7-8.9 106-17.7l96.8 53-26.6-88.2c70.9-53.2 123.7-123.7 123.7-203.3zM618 588.8c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40c0 22-17.9 40-40 40z m194.3-0.3c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40z"
-                fill="#00C800"
-                p-id="11102"
-              ></path>
-              <path
-                d="M366.3 106.9c-194.1 0-353.1 132.3-353.1 300.3 0 97 52.9 176.6 141.3 238.4l-35.3 106.2 123.4-61.9c44.2 8.7 79.6 17.7 123.7 17.7 11.1 0 22.1-0.5 33-1.4-6.9-23.6-10.9-48.3-10.9-74 0-154.3 132.5-279.5 300.2-279.5 11.5 0 22.8 0.8 34 2.1C692 212.6 539.9 106.9 366.3 106.9zM247.7 349.2c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48z m246.6 0c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48z"
-                fill="#00C800"
-                p-id="11103"
-              ></path>
-            </svg>
-          </a>
-          <div class="social-text">
-            <p class="social-name">@未耕之地</p>
-            <p class="social-desc">微信公众号</p>
-          </div>
-        </div>
-
-        <div class="social-item animate-element">
-          <a href="https://space.bilibili.com/3546886514412225" class="social-icon bilibili">
-            <svg
-              t="1744443533641"
-              class="icon"
-              viewBox="0 0 1024 1024"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              p-id="12093"
-              width="24"
-              height="24"
-            >
-              <path
-                d="M387.5 241.7l-74.9-72.6s-11.7-14.4 8.1-30.7c19.9-16.2 20.9-9 27.6-4.5 6.7 4.5 111.4 107.8 111.4 107.8h-72.2z m248.8 2.7l74.9-72.6s11.7-14.4-8.1-30.7c-19.8-16.2-20.9-9-27.6-4.5-6.7 4.5-111.4 107.8-111.4 107.8h72.2z"
-                fill="#FB759C"
-                p-id="12094"
-              ></path>
-              <path
-                d="M917.4 378.8c-2.7-113.7-101.5-135.3-101.5-135.3s-506.2-4.1-611.8 0c-105.6 29.8-97.5 135.3-97.5 135.3s1.4 226-0.1 340.4c11.4 114.4 99.6 132.6 99.6 132.6s35.2 0.7 60.9 0.7c2.7 7.4 4.7 43.3 44.7 43.3 39.9 0 44.7-43.3 44.7-43.3s292.4-1.4 316.7-1.4c1.4 12.2 7.4 45.3 47.4 44.7 39.9-0.7 42.6-47.4 42.6-47.4s13.5-1.4 54.1 0c94.7-17.6 100.2-128.6 100.2-128.6s-1.3-227.3 0-341z m-81.5 361.9c0 17.9-14.2 32.5-31.7 32.5H227.9c-17.5 0-31.7-14.5-31.7-32.5V359c0-17.9 14.2-32.5 31.7-32.5h576.3c17.5 0 31.7 14.5 31.7 32.5v381.7z"
-                fill="#FB759C"
-                p-id="12095"
-              ></path>
-              <path
-                d="M256.9 466.8l169.2-32.5 12.8 63.6-167.8 32.5z m526.5 0l-169.2-32.5-12.9 63.6 167.9 32.5zM438.9 624.5s37.2 67 78.5-21.7c39.9 86.6 83.9 23 83.9 23l25 16.3s-46.7 75.1-108.3 18.3c-52.1 56.8-106.9-18.1-106.9-18.1l27.8-17.8z"
-                fill="#FB759C"
-                p-id="12096"
-              ></path>
-            </svg>
-          </a>
-          <div class="social-text">
-            <p class="social-name">@M0zey</p>
-            <p class="social-desc">Bilibili</p>
-          </div>
-        </div>
+      <div class="feature-visual-stack animate-element">
+        <canvas ref="ocsCanvas" class="feature-canvas" width="800" height="600" alt="OCS与视觉模型展示"></canvas>
       </div>
     </div>
+
+    <SiteCommunity />
+
   </div>
-  <!-- 美化的底部banner -->
-  <div class="footer-banner">
-    <div class="banner-content">
-      <div class="banner-text">
-        <span class="sponsored-text">Sponsored by</span>
-        <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap">
-          <a
-            href="https://secbit.ai/zh-tw/?forcelang=zh"
-            target="_blank"
-            rel="noopener"
-            class="sponsor-link"
-          >
-            <img src="@/assets/secbit.gif" alt="Sponsor Animation" class="sponsor-gif" />
-          </a>
-          <a
-            href="https://cloud.tencent.com/act/cps/redirect?redirect=2446&cps_key=a07574348b7b0918d22e10c0485db25a&from=console"
-            target="_blank"
-            rel="noopener"
-            class="sponsor-link"
-          >
-            <img
-              src="@/assets/rhino-design-480x320.png"
-              alt="Tencent Cloud"
-              class="sponsor-gif sponsor-gif-tencent"
-            />
-          </a>
-        </div>
+    <section id="all-downloads" ref="downloadsSection" class="home-downloads" aria-labelledby="home-downloads-heading">
+      <div class="home-downloads-heading">
+        <h2 id="home-downloads-heading">让学习，轻松一点。</h2>
+        <span v-if="latest" class="home-release-version">正式版 v{{ latest.version }}</span>
       </div>
-      <div class="netlify-section">
-        <span class="deployed-text">Deployed on</span>
-        <a href="https://www.netlify.com/" target="_blank" rel="noopener" class="netlify-link">
-          <img src="@/assets/netlify.svg" alt="Netlify Logo" class="netlify-logo" />
-        </a>
+      <div v-if="groups.length" class="home-download-grid">
+        <section
+          v-for="group in groups"
+          :id="'download-' + group.id"
+          :key="group.id"
+          class="home-download-platform"
+          :aria-labelledby="'download-label-' + group.id"
+        >
+          <h3 :id="'download-label-' + group.id">
+            <img :src="downloadListIcons[group.id]" alt="" width="20" height="20" />
+            {{ group.name }}
+          </h3>
+          <ul>
+            <li v-for="installer in group.installers" :key="installer.downloadUrl">
+              <a
+                :href="installer.downloadUrl"
+                :aria-label="'下载 ' + group.name + ' ' + installer.architecture + ' ' + installer.fileFormat"
+              >
+                <strong>{{ installer.architecture }}</strong>
+                <span class="home-installer-format">{{ installer.fileFormat }}</span>
+                <ActionIcon name="download" class="home-installer-icon" />
+              </a>
+            </li>
+          </ul>
+        </section>
+
       </div>
-    </div>
-  </div>
+      <p v-else class="home-download-status" role="status">
+        {{ downloadStatus === 'loading' ? '正在读取发布列表…' : '暂时无法从官网获取安装包。' }}
+      </p>
+      <div class="home-download-resources">
+        <router-link to="/changelog">更新日志</router-link>
+        <a :href="latest?.releaseUrl || githubReleases">GitHub 发布页</a>
+      </div>
+    </section>
+
+
   </div>
 </template>
 
@@ -308,34 +167,54 @@
 import siliconSvg from "@/assets/硅基.svg?raw";
 import bailianSvg from "@/assets/百炼.svg?raw";
 import deepseekSvg from "@/assets/deepseek.svg?raw"; // 新增导入
-import qqGroupQr from "@/assets/qrcode_1764491285880.jpg";
-import channelQr from "@/assets/qrcode_1764491300797.jpg";
 import multiModelImage from "@/assets/multi-model.png";
 import questionImage from "@/assets/question.png";
 import ocsImage from "@/assets/ocs.png";
 import visionImage from "@/assets/vision.png";
-import promoAdImage from "../../画板 3 (3).png";
+import appleDownloadIcon from "@/assets/download-apple.svg";
+import windowsDownloadIcon from "@/assets/download-windows.svg";
+import linuxDownloadIcon from "@/assets/download-linux.svg";
+import windowsColorIcon from "@/assets/platform-windows-color.svg";
+import linuxColorIcon from "@/assets/platform-linux-color.svg";
+import bankIcon from "@/assets/lucide-globe.svg";
+import ActionIcon from "@/components/ActionIcon.vue";
+import SiteCommunity from "@/components/SiteCommunity.vue";
 import { onMounted, ref } from "vue";
+import { useRoute } from "vue-router";
+import { useHomeDownloads } from "@/composables/useHomeDownloads";
 import "@/assets/styles/home.css"; // 导入样式文件
 
+const downloadPlatformIcons = {
+  macos: appleDownloadIcon,
+  windows: windowsDownloadIcon,
+  linux: linuxDownloadIcon,
+};
+
+const downloadListIcons = {
+  macos: appleDownloadIcon,
+  windows: windowsColorIcon,
+  linux: linuxColorIcon,
+};
+
 export default {
+  components: { ActionIcon, SiteCommunity },
   data() {
     return {
       siliconSvg,
       bailianSvg,
       deepseekSvg, // 新增数据项
-      qqGroupQr,
-      channelQr,
     };
   },
   setup() {
+    const route = useRoute();
+    const downloadsSection = ref(null);
+    const { latest, status: downloadStatus, groups, platformGroup, recommended, githubReleases } = useHomeDownloads();
+    onMounted(() => {
+      if (route.hash === "#all-downloads") downloadsSection.value?.scrollIntoView();
+    });
+
     const featureCanvas = ref(null);
     const ocsCanvas = ref(null);
-    const showPromoAd = ref(true);
-
-    const closePromoAd = () => {
-      showPromoAd.value = false;
-    };
 
     // Helper for rounded rect clipping
     const roundRect = (ctx, x, y, width, height, radius) => {
@@ -562,11 +441,314 @@ export default {
 
     return {
       featureCanvas,
+      downloadsSection,
+      latest,
+      downloadStatus,
+      groups,
+      platformGroup,
+      recommended,
+      downloadPlatformIcons,
+      downloadListIcons,
+      bankIcon,
+      githubReleases,
       ocsCanvas,
-      promoAdImage,
-      showPromoAd,
-      closePromoAd,
     };
   },
 };
 </script>
+
+<style scoped>
+.hero-section {
+  margin-top: clamp(3.25rem, 7vw, 6.5rem);
+  margin-bottom: clamp(2.9rem, 6vw, 5rem);
+}
+
+.home-hero-title {
+  margin-bottom: 1rem;
+  color: #272019;
+  font-size: clamp(2.2rem, 5.7vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.home-hero-subtitle {
+  margin-top: 0;
+  margin-bottom: 1.6rem;
+  font-weight: 400;
+}
+
+.home-download-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 0.65rem 0.85rem;
+  width: min(100%, 30rem);
+}
+
+.home-download-choice {
+  display: grid;
+  min-width: 0;
+  gap: 0.2rem;
+}
+
+.home-action-button {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  min-height: 60px;
+  padding: 0.62rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  text-align: left;
+  text-decoration: none;
+}
+
+.home-action-download {
+  border-color: #fcb334;
+  background: #fcb334;
+  color: #fff;
+}
+
+.home-action-bank {
+  border-color: #f6dfb0;
+  background: #fffbf3;
+  color: #fcb334;
+}
+
+.home-action-button strong,
+.home-action-button small {
+  display: block;
+  line-height: 1.35;
+}
+
+.home-action-button strong {
+  font-size: 0.975rem;
+  font-weight: 650;
+}
+
+.home-action-button small {
+  margin-top: 0.2rem;
+  color: inherit;
+  font-size: 0.73rem;
+  font-weight: 500;
+}
+
+.home-action-bank small {
+  color: inherit;
+}
+
+.home-action-bank strong {
+  font-weight: 600;
+}
+
+.home-fallback-download-icon {
+  flex: 0 0 24px;
+  font-size: 1.3rem;
+}
+
+.home-download-system-icon {
+  flex: 0 0 24px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.home-bank-icon {
+  flex: 0 0 24px;
+  object-fit: contain;
+}
+
+.home-download-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-self: center;
+  gap: 0.4rem;
+  min-height: 40px;
+  padding: 0 0.55rem;
+  border-radius: 8px;
+  color: #4a5568;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.home-download-secondary .action-icon {
+  font-size: 0.75rem;
+}
+
+.home-downloads {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1120px;
+  margin: clamp(3rem, 6vw, 5rem) auto 0;
+  padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 4vw, 3rem) 1.75rem;
+  border: 1px solid #ffbf51;
+  border-radius: 24px;
+  background: linear-gradient(115deg, #f3a321 0%, #fcb334 45%, #ffd574 100%);
+  color: #292118;
+  scroll-margin-top: 95px;
+}
+
+.home-downloads-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.home-downloads-heading h2 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+
+.home-release-version {
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.home-download-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  align-items: start;
+  gap: 0.8rem;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.home-download-platform {
+  min-width: 0;
+  padding: 1.25rem 1rem 1rem;
+  border: 1px solid rgb(255 255 255 / 65%);
+  border-radius: 15px;
+  background: #fffdf9;
+  box-shadow: 0 4px 14px rgb(169 98 0 / 5%);
+  scroll-margin-top: 95px;
+}
+
+.home-download-platform h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 0 0 1rem;
+  color: #30261a;
+  font-size: 1.125rem;
+  font-weight: 650;
+}
+
+.home-download-platform h3 img {
+  flex: none;
+  object-fit: contain;
+}
+
+.home-download-platform ul {
+  display: grid;
+  gap: 0.42rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home-download-platform li a {
+  display: flex;
+  box-sizing: border-box;
+  min-height: 47px;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid rgb(140 70 0 / 10%);
+  border-radius: 9px;
+  background: #fff8eb;
+  box-shadow: 0 1px 2px rgb(140 70 0 / 12%);
+  color: #4b3a20;
+  font-size: 0.88rem;
+  text-decoration: none;
+}
+
+.home-installer-format {
+  padding: 0.15rem 0.35rem;
+  border-radius: 5px;
+  background: #fff;
+  color: #635137;
+  font-size: 0.72rem;
+}
+
+.home-installer-icon {
+  margin-left: auto;
+  color: #815519;
+  font-size: 1.12rem;
+}
+
+.home-download-status {
+  margin: 0;
+  color: #fff;
+  text-align: center;
+}
+
+.home-download-resources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  justify-content: center;
+  margin-top: 1.3rem;
+}
+
+.home-download-resources a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 0.25rem;
+  color: #613d0b;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.home-root :is(.home-download-actions, .home-downloads) a:focus-visible {
+  outline: 2px solid #865718;
+  outline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .home-action-download:hover {
+    border-color: #f1a91f;
+    background: #f1a91f;
+  }
+
+  .home-action-bank:hover {
+    border-color: #f0cd88;
+    background: #fff6e5;
+  }
+
+  .home-download-platform li a:hover {
+    background: #fff4df;
+    box-shadow: 0 2px 4px rgb(140 70 0 / 14%);
+  }
+
+  .home-download-secondary:hover,
+  .home-download-resources a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+}
+
+@media (max-width: 1800px) {
+  .home-download-actions {
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 570px) {
+  .home-download-actions {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 20rem;
+  }
+}
+</style>
