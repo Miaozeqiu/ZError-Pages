@@ -2,89 +2,62 @@
   <div class="download-page">
     <div class="download-header">
       <h1>下载 ZError</h1>
-      <p class="subtitle">选择适合你系统的安装包 · 当前版本 {{ version }}</p>
+      <p v-if="latest" class="subtitle">当前正式版 v{{ latest.version }}</p>
     </div>
 
-    <div class="download-grid">
-      <section class="download-card is-disabled">
-        <div class="os-badge mac">macOS</div>
-        <h2>Mac（Apple Silicon）</h2>
-        <p class="hint">macOS 版暂时下架，修复安装签名问题后会重新开放。</p>
-        <button class="download-btn is-disabled" type="button" disabled>
-          暂时不可用
-        </button>
-        <p class="meta">敬请关注后续更新</p>
-      </section>
+    <p v-if="status === 'loading'" class="subtitle" role="status">正在读取发布列表…</p>
+    <p v-else-if="status === 'error'" class="subtitle" role="status">暂时无法读取发布列表。</p>
+    <p v-else-if="!groups.length" class="subtitle" role="status">当前正式版没有可用的安装包。</p>
 
-      <section class="download-card">
-        <div class="os-badge win">Windows</div>
-        <h2>Windows x64</h2>
-        <p class="hint">适用于 64 位 Windows。下载后直接运行安装程序。</p>
-        <a class="download-btn" :href="winUrl" download>
-          下载 Windows 版
+    <div v-if="groups.length" class="download-grid">
+      <section v-for="group in groups" :key="group.platform" class="download-card">
+        <div class="os-badge" :class="group.badge">{{ group.name }}</div>
+        <a
+          v-for="asset in group.installers"
+          :key="asset.url"
+          class="download-btn"
+          :href="asset.url"
+          :aria-label="'下载 ' + group.name + ' ' + (architectureNames[asset.arch] || asset.arch) + ' ' + formatNames[asset.format]"
+        >
+          {{ architectureNames[asset.arch] || asset.arch }} · {{ formatNames[asset.format] }}
         </a>
-        <p class="meta">{{ winFileName }}</p>
       </section>
     </div>
 
-    <div class="changelog-box" v-if="changelog">
+    <div v-if="latest?.notes" class="changelog-box">
       <h3>本版更新</h3>
-      <pre class="changelog-text">{{ changelog }}</pre>
-      <router-link class="more-link" to="/changelog">查看完整更新日志</router-link>
+      <pre class="changelog-text">{{ latest.notes }}</pre>
+    </div>
+
+    <div class="release-links">
+      <router-link class="more-link" to="/changelog">更新日志</router-link>
+      <a class="more-link" :href="latest?.releaseUrl || githubReleases">GitHub 发布页</a>
     </div>
   </div>
 </template>
 
-<script>
-const FALLBACK = {
-  version: '2.2.8',
-  winUrl: 'https://webapi.zaizhexue.top/apps/ZError_2.2.8_x64-setup_r2.exe',
-}
+<script setup lang="ts">
+import { computed } from 'vue'
+import { githubReleases, useReleaseList } from '../composables/useReleaseList'
 
-function applyVersionPayload(vm, data) {
-  if (!data || typeof data !== 'object') return
-  if (data.version) vm.version = data.version
-  if (data.downloadUrlWin || data.downloadUrlWindows || data.downloadUrl) {
-    vm.winUrl = data.downloadUrlWin || data.downloadUrlWindows || data.downloadUrl
-  }
-  if (data.changelog) vm.changelog = data.changelog
+const platforms = [
+  { platform: 'windows', name: 'Windows', badge: 'win' },
+  { platform: 'macos', name: 'macOS', badge: 'mac' },
+  { platform: 'linux', name: 'Linux', badge: 'linux' },
+] as const
+const architectureNames: Record<string, string> = {
+  x86_64: 'x64',
+  aarch64: 'ARM64',
+  i686: 'x86',
+  universal: '通用版',
 }
-
-export default {
-  name: 'DownloadView',
-  data() {
-    return {
-      version: FALLBACK.version,
-      winUrl: FALLBACK.winUrl,
-      changelog: '',
-    }
-  },
-  computed: {
-    winFileName() {
-      try {
-        return decodeURIComponent(new URL(this.winUrl).pathname.split('/').pop() || '')
-      } catch {
-        return 'ZError Windows.exe'
-      }
-    },
-  },
-  async mounted() {
-    const sources = [
-      'https://webapi.zaizhexue.top/live/latest_version.json',
-      '/latest_version.json',
-    ]
-    for (const url of sources) {
-      try {
-        const res = await fetch(url, { cache: 'no-store' })
-        if (!res.ok) continue
-        applyVersionPayload(this, await res.json())
-        return
-      } catch (e) {
-        console.warn('加载版本信息失败', url, e)
-      }
-    }
-  },
-}
+const formatNames = { exe: 'EXE', msi: 'MSI', dmg: 'DMG', appimage: 'AppImage', deb: 'DEB' }
+const { releases, status } = useReleaseList()
+const latest = computed(() => releases.value[0])
+const groups = computed(() => platforms.map(platform => ({
+  ...platform,
+  installers: latest.value?.installers.filter(asset => asset.platform === platform.platform) || [],
+})).filter(group => group.installers.length))
 </script>
 
 <style scoped>
@@ -149,17 +122,16 @@ export default {
   color: #b87500;
 }
 
-.download-card h2 {
-  margin: 0;
-  font-size: 1.35rem;
-  color: #2c3e50;
+.os-badge.linux {
+  background: rgba(72, 124, 94, 0.14);
+  color: #326247;
 }
 
-.hint {
-  margin: 0;
-  color: #7f8c8d;
-  line-height: 1.5;
-  font-size: 0.95rem;
+.release-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
 }
 
 .download-btn {
@@ -179,61 +151,6 @@ export default {
 .download-btn:hover {
   background: #e5a02c;
   transform: translateY(-1px);
-}
-
-.download-btn.is-disabled,
-.download-btn:disabled {
-  background: #cfd8dc;
-  color: #fff;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.download-card.is-disabled {
-  opacity: 0.92;
-}
-
-.meta {
-  margin: 0;
-  font-size: 0.8rem;
-  color: #95a5a6;
-  word-break: break-all;
-}
-
-.tip {
-  width: 100%;
-  margin-top: 0.25rem;
-  padding: 0.85rem 1rem;
-  border-radius: 10px;
-  background: #f8faf9;
-  border: 1px solid rgba(28, 36, 33, 0.08);
-  box-sizing: border-box;
-}
-
-.tip strong {
-  display: block;
-  color: #2c3e50;
-  font-size: 0.9rem;
-  margin-bottom: 0.35rem;
-}
-
-.tip p {
-  margin: 0 0 0.5rem;
-  color: #7f8c8d;
-  font-size: 0.88rem;
-  line-height: 1.5;
-}
-
-.tip-code {
-  margin: 0;
-  padding: 0.65rem 0.75rem;
-  border-radius: 8px;
-  background: #1c2421;
-  color: #e8f0ec;
-  font-size: 0.78rem;
-  line-height: 1.55;
-  overflow-x: auto;
-  white-space: pre;
 }
 
 .changelog-box {
