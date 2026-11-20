@@ -8,29 +8,29 @@
             <stop offset="0.4" :stop-color="beam.color" stop-opacity="0.5" />
             <stop offset="0.75" :stop-color="beam.color" />
             <stop offset="1" :stop-color="beam.color" stop-opacity="0" />
-            <animate attributeName="x1" :from="beam.from - beam.direction * 80" :to="beam.to + beam.direction * 20" :begin="beam.begin" :dur="beam.duration" fill="freeze" />
-            <animate attributeName="x2" :from="beam.from - beam.direction * 20" :to="beam.to + beam.direction * 80" :begin="beam.begin" :dur="beam.duration" fill="freeze" />
           </linearGradient>
         </defs>
         <path v-for="route in architectureRoutes" :key="route.id" :d="route.path" class="flow-route" />
         <path v-for="beam in activeBeams" :key="beam.id" :d="beam.path" :stroke="'url(#' + beam.id + ')'" class="flow-beam" />
       </svg>
 
-      <div class="flow-learning-node" :class="{ 'is-reading': phase === 0, 'is-filled': phase === 6 }" aria-hidden="true">
+      <div class="flow-learning-node" :class="{ 'is-reading': phase === 0, 'is-filled': answerFilled }" aria-hidden="true">
         <div class="flow-learning-card">
           <div class="flow-browser-chrome"><i></i><i></i><i></i><span>章节练习</span></div>
           <div class="flow-learning-body">
             <div class="flow-learning-name"><img :src="chaoxingIcon" alt="" /><strong>学习通</strong><span>课程作业</span></div>
-            <div class="flow-question-type">单选题 <span>1 / 1</span></div>
-            <h4>函数 f(x) = x² 的导数是？</h4>
-            <div v-for="option in options" :key="option.letter" class="flow-option" :class="{ 'is-answer': phase === 6 && option.letter === 'B' }"><span>{{ option.letter }}</span>{{ option.text }}<AppPreviewIcon v-if="phase === 6 && option.letter === 'B'" name="check" /></div>
+            <div class="flow-question-scan">
+              <div class="flow-question-type">单选题 <span>1 / 1</span></div>
+              <h4>函数 f(x) = x² 的导数是？</h4>
+              <div v-for="option in options" :key="option.letter" class="flow-option" :class="{ 'is-answer': answerFilled && option.letter === 'B' }"><span>{{ option.letter }}</span>{{ option.text }}<AppPreviewIcon v-if="answerFilled && option.letter === 'B'" name="check" /></div>
+            </div>
           </div>
         </div>
-        <div class="flow-learning-status"><span v-if="phase === 6"><AppPreviewIcon name="circle-check" />答案已回填</span><span v-else-if="phase === 0" class="flow-reading-text">OCS 正在读取题目…</span><span v-else>等待答案返回</span></div>
+        <div class="flow-learning-status"><span v-if="answerFilled"><AppPreviewIcon name="circle-check" />答案已回填</span><span v-else-if="phase === 0" class="flow-reading-text">OCS 正在读取题目…</span><span v-else>等待答案返回</span></div>
       </div>
 
       <div class="flow-icon-node flow-ocs" :class="{ 'is-active': phase === 0 || phase === 1 || phase >= 5 }" aria-hidden="true">
-        <div class="flow-icon-circle"><AppPreviewIcon name="ocs" /><span v-if="phase >= 5" class="flow-ocs-check"><AppPreviewIcon name="check" /></span></div>
+        <div class="flow-icon-circle"><AppPreviewIcon name="ocs" /><span v-if="ocsReceived" class="flow-ocs-check"><AppPreviewIcon name="check" /></span></div>
         <strong>OCS 网课助手</strong>
       </div>
 
@@ -70,6 +70,9 @@ const phase = ref(0)
 const inView = ref(false)
 const pageVisible = ref(true)
 const reducedMotion = ref(false)
+const transferComplete = ref(false)
+const ocsReceived = computed(() => phase.value > 5 || (phase.value === 5 && transferComplete.value))
+const answerFilled = computed(() => phase.value === 6 && (transferComplete.value || reducedMotion.value))
 const canPlay = computed(() => inView.value && pageVisible.value && !reducedMotion.value)
 const parallelModels = [{ name: 'DeepSeek', icon: '/models/deepseek.png' }, { name: 'Qwen', icon: '/models/qwen.png' }, { name: 'GLM', icon: '/models/glm.png' }]
 const beamId = useId().replace(/:/g, '')
@@ -115,7 +118,7 @@ const activeBeams = computed(() => {
     return {
       id: `${beamId}-beam-${index}`, path: route.path, from, to,
       direction: Math.sign(to - from), color: step.answer ? '#89b79d' : '#ffb52e',
-      begin: `${step.begin || 0}s`, duration: `${step.duration || 1.1}s`,
+      begin: step.begin ?? 0, duration: step.duration ?? 1.1,
     }
   })
 })
@@ -125,6 +128,27 @@ let remaining = phases[0]!.duration
 let startedAt = 0
 let observer: IntersectionObserver | undefined
 let motionQuery: MediaQueryList | undefined
+let beamFrame = 0
+let gradients: SVGLinearGradientElement[] = []
+
+function drawBeams() {
+  beamFrame = 0
+  const elapsed = (phases[phase.value]!.duration - remaining
+    + (timer === undefined ? 0 : performance.now() - startedAt)) / 1000
+  let pending = false
+  gradients.forEach((gradient, index) => {
+    const beam = activeBeams.value[index]
+    if (!beam) return
+    const progress = Math.max(0, Math.min(1, (elapsed - beam.begin) / beam.duration))
+    const offset = (beam.to - beam.from + beam.direction * 100) * progress
+    gradient.setAttribute('x1', String(beam.from - beam.direction * 80 + offset))
+    gradient.setAttribute('x2', String(beam.from - beam.direction * 20 + offset))
+    if (progress < 1) pending = true
+  })
+  transferComplete.value = gradients.length > 0 && !pending
+  if (canPlay.value && pending) beamFrame = requestAnimationFrame(drawBeams)
+}
+
 function stopTimer(preserveRemaining = true) {
   if (timer === undefined) return
   clearTimeout(timer)
@@ -140,6 +164,7 @@ function schedule() {
   }, remaining)
 }
 watch(phase, () => {
+  transferComplete.value = false
   stopTimer(false)
   remaining = phases[phase.value]!.duration
   schedule()
@@ -147,8 +172,9 @@ watch(phase, () => {
 watch(canPlay, playing => { if (playing) schedule(); else stopTimer() })
 watch([phase, canPlay], async () => {
   await nextTick()
-  if (canPlay.value) routes.value?.unpauseAnimations()
-  else routes.value?.pauseAnimations()
+  cancelAnimationFrame(beamFrame)
+  gradients = Array.from(routes.value?.querySelectorAll('linearGradient') ?? [])
+  drawBeams()
 })
 function onVisibility() { pageVisible.value = document.visibilityState === 'visible' }
 function onMotionChange() {
@@ -156,7 +182,6 @@ function onMotionChange() {
   if (reducedMotion.value) phase.value = phases.length - 1
 }
 onMounted(() => {
-  routes.value?.pauseAnimations()
   motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
   motionQuery.addEventListener('change', onMotionChange)
   onMotionChange()
@@ -165,7 +190,7 @@ onMounted(() => {
   observer = new IntersectionObserver(entries => { inView.value = entries[0]?.isIntersecting ?? false }, { threshold: 0.15 })
   if (root.value) observer.observe(root.value)
 })
-onUnmounted(() => { clearTimeout(timer); observer?.disconnect(); motionQuery?.removeEventListener('change', onMotionChange); document.removeEventListener('visibilitychange', onVisibility) })
+onUnmounted(() => { clearTimeout(timer); cancelAnimationFrame(beamFrame); observer?.disconnect(); motionQuery?.removeEventListener('change', onMotionChange); document.removeEventListener('visibilitychange', onVisibility) })
 </script>
 
 <style scoped>
@@ -187,7 +212,22 @@ onUnmounted(() => { clearTimeout(timer); observer?.disconnect(); motionQuery?.re
 .flow-learning-name img { width: 2.6cqw; height: 2.6cqw; border-radius: 0.55cqw; }
 .flow-learning-name strong { font-size: 1.5cqw; color: #4d4844; font-weight: 600; }
 .flow-learning-name > span { margin-left: auto; color: #a49d93; font-size: 0.95cqw; }
-.flow-question-type { margin-top: 1.6cqw; font-size: 1cqw; color: #a59b8d; }.flow-question-type > span { float: right; }
+.flow-question-scan { position: relative; overflow: hidden; margin-top: 1.6cqw; }
+.is-reading .flow-question-scan::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-bottom: 1px solid rgb(252 179 52 / 90%);
+  background: linear-gradient(transparent 75%, rgb(252 179 52 / 4%) 88%, rgb(252 179 52 / 18%));
+  box-shadow: 0 3px 10px rgb(252 179 52 / 16%);
+  animation: flow-scan 1400ms linear both;
+}
+.flow-question-type { font-size: 1cqw; color: #a59b8d; }.flow-question-type > span { float: right; }
 .flow-learning-body h4 { margin: 0.7cqw 0 1.3cqw; color: #49443f; font-size: 1.35cqw; font-weight: 500; line-height: 1.6; }
 .flow-option { display: flex; align-items: center; gap: 0.8cqw; padding: 0.65cqw 0.7cqw; margin-bottom: 0.4cqw; border: 1px solid #f0eee9; border-radius: 0.5cqw; color: #8c8376; font-size: 1.15cqw; transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease; }
 .flow-option:last-child { margin-bottom: 0; }
@@ -227,14 +267,16 @@ onUnmounted(() => { clearTimeout(timer); observer?.disconnect(); motionQuery?.re
 .flow-steps li > span { display: block; width: 0.45cqw; height: 0.45cqw; border-radius: 50%; background: #e9e7e3; transition: background-color 160ms ease, transform 160ms cubic-bezier(0.23, 1, 0.32, 1); }
 .flow-steps li.active > span { background: #ffb52e; transform: scale(1.4); }
 .flow-steps li.done > span { background: #d2dace; }
-.flow-learning-body h4 { position: relative; }
-.is-reading h4::after { content: ''; position: absolute; left: 0; bottom: -0.45cqw; height: 1px; width: 100%; background: #e9c486; transform: scaleX(0); transform-origin: left; animation: flow-read 1100ms cubic-bezier(0.23, 1, 0.32, 1) forwards; }
 .flow-option.is-answer .preview-icon { animation: flow-confirm 180ms cubic-bezier(0.23, 1, 0.32, 1) both; }
-@keyframes flow-read { to { transform: scaleX(1); } }
+@keyframes flow-scan {
+  0% { transform: translateY(0); opacity: 0; }
+  10%, 85% { opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
 @keyframes flow-confirm { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
 
-.is-paused .is-reading h4::after, .is-paused .flow-model.is-thinking .flow-model-check, .is-paused .flow-option.is-answer .preview-icon { animation-play-state: paused; }
-@media (prefers-reduced-motion: reduce) { .flow-learning-card, .flow-option, .flow-icon-circle, .flow-steps li > span { transition: none; }.is-reading h4::after, .flow-option.is-answer .preview-icon, .flow-model.is-thinking .flow-model-check { animation: none; } }
+.is-paused .is-reading .flow-question-scan::after, .is-paused .flow-model.is-thinking .flow-model-check, .is-paused .flow-option.is-answer .preview-icon { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .flow-learning-card, .flow-option, .flow-icon-circle, .flow-steps li > span { transition: none; }.flow-question-scan::after { display: none; }.flow-option.is-answer .preview-icon, .flow-model.is-thinking .flow-model-check { animation: none; } }
 @media (max-width: 640px) {
   .auto-answer-flow { border-radius: 12px; }
   .flow-steps { height: 36px; }.flow-steps li { width: 24px; height: 24px; }.flow-steps li > span { width: 3px; height: 3px; }
