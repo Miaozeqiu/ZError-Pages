@@ -1,5 +1,6 @@
 <template>
   <div class="app-container">
+    <SiteBackdrop />
     <nav>
       <div class="nav-brand">
         <router-link to="/" class="nav-brand-link" active-class="brand-current" exact-active-class="brand-current" aria-label="返回 ZError 官网首页" @click="closeMenu">
@@ -50,9 +51,10 @@
 <script>
 import { ref } from 'vue'
 import SiteFooter from '@/components/SiteFooter.vue'
+import SiteBackdrop from '@/components/SiteBackdrop.vue'
 
 export default {
-  components: { SiteFooter },
+  components: { SiteFooter, SiteBackdrop },
   setup() {
     const isMenuOpen = ref(false)
 
@@ -148,12 +150,15 @@ html {
 body {
   margin: 0;
   overflow-y: auto;
+  background-color: #fafafa;
 }
 
 /* 添加过渡动画 */
 
 
 .app-container {
+  position: relative;
+  isolation: isolate;
   width: 100%;
   min-height: 100vh;
 }
@@ -167,7 +172,9 @@ nav {
   right: 0;
   z-index: 1000;
   padding: 0.5rem 1rem;
-  background: #fff;
+  background: rgb(255 255 255 / 82%);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(28, 36, 33, 0.1);
   display: flex;
   justify-content: center;
@@ -288,7 +295,8 @@ nav a.router-link-exact-active {
 }
 
 body {
-  padding: 0 60px;
+  --page-gutter: 60px;
+  padding: 0 var(--page-gutter);
   margin: 0px;
 }
 
@@ -312,12 +320,9 @@ body {
 
 @media (max-width: 768px) {
   body {
-  padding: 0 30px;
+    --page-gutter: 30px;
   }
 
-  nav{
-    background-color: #fff;
-  }
   /* 小屏幕下显示汉堡按钮 */
   .hamburger {
     display: flex;

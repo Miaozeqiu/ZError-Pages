@@ -46,56 +46,17 @@
           </a>
         </div>
       </div>
-      <img src="@/assets/ZError2.0.0.png" alt="ZError首页" width="1407" height="942" class="hero-image animate-element" />
-    </div>
-
-    <div class="platform-section animate-element">
-      <div class="platform-header">
-        <div class="ai-model-heading animate-element">AI 模型</div>
-        <h3 class="platform-title animate-element">完全自定义</h3>
-        <p class="platform-subtitle animate-element">
-          接入任意 AI 平台与模型，兼容 OpenAI 等常见接口格式
-        </p>
-      </div>
-      <div class="platform-grid">
-        <div class="platform-item animate-element">
-          <div class="platform-icon" v-html="siliconSvg"></div>
-          <span class="platform-name">硅基流动</span>
-        </div>
-
-        <div class="platform-item animate-element">
-          <div class="platform-icon" v-html="bailianSvg"></div>
-          <span class="platform-name">阿里百炼</span>
-        </div>
-
-        <div class="platform-item animate-element">
-          <div class="platform-icon" v-html="deepseekSvg"></div>
-          <span class="platform-name">DeepSeek</span>
-        </div>
-
-        <div class="platform-item animate-element">
-          <div class="platform-icon platform-icon-custom">
-            <svg
-              fill="currentColor"
-              viewBox="0 0 1024 1024"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path
-                d="M811.008 768.170667v106.666666a106.666667 106.666667 0 0 1-106.666667 106.666667h-128a21.248 21.248 0 0 1-21.333333-21.333333V938.666667c0-75.52-43.306667-127.872-128.341333-127.872-84.224 0-128.085333 52.821333-128.085334 127.872v21.461333a21.333333 21.333333 0 0 1-21.333333 21.333333h-128a106.666667 106.666667 0 0 1-106.666667-106.709333l0.426667-128a21.333333 21.333333 0 0 1 21.333333-21.248h42.666667c58.752 0 106.410667-55.210667 106.410667-128 0-73.386667-47.36-128-106.410667-128H64.213333a21.333333 21.333333 0 0 1-21.333333-21.333333v-128a106.666667 106.666667 0 0 1 106.666667-106.666667h106.368V213.333333c0-97.066667 61.013333-170.538667 170.752-170.538666 107.008 0 171.392 75.434667 171.392 170.538666v0.128h106.837333a106.666667 106.666667 0 0 1 106.666667 106.666667v106.666667h20.778666c84.053333 0 149.077333 75.008 149.077334 170.666666 0 95.104-65.28 170.666667-149.077334 170.666667h-21.333333z m-42.666667-20.736v-0.597334a21.333333 21.333333 0 0 1 21.333334-21.333333h42.666666c58.752 0 106.410667-55.210667 106.410667-128 0-73.386667-47.36-128-106.410667-128h-42.666666a21.333333 21.333333 0 0 1-20.778667-26.325333V320.128a64 64 0 0 0-64-64h-126.890667a21.76 21.76 0 0 1-1.28 0 21.333333 21.333333 0 0 1-21.333333-21.333333V213.333333c0-72.917333-46.933333-127.872-128.725333-127.872-84.224 0-128.085333 52.821333-128.085334 127.872v21.461334a21.248 21.248 0 0 1-21.333333 21.333333H149.546667a64 64 0 0 0-64 64v106.666667h21.461333c84.053333 0 149.077333 75.008 149.077333 170.666666 0 95.104-65.28 170.666667-149.077333 170.666667h-21.418667l-0.341333 106.666667a64 64 0 0 0 64 64h106.666667V938.666667c0-97.066667 61.013333-170.538667 170.752-170.538667 110.592 0 171.008 73.002667 171.008 170.538667v0.170666h106.666666a64 64 0 0 0 64-64v-127.402666z"
-              ></path>
-            </svg>
-          </div>
-          <span class="platform-name">自定义</span>
-        </div>
-      </div>
+      <AppWindowPreview />
     </div>
 
     <div class="search-feature-section">
       <div class="search-feature-content">
-        <h3 class="search-feature-title animate-element">多模型并发请求。</h3>
+        <h3 class="search-feature-title animate-element">
+          <span class="feature-ink feature-ink-underline">多模型<svg viewBox="0 0 160 16" preserveAspectRatio="none" aria-hidden="true"><path d="M3 10C40 15 99 2 156 6M7 13C52 12 112 5 151 8" /></svg></span><br />
+          <span class="feature-ink feature-ink-circle">并发<svg viewBox="0 0 120 64" preserveAspectRatio="none" aria-hidden="true"><path d="M108 13C88-2 30 0 10 17C-8 35 11 60 51 60C90 63 121 47 116 27C111 7 74 0 42 5M106 12C81 1 30 3 12 21" /></svg></span>请求。
+        </h3>
         <p class="search-feature-desc animate-element">
-          支持多个模型并发请求，并由总结模型最终给出答案，提高回答准确性。
+          支持多个模型并发请求，由总结模型汇总答案，提高回答准确性。
         </p>
       </div>
       <div class="feature-visual-stack animate-element">
@@ -105,9 +66,12 @@
 
     <div class="search-feature-section reverse">
       <div class="search-feature-content">
-        <h3 class="search-feature-title animate-element">完美支持图片题目。</h3>
+        <h3 class="search-feature-title animate-element">
+          完美<span class="feature-ink feature-ink-circle">支持<svg viewBox="0 0 120 64" preserveAspectRatio="none" aria-hidden="true"><path d="M107 11C74-2 24 2 8 22C-4 41 17 62 57 60C94 59 120 43 115 25C110 9 80 1 49 4M111 18C100 5 69 1 40 7" /></svg></span><br />
+          <span class="feature-ink feature-ink-underline">图片题目<svg viewBox="0 0 160 16" preserveAspectRatio="none" aria-hidden="true"><path d="M3 9C44 15 101 3 157 5M9 13C60 12 116 5 151 8" /></svg></span>。
+        </h3>
         <p class="search-feature-desc animate-element">
-          完美兼容 OCS 网课助手。借助强大的视觉大模型，能够轻松识别并解析复杂的公式，实现图片题目的自动回答。
+          兼容 OCS 网课助手，借助视觉大模型识别图片中的公式，自动生成答案。
         </p>
       </div>
       <div class="feature-visual-stack animate-element">
@@ -164,9 +128,6 @@
 </template>
 
 <script>
-import siliconSvg from "@/assets/硅基.svg?raw";
-import bailianSvg from "@/assets/百炼.svg?raw";
-import deepseekSvg from "@/assets/deepseek.svg?raw"; // 新增导入
 import multiModelImage from "@/assets/multi-model.png";
 import questionImage from "@/assets/question.png";
 import ocsImage from "@/assets/ocs.png";
@@ -178,6 +139,7 @@ import windowsColorIcon from "@/assets/platform-windows-color.svg";
 import linuxColorIcon from "@/assets/platform-linux-color.svg";
 import bankIcon from "@/assets/lucide-globe.svg";
 import ActionIcon from "@/components/ActionIcon.vue";
+import AppWindowPreview from "@/components/AppWindowPreview.vue";
 import SiteCommunity from "@/components/SiteCommunity.vue";
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
@@ -197,14 +159,7 @@ const downloadListIcons = {
 };
 
 export default {
-  components: { ActionIcon, SiteCommunity },
-  data() {
-    return {
-      siliconSvg,
-      bailianSvg,
-      deepseekSvg, // 新增数据项
-    };
-  },
+  components: { ActionIcon, AppWindowPreview, SiteCommunity },
   setup() {
     const route = useRoute();
     const downloadsSection = ref(null);
@@ -458,6 +413,42 @@ export default {
 </script>
 
 <style scoped>
+.search-feature-content {
+  min-width: 0;
+  max-width: 300px;
+}
+.search-feature-title {
+  margin-bottom: 1.25rem;
+  font-size: clamp(1.9rem, 2.8vw, 2.4rem);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.035em;
+  color: #252b32;
+}
+.search-feature-desc {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #454d58;
+}
+.feature-ink { position: relative; display: inline-block; }
+.feature-ink svg {
+  position: absolute;
+  pointer-events: none;
+  overflow: visible;
+  fill: none;
+  stroke: #fcb334;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.feature-ink path { vector-effect: non-scaling-stroke; }
+.feature-ink-underline svg { width: 106%; height: 0.28em; left: -3%; bottom: 0.03em; }
+.feature-ink-circle svg { width: 125%; height: 1.32em; left: -12%; top: 0.08em; transform: rotate(-5deg); }
+@media (max-width: 900px) {
+  .search-feature-content { width: 100%; max-width: 620px; text-align: left; }
+  .search-feature-title br { display: none; }
+}
+
 .hero-section {
   margin-top: clamp(3.25rem, 7vw, 6.5rem);
   margin-bottom: clamp(2.9rem, 6vw, 5rem);
